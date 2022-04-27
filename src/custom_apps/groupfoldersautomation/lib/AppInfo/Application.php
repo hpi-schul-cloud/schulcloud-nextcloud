@@ -43,7 +43,7 @@ class Application extends App {
          $folderName = $affectedGroup->getDisplayName();
 
          //Get folder name with regex from group name
-         //Match between fist '-' and last '||'
+         //Match everything after first '||'
          if(preg_match('/(?<=\|\|)(.*)$/', $folderName, $matches) {
             $folderName = $matches[0];
          } else {
