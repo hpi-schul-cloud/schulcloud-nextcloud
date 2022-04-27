@@ -44,7 +44,7 @@ class Application extends App {
 
          //Get folder name with regex from group name
          //Match everything after first '||'
-         if(preg_match('/(?<=\|\|)(.*)$/', $folderName, $matches) {
+         if(preg_match('/(?<=\|\|)(.*)$/', $folderName, $matches)) {
             $folderName = $matches[0];
          } else {
             $this->logger->error("Creating Folder: $groupName, since group name is of wrong format. Expected: Nextcloud-<Team Name>||<Team ID>");
