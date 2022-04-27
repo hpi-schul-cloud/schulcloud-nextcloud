@@ -1,0 +1,15 @@
+{
+    "name": "Group Folders Automation",
+    "description": "Automatically creates Group Folders from the Group Folders Plugin via REST API Calls",
+    "type": "project",
+    "license": "AGPL",
+    "authors": [
+        {
+            "name": "Marvin Öhlerking"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^5.4"
+    }
+}
