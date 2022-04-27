@@ -1,0 +1,359 @@
+{
+  "system": {
+    "htaccess.RewriteBase": "\/",
+    "memcache.local": "\\OC\\Memcache\\APCu",
+    "apps_paths": [
+      {
+        "path": "\/var\/www\/html\/apps",
+        "url": "\/apps",
+        "writable": false
+      },
+      {
+        "path": "\/var\/www\/html\/custom_apps",
+        "url": "\/custom_apps",
+        "writable": true
+      }
+    ],
+    "passwordsalt": "hZ\/yWOmBY9ojmRC1HBKP9HC1eKahd9",
+    "secret": "ABZaovPxghy14ng50ob2iLq9nQlSZ8JIzaZYgW\/2KhiScWKc",
+    "trusted_domains": [
+      "localhost"
+    ],
+    "datadirectory": "\/var\/www\/html\/data",
+    "dbtype": "mysql",
+    "version": "23.0.3.2",
+    "overwrite.cli.url": "http:\/\/localhost",
+    "dbname": "nextcloud",
+    "dbhost": "mysql",
+    "dbport": "",
+    "dbtableprefix": "oc_",
+    "mysql.utf8mb4": true,
+    "dbuser": "nextcloud",
+    "dbpassword": "nextcloud",
+    "installed": true,
+    "instanceid": "oc4s6jo0zr07",
+    "app_install_overwrite": [
+      "gluusso"
+    ],
+    "profile.enabled": false,
+    "auth.webauthn.enabled": false,
+    "hide_login_form": true
+  },
+  "apps": {
+    "AutoGroups": {
+      "creation_hook": "false",
+      "login_hook": "false",
+      "modification_hook": "false"
+    },
+    "accessibility": {
+      "enabled": "no",
+      "installed_version": "1.9.0",
+      "types": ""
+    },
+    "activity": {
+      "enabled": "no",
+      "installed_version": "2.15.0",
+      "types": "filesystem"
+    },
+    "admin_audit": {
+      "enabled": "yes",
+      "installed_version": "1.13.0",
+      "types": "logging"
+    },
+    "apporder": {
+      "enabled": "no",
+      "force": "true",
+      "hidden": "[\"\/apps\/files\/\",\"\/apps\/photos\/\"]",
+      "installed_version": "0.15.0",
+      "order": "[\"\/apps\/photos\/\",\"\/apps\/files\/\"]",
+      "types": ""
+    },
+    "auto_groups": {
+      "enabled": "no",
+      "installed_version": "1.4.0",
+      "types": ""
+    },
+    "backgroundjob": {
+      "lastjob": "4"
+    },
+    "circles": {
+      "enabled": "no",
+      "installed_version": "23.1.0",
+      "loopback_tmp_scheme": "http",
+      "maintenance_run": "0",
+      "maintenance_update": "{\"maximum\":3,\"3\":1650612976,\"2\":1650613788,\"1\":1650613788}",
+      "types": "filesystem,dav"
+    },
+    "cloud_federation_api": {
+      "enabled": "yes",
+      "installed_version": "1.6.0",
+      "types": "filesystem"
+    },
+    "comments": {
+      "enabled": "no",
+      "installed_version": "1.13.0",
+      "types": "logging"
+    },
+    "contactsinteraction": {
+      "enabled": "no",
+      "installed_version": "1.4.0",
+      "types": "dav"
+    },
+    "core": {
+      "installedat": "1650460063.5177",
+      "lastcron": "1650616532",
+      "lastupdatedat": "1650612914",
+      "public_files": "files_sharing\/public.php",
+      "public_webdav": "dav\/appinfo\/v1\/publicwebdav.php",
+      "shareapi_allow_group_sharing": "no",
+      "shareapi_allow_links": "no",
+      "shareapi_allow_resharing": "no",
+      "shareapi_allow_share_dialog_user_enumeration": "no",
+      "shareapi_default_permission_canshare": "no",
+      "shareapi_default_permissions": "15",
+      "shareapi_restrict_user_enumeration_full_match": "no",
+      "theming.variables": "d41d8cd98f00b204e9800998ecf8427e",
+      "vendor": "nextcloud"
+    },
+    "dashboard": {
+      "enabled": "no",
+      "installed_version": "7.3.0",
+      "types": ""
+    },
+    "dav": {
+      "enabled": "yes",
+      "generateBirthdayCalendar": "no",
+      "installed_version": "1.21.0",
+      "sendEventReminders": "no",
+      "sendInvitations": "no",
+      "types": "filesystem"
+    },
+    "federatedfilesharing": {
+      "enabled": "yes",
+      "installed_version": "1.13.0",
+      "types": ""
+    },
+    "federation": {
+      "enabled": "no",
+      "installed_version": "1.13.0",
+      "types": "authentication"
+    },
+    "files": {
+      "enabled": "yes",
+      "installed_version": "1.18.0",
+      "types": "filesystem"
+    },
+    "files_pdfviewer": {
+      "enabled": "yes",
+      "installed_version": "2.4.0",
+      "types": ""
+    },
+    "files_rightclick": {
+      "enabled": "yes",
+      "installed_version": "1.2.0",
+      "types": ""
+    },
+    "files_sharing": {
+      "enabled": "no",
+      "incoming_server2server_share_enabled": "no",
+      "installed_version": "1.15.0",
+      "lookupServerEnabled": "no",
+      "lookupServerUploadEnabled": "no",
+      "outgoing_server2server_share_enabled": "no",
+      "types": "filesystem"
+    },
+    "files_trashbin": {
+      "enabled": "yes",
+      "installed_version": "1.13.0",
+      "types": "filesystem,dav"
+    },
+    "files_versions": {
+      "enabled": "yes",
+      "installed_version": "1.16.0",
+      "types": "filesystem,dav"
+    },
+    "files_videoplayer": {
+      "enabled": "yes",
+      "installed_version": "1.12.0",
+      "types": ""
+    },
+    "firstrunwizard": {
+      "enabled": "no",
+      "installed_version": "2.12.0",
+      "types": "logging"
+    },
+    "groupfolders": {
+      "enabled": "yes",
+      "installed_version": "11.1.2",
+      "types": "filesystem,dav"
+    },
+    "integration_openproject": {
+      "enabled": "no",
+      "installed_version": "1.0.6",
+      "types": ""
+    },
+    "logreader": {
+      "enabled": "no",
+      "installed_version": "2.8.0",
+      "types": ""
+    },
+    "lookup_server_connector": {
+      "enabled": "yes",
+      "installed_version": "1.11.0",
+      "types": "authentication"
+    },
+    "nextcloud_announcements": {
+      "enabled": "no",
+      "installed_version": "1.12.0",
+      "types": "logging"
+    },
+    "notifications": {
+      "enabled": "no",
+      "installed_version": "2.11.1",
+      "types": "logging"
+    },
+    "oauth2": {
+      "enabled": "yes",
+      "installed_version": "1.11.0",
+      "types": "authentication"
+    },
+    "oidc": {
+      "enabled": "no",
+      "expire_time": "900",
+      "installed_version": "0.1.0",
+      "kid": "1533727d-01a5-4f5f-a177-a25ee50b3de1",
+      "private_key": "-----BEGIN PRIVATE KEY-----\nMIIJQwIBADANBgkqhkiG9w0BAQEFAASCCS0wggkpAgEAAoICAQDHmCEfpZVv3oCO\n2EkZ3X3GHQKJLUT3TFIkt+YMp6+UVdVxkvSA\/1wIsAdZ6kVqGVP1\/KlxzhaU\/iM7\ncjsdCivsUDFj1KWP5vYJkZLD18OJyEgkYdOZLt5\/2f9aqh6dLZs3Tz7Q+Hvj3wPj\n4AjI3hKe3EfKa+Bpgt6Gc7MoSa450hahR4z3EzQmxhSDLPu3mtzKVZy0RR2sBfdC\nSeuPZiDqATp9lYnTi9GKvTFSPmtabGYoCmPvuwhQ\/B0mCQ0T315eCIhp7\/OtrPGB\nlq1w1Ug3pHauue0dqk99WKUWZ1a6O5wKu69Zghx80Bg3CMItUmcy7YMTWFTeqNYv\nig4yJIbmcw8cxQ+w1UY+rURMDVgTMCCw3h2ynyadj\/8jXSCKrzTAMvHTOAlYsQLJ\nv7Ra4iI9Uru4Oasbe8LnykMsJOtffkNMs6GYojBwugbfO4P32AsAC+TOrB2IlGw8\nBCQp3zP2blJWcuiVZagAEs6Ir2YLgrH5frPPo8ZU4lLbLwvyyNEYka0AOS96aHUX\nAd7UzjLS4wc8sWn5JtgyteP48vfAP6xZEc\/b3CIDsSQ0BNCog8B4yS6TjLLicqWj\nK45\/czm4v8JesouRxNqAHGT6Gcx85Ju4yvghBTlj\/RE1BMH5k5pGAjjoeLfpEDNB\nCLq8qFWawhr+HoaeB0+gBiWt4mAGSwIDAQABAoICAQCatAqwidqLTC3fCjuW5buw\nDBpEEyeKesiMl1Gja3HHCsSW9G25crR2M2JvSgslkp4mYwE\/KZsNPvI2CHNTLegf\nkYTGuTLemAkKH6BfVeTE7c0lDgJBkDd7Z4\/qSUPTVl8hfrXUqVT1qY1NWf\/VGXPb\nWCf4+KaHgZ1TH2i1CG8XeAR8W4Yil+rrRsrtZbdxd4I8\/iCpBY1bIYCmC7+edW17\nkxov7vFWW+A9pikNcz4oZy7DSFJvpUtr4g4BxjAxwAdX4UtCuW7ppcvHQvAKLfZ8\n0mf\/RDNKtBBKuqOy+sQZM0zecN0YBqZoA69RMOO4108QBVJ8cxHNR5ZEYMBiEzfP\nFKygyFME8dYfM\/kIUS0197UD6VLqmEc7P49iW1gyvkfVCQSk2cF9H\/02alDi1IWc\nGthQPs1IoupjvW0t\/nhVGgCMNsqioTvZc6VgtJgD0ViwXcaBcbBBOnhX2GFCkrEa\ngFbw+K\/cJLxazwwrLH8+nCFA8Zb38s9Hav+3o\/uBIdbFR5OQ3xZ8Itq1I9bik+55\nziq5OuEJywb7Rr4EPoeUIO53V70573aYqRO4Txhww1iIpcf7I\/CRqkoAqq0v8k5i\nS1LcqXsXABVjVMCpBtV\/yWRYj2XGycE8M1\/zwoSyCa1tMEjm5pxZI4kUjoTnaRwZ\nHyB3PZYnS0SnzR3l0D2D6QKCAQEA\/Oyq1W6Z1XlDFLJTc6tVViLSmm3MwIVE1vHm\nnEuNAFMapqxXLDGltvBRMMf24ijBqds6\/fyNEfr1sbe4hxwMnrceEVnE04zZjJTq\n65XSQ+mb8e0y3LllsjIwulf1AvxfwsCQ\/Wc0C\/SOOmPi\/uQ3W63blXa51v6DB7Hv\nL\/FLuS7XUZTcNg0Y5RsagStYINZ7v69BRLw3ACeyhdx2N49kUBfVHXUPRZHIkIVK\nP9FuBbnMqEkI7tPA2Z61sakbx8oiOQk5oKBjWZRF\/trCJEqbTpa1OUXd\/x27S4BZ\ndbpBQNLKklAetAONzVs\/XrsigVM\/l\/I4uRghJLsksLs1ATTfDQKCAQEAygVzFdiX\nIOLDmD8Y6ysn6Wh5Z2D\/TxTMM+5E28BIUr+U+7msvM3C8fTi070RQa8+3nEBmXPJ\nWeLDdGXrSkff7o1tBfX\/BJipPLiiSB16LskDBmdkdBQ1IjuQghxDCDHl1gqgQ1n5\n2QVGrbh72Mg1By5iWHRWXT3RP3OWOlg8mz+K1TLdIEMERHeifdQQ\/ZEWPTCBIQBy\nJWU4wHCFtS8\/DQtIrpPeuPD7XLY60YG3XcK3sBsQKcoT1xZS9N6l7cGZu6OR72c6\n9j8J0c3ID49Nwgui5Pw3ztPrZUUBQ1y\/GY52zAyS60l2G6YwXRc+XBwP8k6ELsJg\n9UmaH0QlV2HktwKCAQEA9dXDpng+JfQbc35xBri91V87fMbEgUwHwTSWhcwZXPtp\nqB9TC62l+M5U3ClAmkorEsH38O8M3zEipn6AaTKmQY6TNyId4dHBkpccT6fsG\/5w\niRGYolnBsxZ9rmHXz\/Ml0NIDG4q4V\/Z4V+DGviFsfTvbdsdTktkG2u\/kIKFUjMYu\nmykpcZABZo6VkH9kxWY0GfhqZDjc7NWo+9txPEevpPnFN0CUe3Zbj70+khEp837I\nobl7aUeA5wUQbYKFcgfSg8WnsayzZFpuPmy6zzOFCToLI4P5ZwKrDZPPYFKNIkjA\nhL5DWY0qwzOxwI3719\/mq\/XPlHkTnfQYkX8k4etV8QKCAQB8k0G1ffsrp0oP7xDR\nq6oP74G1swWc4WlOuKYzkG3IwSUA2S1gu81z4JujEBq9E3DEQJFI7DKEwCXg+BxQ\nkOPQuds56sjYL79kl0JTEAJRKVk5MLasMe3V7z8cTIs1WXeuNp0\/CxPbtLox0+pi\n8opopDy26P58vuryordHwTOWVGerMpNTGqBeDBviVcwoYLiDAQ8Pp7O7xaBqYrjA\n0qKhy4yFQt\/70XZfZGv+12uYYMNe0EF2U4tKfhSntUhCxbikEaijJVghkxveCXRN\nzAOaHgzUAYf0fY\/RweyWenHJM6WkDDjo6ELxp9h4\/yVQLWnT9IDkSK77cuicUSxp\npw8fAoIBAGgFH1SKemjararoZpqRfLLKi1MwCfGsBJ4StW5xEfPhzSnAruoGb0kl\nYv3JLnJbtCHXHyu2Iin+rY4cCaxEMk\/Kuu1zUHHjeN5KT48YrL\/0QVBpnDwzKXZR\n59CJIGQvWh7fhkVis3Mq8wbxUN6odw4h8p6JHIzIHeRaSFbiql+7fzI7njMMBjwx\nCxORT2vPPZ7k32QMsvoFotUrntPdeRqAOY+Y8YUDeYMBKdW2WV9s5Evxr88h0Xl1\nzk8gJH9\/FUpjS91GkvQLwq\/WGIAiXjUcAEBnQ4PV2dWFwnhdj7t3f1q4wf+rsnOu\nkg8HD+TpsxCelaXfbOsHSDK7Fvv3G38=\n-----END PRIVATE KEY-----\n",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAx5ghH6WVb96AjthJGd19\nxh0CiS1E90xSJLfmDKevlFXVcZL0gP9cCLAHWepFahlT9fypcc4WlP4jO3I7HQor\n7FAxY9Slj+b2CZGSw9fDichIJGHTmS7ef9n\/WqoenS2bN08+0Ph7498D4+AIyN4S\nntxHymvgaYLehnOzKEmuOdIWoUeM9xM0JsYUgyz7t5rcylWctEUdrAX3Qknrj2Yg\n6gE6fZWJ04vRir0xUj5rWmxmKApj77sIUPwdJgkNE99eXgiIae\/zrazxgZatcNVI\nN6R2rrntHapPfVilFmdWujucCruvWYIcfNAYNwjCLVJnMu2DE1hU3qjWL4oOMiSG\n5nMPHMUPsNVGPq1ETA1YEzAgsN4dsp8mnY\/\/I10giq80wDLx0zgJWLECyb+0WuIi\nPVK7uDmrG3vC58pDLCTrX35DTLOhmKIwcLoG3zuD99gLAAvkzqwdiJRsPAQkKd8z\n9m5SVnLolWWoABLOiK9mC4Kx+X6zz6PGVOJS2y8L8sjRGJGtADkvemh1FwHe1M4y\n0uMHPLFp+SbYMrXj+PL3wD+sWRHP29wiA7EkNATQqIPAeMkuk4yy4nKloyuOf3M5\nuL\/CXrKLkcTagBxk+hnMfOSbuMr4IQU5Y\/0RNQTB+ZOaRgI46Hi36RAzQQi6vKhV\nmsIa\/h6GngdPoAYlreJgBksCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+      "public_key_e": "AQAB",
+      "public_key_n": "x5ghH6WVb96AjthJGd19xh0CiS1E90xSJLfmDKevlFXVcZL0gP9cCLAHWepFahlT9fypcc4WlP4jO3I7HQor7FAxY9Slj-b2CZGSw9fDichIJGHTmS7ef9n_WqoenS2bN08-0Ph7498D4-AIyN4SntxHymvgaYLehnOzKEmuOdIWoUeM9xM0JsYUgyz7t5rcylWctEUdrAX3Qknrj2Yg6gE6fZWJ04vRir0xUj5rWmxmKApj77sIUPwdJgkNE99eXgiIae_zrazxgZatcNVIN6R2rrntHapPfVilFmdWujucCruvWYIcfNAYNwjCLVJnMu2DE1hU3qjWL4oOMiSG5nMPHMUPsNVGPq1ETA1YEzAgsN4dsp8mnY__I10giq80wDLx0zgJWLECyb-0WuIiPVK7uDmrG3vC58pDLCTrX35DTLOhmKIwcLoG3zuD99gLAAvkzqwdiJRsPAQkKd8z9m5SVnLolWWoABLOiK9mC4Kx-X6zz6PGVOJS2y8L8sjRGJGtADkvemh1FwHe1M4y0uMHPLFp-SbYMrXj-PL3wD-sWRHP29wiA7EkNATQqIPAeMkuk4yy4nKloyuOf3M5uL_CXrKLkcTagBxk-hnMfOSbuMr4IQU5Y_0RNQTB-ZOaRgI46Hi36RAzQQi6vKhVmsIa_h6GngdPoAYlreJgBks",
+      "types": "authentication"
+    },
+    "oidc_login": {
+      "enabled": "no",
+      "installed_version": "2.3.1",
+      "types": ""
+    },
+    "password_policy": {
+      "enabled": "no",
+      "installed_version": "1.13.0",
+      "types": "authentication"
+    },
+    "photos": {
+      "enabled": "no",
+      "installed_version": "1.5.0",
+      "types": ""
+    },
+    "privacy": {
+      "enabled": "no",
+      "installed_version": "1.7.0",
+      "types": ""
+    },
+    "provisioning_api": {
+      "enabled": "yes",
+      "installed_version": "1.13.0",
+      "types": "prevent_group_restriction"
+    },
+    "recommendations": {
+      "enabled": "no",
+      "installed_version": "1.2.0",
+      "types": ""
+    },
+    "serverinfo": {
+      "cached_count_filecache": "803",
+      "cached_count_storages": "7",
+      "enabled": "yes",
+      "installed_version": "1.13.0",
+      "types": ""
+    },
+    "settings": {
+      "enabled": "yes",
+      "installed_version": "1.5.0",
+      "types": ""
+    },
+    "sharebymail": {
+      "enabled": "no",
+      "installed_version": "1.13.0",
+      "types": "filesystem"
+    },
+    "sociallogin": {
+      "allow_login_connect": "",
+      "auto_create_groups": "1",
+      "create_disabled_users": "",
+      "custom_providers": "{\"custom_oidc\":[{\"name\":\"Nextcloud\",\"title\":\"Nextcloud\",\"authorizeUrl\":\"http:\\\/\\\/localhost:9000\\\/oauth2\\\/auth\",\"tokenUrl\":\"http:\\\/\\\/hydra-host:4444\\\/oauth2\\\/token\",\"displayNameClaim\":\"name\",\"userInfoUrl\":\"http:\\\/\\\/hydra-host:4444\\\/userinfo\",\"logoutUrl\":\"http:\\\/\\\/localhost:3100\\\/logout\",\"clientId\":\"Nextcloud\",\"clientSecret\":\"Nextcloud\",\"scope\":\"openid offline profile email\",\"groupsClaim\":\"teams\",\"style\":\"paypal\",\"defaultGroup\":\"\"}]}",
+      "disable_notify_admins": "",
+      "disable_registration": "",
+      "enabled": "yes",
+      "hide_default_login": "",
+      "installed_version": "4.14.0",
+      "no_prune_user_groups": "",
+      "oauth_providers": "{\"google\":{\"appid\":\"\",\"secret\":\"\",\"defaultGroup\":\"\",\"auth_params\":{\"hd\":\"\"}},\"amazon\":{\"appid\":\"\",\"secret\":\"\",\"defaultGroup\":\"\"},\"facebook\":{\"appid\":\"\",\"secret\":\"\",\"defaultGroup\":\"\"},\"twitter\":{\"appid\":\"\",\"secret\":\"\",\"defaultGroup\":\"\"},\"GitHub\":{\"appid\":\"\",\"secret\":\"\",\"defaultGroup\":\"\",\"orgs\":\"\"},\"discord\":{\"appid\":\"\",\"secret\":\"\",\"defaultGroup\":\"\",\"guilds\":\"\"},\"QQ\":{\"appid\":\"\",\"secret\":\"\",\"defaultGroup\":\"\"},\"slack\":{\"appid\":\"\",\"secret\":\"\",\"defaultGroup\":\"\"},\"telegram\":{\"appid\":\"\",\"secret\":\"\",\"defaultGroup\":\"\"},\"mailru\":{\"appid\":\"\",\"secret\":\"\",\"defaultGroup\":\"\"},\"yandex\":{\"appid\":\"\",\"secret\":\"\",\"defaultGroup\":\"\",\"auth_params\":{\"hd\":\"\"}}}",
+      "prevent_create_email_exists": "",
+      "restrict_users_wo_assigned_groups": "",
+      "restrict_users_wo_mapped_groups": "",
+      "types": "",
+      "update_profile_on_login": "1"
+    },
+    "support": {
+      "enabled": "no",
+      "installed_version": "1.6.0",
+      "types": "session"
+    },
+    "survey_client": {
+      "enabled": "no",
+      "installed_version": "1.11.0",
+      "types": ""
+    },
+    "systemtags": {
+      "enabled": "no",
+      "installed_version": "1.13.0",
+      "types": "logging"
+    },
+    "text": {
+      "enabled": "yes",
+      "installed_version": "3.4.1",
+      "types": "dav"
+    },
+    "theming": {
+      "enabled": "no",
+      "installed_version": "1.14.0",
+      "types": "logging"
+    },
+    "twofactor_backupcodes": {
+      "enabled": "yes",
+      "installed_version": "1.12.0",
+      "types": ""
+    },
+    "updatenotification": {
+      "enabled": "no",
+      "installed_version": "1.13.0",
+      "types": "",
+      "update_check_errors": "2"
+    },
+    "user_oidc": {
+      "enabled": "no",
+      "id4me_enabled": "0",
+      "installed_version": "1.1.0",
+      "types": "authentication"
+    },
+    "user_status": {
+      "enabled": "no",
+      "installed_version": "1.3.1",
+      "types": ""
+    },
+    "viewer": {
+      "enabled": "yes",
+      "installed_version": "1.7.0",
+      "types": ""
+    },
+    "weather_status": {
+      "enabled": "no",
+      "installed_version": "1.3.0",
+      "types": ""
+    },
+    "workflowengine": {
+      "enabled": "yes",
+      "installed_version": "2.5.0",
+      "types": "filesystem"
+    }
+  }
+}
