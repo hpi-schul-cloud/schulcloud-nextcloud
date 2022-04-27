@@ -7,20 +7,26 @@ fi
 
 echo "Start configuration script..."
 
-ROOT="/var/www/html"
+for i in $INSTALL_PLUGINS; do
+  sudo -u www-data PHP_MEMORY_LIMIT=512M php occ app:install $i
+  echo "Plugins were installed"
+done
 
-echo "Installing custom apps..."
-cp -r /usr/nextcloud/custom_apps $ROOT
-sudo -u www-data PHP_MEMORY_LIMIT=512M php occ config:import /usr/nextcloud/import.json
-sudo -u www-data PHP_MEMORY_LIMIT=512M php occ app:install sociallogin || true
-sudo -u www-data PHP_MEMORY_LIMIT=512M php occ app:install groupfolders || true
-echo "Custom apps installed"
+for i in $ENABLE_PLUGINS; do
+  sudo -u www-data PHP_MEMORY_LIMIT=512M php occ app:enable $i
+  echo "Plugins were enabled"
+done
 
-if [ -d "$ROOT/core/skeleton" ]; then
-  echo "Removing default files..."
-  rm -r $ROOT/core/skeleton
-  echo "Default files removed"
-fi
+for i in $DISABLE_PLUGINS; do
+  sudo -u www-data PHP_MEMORY_LIMIT=512M php occ app:disable $i
+  echo "Plugins were disabled"
+done
+
+echo $CONFIG_JSON > ./tmp
+sudo -u www-data PHP_MEMORY_LIMIT=512M php occ config:import ./tmp
+rm ./tmp
+
+sudo -u www-data PHP_MEMORY_LIMIT=512M php occ app:update
 
 echo 'The configuration script was executed' > /usr/nextcloud/executed
 

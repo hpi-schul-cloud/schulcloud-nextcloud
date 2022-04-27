@@ -13,16 +13,17 @@ services:
       - .env
     volumes:
       - nextcloud:/var/www/html
+      - ./src/config/schulcloud.config.php:/var/www/html/config/schulcloud.config.php
       # uncomment the following line if you want to develop the app
-      #- ./src/custom_apps/groupfoldersautomation:/var/www/html/custom_apps/groupfoldersautomation
+      - ./src/custom_apps/groupfoldersautomation:/var/www/html/custom_apps/groupfoldersautomation
 
-  mysql:
-    image: mysql:8.0
+  db:
+    image: postgres:latest
     restart: unless-stopped
     env_file:
       - .env
     volumes:
-      - mysql:/var/lib/mysql
+      - db:/var/lib/postgresql/data
     cap_add:
       - SYS_NICE  # CAP_SYS_NICE
 
@@ -32,6 +33,6 @@ networks:
       name: schulcloudserver_schulcloud-server-network
 
 volumes:
-  mysql:
+  db:
   nextcloud:
 
