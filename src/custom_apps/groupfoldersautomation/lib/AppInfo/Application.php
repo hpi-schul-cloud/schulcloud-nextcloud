@@ -39,8 +39,16 @@ class Application extends App {
       //Handle GroupCreatedEvent for automatic folder creation
       $dispatcher->addListener(GroupCreatedEvent::class, function(GroupCreatedEvent $event) {
          $affectedGroup = $event->getGroup();
-         $folderName = $affectedGroup->getDisplayName();
          $groupId = $affectedGroup->getGID();
+         $folderName = $affectedGroup->getDisplayName();
+
+         //Get folder name with regex from group name
+         //Match between fist '-' and last '||'
+         if(preg_match('/(?<=\|\|)(.*)$/', $folderName, $matches) {
+            $folderName = $matches[0];
+         } else {
+            $this->logger->error("Creating Folder: $groupName, since group name is of wrong format. Expected: Nextcloud-<Team Name>||<Team ID>");
+         }
 
          try {
             //Create new folder
