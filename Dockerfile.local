@@ -6,6 +6,10 @@ RUN apt-get update && apt-get install -y supervisor sudo \
   && mkdir /var/log/supervisord /var/run/supervisord
 
 COPY ./src /usr/nextcloud
+RUN mkdir /var/www/html/config/
+RUN mkdir /var/www/html/custom_apps/
+RUN sudo chown -R www-data /var/www/html/config/
+RUN sudo chown -R www-data /var/www/html/custom_apps/
 
 ENV NEXTCLOUD_UPDATE=1
 ENV PHP_MEMORY_LIMIT=512M

@@ -26,7 +26,7 @@ echo $CONFIG_JSON > ./tmp
 sudo -u www-data PHP_MEMORY_LIMIT=512M php occ config:import ./tmp
 rm ./tmp
 
-sudo -u www-data PHP_MEMORY_LIMIT=512M php occ app:update
+sudo -u www-data PHP_MEMORY_LIMIT=512M php occ upgrade
 
 echo 'The configuration script was executed' > /usr/nextcloud/executed
 
