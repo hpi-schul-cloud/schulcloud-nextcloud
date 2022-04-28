@@ -5,7 +5,8 @@ services:
   nextcloud:
     build:
       context: .
-      dockerfile: Dockerfile.local
+      target: development
+    image: schulcloud/schulcloud-nextcloud/development
     restart: unless-stopped
     ports:
       - 8080:80
@@ -13,7 +14,6 @@ services:
       - .env
     volumes:
       - nextcloud:/var/www/html
-      - ./src/config/schulcloud.config.php:/var/www/html/config/schulcloud.config.php:rw
       - ./src/custom_apps/groupfoldersautomation:/var/www/html/custom_apps/groupfoldersautomation:rw
 
   db:
