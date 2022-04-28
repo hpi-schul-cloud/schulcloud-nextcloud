@@ -1,5 +1,10 @@
 #!/bin/sh
 
+while [ ! -f occ ]; do
+  echo "Nextcloud not available. Try again run configure script";
+  sleep 5
+done;
+
 if [ -f "/usr/nextcloud/executed" ]; then
   echo "Configuration script already run. Nothing to do."
   exit 0

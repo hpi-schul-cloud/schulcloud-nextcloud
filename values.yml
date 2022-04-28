@@ -1,0 +1,150 @@
+## values.yml for helm nextcloud helm chart
+## https://github.com/nextcloud/helm
+image:
+  repository: nextcloud
+  tag: 23.0.3-apache
+  pullPolicy: IfNotPresent
+
+nameOverride: "schulcloud-nextcloud"
+fullnameOverride: ""
+podAnnotations: {}
+deploymentAnnotations: {}
+
+# Number of replicas to be deployed
+replicaCount: 1
+
+# Allow configuration of lifecycle hooks
+# ref: https://kubernetes.io/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/
+lifecycle:
+  postStartCommand: ["/bin/sh", "-c", "./usr/nextcloud/configure.sh"]
+
+phpClientHttpsFix:
+  enabled: false
+  protocol: https
+
+nextcloud:
+  host: nextcloud.kube.home
+  username: admin
+  password: admin
+  update: 0
+  containerPort: 8080
+  datadir: /var/www/html/data
+  # PHP Configuration files
+  # Will be injected in /usr/local/etc/php/conf.d for apache image and in /usr/local/etc/php-fpm.d when nginx.enabled: true
+  phpConfigs: {}
+  # Default config files
+  # IMPORTANT: Will be used only if you put extra configs, otherwise default will come from nextcloud itself
+  # Default confgurations can be found here: https://github.com/nextcloud/docker/tree/master/16.0/apache/config
+  defaultConfigs:
+    # To protect /var/www/html/config
+    .htaccess: true
+    # Redis default configuration
+    redis.config.php: true
+    # Apache configuration for rewrite urls
+    apache-pretty-urls.config.php: true
+    # Define APCu as local cache
+    apcu.config.php: true
+    # Apps directory configs
+    apps.config.php: true
+    # Used for auto configure database
+    autoconfig.php: true
+    # SMTP default configuration
+    smtp.config.php: true
+  # Extra config files created in /var/www/html/config/
+  # ref: https://docs.nextcloud.com/server/15/admin_manual/configuration_server/config_sample_php_parameters.html#multiple-config-php-file
+  configs: {}
+
+  strategy:
+    type: Recreate
+
+  ##
+  ## Extra environment variables
+  extraEnv:
+    - name:
+  #  - name: SOME_SECRET_ENV
+  #    valueFrom:
+  #      secretKeyRef:
+  #        name: nextcloud
+  #        key: secret_key
+
+  # Extra mounts for the pods. Example shown is for connecting a legacy NFS volume
+  # to NextCloud pods in Kubernetes. This can then be configured in External Storage
+  extraVolumes:
+  #  - name: nfs
+  #    nfs:
+  #      server: "10.0.0.1"
+  #      path: "/nextcloud_data"
+  #      readOnly: false
+  extraVolumeMounts:
+  #  - name: nfs
+  #    mountPath: "/legacy_data"
+
+  # Extra secuurityContext parameters. For example you may need to define runAsNonRoot directive
+  # extraSecurityContext:
+  #   runAsUser: "33"
+  #   runAsGroup: "33"
+  #   runAsNonRoot: true
+  #   readOnlyRootFilesystem: true
+
+##
+## External database configuration
+##
+externalDatabase:
+  enabled: true
+  ## Supported database engines: mysql or postgresql
+  type: postgresql
+  ## Database host
+  host:
+  ## Database user
+  user: nextcloud
+  ## Database password
+  password: nextcloud
+  ## Database name
+  database: nextcloud
+
+##
+## PostgreSQL chart configuration
+## for more options see https://github.com/bitnami/charts/tree/master/bitnami/postgresql
+##
+postgresql:
+  enabled: true
+  global:
+    postgresql:
+      auth:
+        username: nextcloud
+        password: nextcloud
+        database: nextcloud
+  primary:
+    persistence:
+      enabled: true
+
+service:
+  type: ClusterIP
+  port: 8080
+  loadBalancerIP: nil
+  nodePort: nil
+
+## Liveness and readiness probe values
+## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
+##
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+  successThreshold: 1
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+  successThreshold: 1
+startupProbe:
+  enabled: false
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 30
+  successThreshold: 1
