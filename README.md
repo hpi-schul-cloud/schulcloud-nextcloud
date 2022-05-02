@@ -6,7 +6,7 @@ This repository contains:
 - a custom nextcloud plugin
 
 The custom image configures the nextcloud instance and uses environment variables for configuration.
-These env variables can used for install, enable and disable plugins.
+These env variables can be used for installing, enabling and disabling plugins.
 
 ## Build Container locally
 You have the choice between helm and docker-compose to setup your schulcloud-nextcloud instance locally.
@@ -23,14 +23,14 @@ $ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scr
 $ chmod 700 get_helm.sh
 $ ./get_helm.sh
 ```
-Check installtion with `helm version`.
+Check installation with `helm version`.
 
 ```
 helm repo add nextcloud https://nextcloud.github.io/helm/
 helm repo update
 ```
 
-If docker-desktop isnt the current kubernetes context `kubectl config get-contexts`, you can make it current with
+If docker-desktop isnt the current kubernetes context `kubectl config get-contexts`, you can make it your current with
 `kubectl config use-context docker-desktop`.
 
 #### Build and run the kubernetes production image
@@ -53,14 +53,14 @@ helm uninstall schulcloud-nextcloud
 
 ### With docker
 
-The following command build and run development image as container. It also runs a postgres server.
-The compose uses the `.env` to configure the environment. To start and build the image use:
+The following command builds and runs the development image as a container. It also runs a postgres server.
+The compose uses the `.env` to configure the environment. To start and build the images use:
 
 ```
 docker-compose up --build
 ```
 
-The groupfoldersautomation folder, our custom plugin, get mounted automatically and can be edited while the container is running.
+The groupfoldersautomation folder, our custom plugin, gets mounted automatically and can be edited while the container is running.
 
 
 ## NextCloud configuration
@@ -69,7 +69,7 @@ The NextCloud instance will be available at [`http://localhost:8080`](http://loc
 For the admin login, use [`http://localhost:8080?direct=1`](http://localhost:8080?direct=1).
 You may login into the instance with username `admin` and password `admin`.
 
-| Environemnt variable     | E.g.                                                          | comment                                                                                                                                       |
+| Environment variable     | E.g.                                                          | comment                                                                                                                                       |
 |--------------------------|---------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
 | POSTGRES_DB              | nextcloud                                                     |                                                                                                                                               |
 | POSTGRES_USER            | nextcloud                                                     |                                                                                                                                               |
