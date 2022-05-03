@@ -1,8 +1,5 @@
-# Group Folders Automation
-
-Listens to the GroupCreatedEvent from nextcloud and automatically creates a Group Folder from the GroupFolders Plugin via REST API calls. This is used to create a Group Folder for groups from dBildungscloud after a successfull login with the Social Login Plugin.
-
-Place this app in **nextcloud/custom_apps/**
+# My App
+Place this app in **nextcloud/apps/**
 
 ## Building the app
 

@@ -11,9 +11,9 @@ use OCP\Group\Events\GroupCreatedEvent;
 use Psr\Log\LoggerInterface;
 
 class Application extends App {
-   
+
    private const API_URL = "http://localhost:80/";
-   
+
    /** @var string */
    private $adminUser;
 
@@ -47,7 +47,7 @@ class Application extends App {
          if(preg_match('/(?<=\|\|)(.*)$/', $folderName, $matches)) {
             $folderName = $matches[0];
          } else {
-            $this->logger->error("Creating Folder: $groupName, since group name is of wrong format. Expected: Nextcloud-<Team ID>||<Team Name>");
+            $this->logger->error("Creating Folder: $groupName, since group name is of wrong format. Expected: <socialplugin#internalname>-<Team ID>||<Team Name>");
          }
 
          try {
@@ -88,7 +88,7 @@ class Application extends App {
          case 'PUT':
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PUT');
             if ($data)
-               curl_setopt($curl, CURLOPT_POSTFIELDS, $data);			 					
+               curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
             break;
          default:
             if ($data)
@@ -112,7 +112,7 @@ class Application extends App {
 
       if(curl_errno($curl))
          throw new Exception('Curl error: '. curl_error($curl));
-       
+
       curl_close($curl);
       return $result;
    }
