@@ -1,6 +1,8 @@
 # syntax=docker/dockerfile:1
 FROM nextcloud:latest AS base
 
+USER root
+
 RUN apt-get update && apt-get install -y sudo
 
 ENV NEXTCLOUD_UPDATE=1
