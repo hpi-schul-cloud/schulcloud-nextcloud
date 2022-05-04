@@ -10,6 +10,7 @@ ENV NEXTCLOUD_UPDATE=1
 FROM base AS production
 
 COPY ./src/configure.sh /usr/nextcloud/configure.sh
+RUN chmod +x /usr/nextcloud/configure.sh
 COPY ./src/custom_apps /usr/nextcloud/custom_apps
 
 FROM base AS development

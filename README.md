@@ -39,7 +39,7 @@ The production build uses Docker to build the image and Helm/Kubernetes to run i
 It uses the values.yml to configure the environment. To build and run the image use:
 
 ```
-./build-production.sh
+./run-production.sh
 ```
 
 This builds the new image and removes all old instances before starting new ones.
@@ -69,16 +69,16 @@ The NextCloud instance will be available at [`http://localhost:8080`](http://loc
 For the admin login, use [`http://localhost:8080?direct=1`](http://localhost:8080?direct=1).
 You may login into the instance with username `admin` and password `admin`.
 
-| Environment variable     | E.g.                                                          | comment                                                                                                                                       |
-|--------------------------|---------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| POSTGRES_DB              | nextcloud                                                     |                                                                                                                                               |
-| POSTGRES_USER            | nextcloud                                                     |                                                                                                                                               |
-| POSTGRES_PASSWORD        | nextcloud                                                     |                                                                                                                                               |
-| POSTGRES_HOST            | db                                                            |                                                                                                                                               |
-| INSTALL_PLUGINS          | sociallogin groupfolders ...                                  | Installs all referecend plugins from nextcloud app store. If the appstore is unreachable the container startup fails.                         |
-| NEXTCLOUD_ADMIN_USER     | admin                                                         |                                                                                                                                               |
-| NEXTCLOUD_ADMIN_PASSWORD | admin                                                         |                                                                                                                                               |
-| ENABLE_PLUGINS           | groupfoldersautomation                                        | Enables all referenced plugins. Precondition the plugin is installed.                                                                         |
-| DISABLE_PLUGINS          | accessibility activity circles comments...                    | Disable all referenced plugins. Precondition the plugin is installed.                                                                         |
-| CONFIG_JSON              | {"system":{"app_install_overwrite":["gluusso","groupfolder... | Contains the hole nextcloud configuration. It will be only imported after installation of nextcloud and overrides values of config.php files. |
+| Environment variable     | E.g.                                                          | comment                                                                                                                                        |
+|--------------------------|---------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| POSTGRES_DB              | nextcloud                                                     |                                                                                                                                                |
+| POSTGRES_USER            | nextcloud                                                     |                                                                                                                                                |
+| POSTGRES_PASSWORD        | nextcloud                                                     |                                                                                                                                                |
+| POSTGRES_HOST            | db                                                            |                                                                                                                                                |
+| INSTALL_PLUGINS          | sociallogin groupfolders ...                                  | Installs all referecend plugins from nextcloud app store. If the appstore is unreachable the container startup fails.                          |
+| NEXTCLOUD_ADMIN_USER     | admin                                                         |                                                                                                                                                |
+| NEXTCLOUD_ADMIN_PASSWORD | admin                                                         |                                                                                                                                                |
+| ENABLE_PLUGINS           | groupfoldersautomation                                        | Enables all referenced plugins. Precondition the plugin is installed.                                                                          |
+| DISABLE_PLUGINS          | accessibility activity circles comments...                    | Disable all referenced plugins. Precondition the plugin is installed.                                                                          |
+| CONFIG_JSON              | {"system":{"app_install_overwrite":["gluusso","groupfolder... | Contains the whole nextcloud configuration. It will be only imported after installation of nextcloud and overrides values of config.php files. |
 

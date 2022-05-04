@@ -5,6 +5,10 @@ if [ -f "/usr/nextcloud/executed" ]; then
   exit 0
 fi
 
+if [ -z "$INSTALL_PLUGINS" ] || [ -z "$ENABLE_PLUGINS" ] || [ -z "$DISABLE_PLUGINS" ] || [ -z "$CONFIG_JSON" ]; then
+  echo "One or more environment variables are undefined"
+fi
+
 while true; do
   sudo -u www-data PHP_MEMORY_LIMIT=512M php occ status | grep "installed: true"
   if [ $? -eq 0 ]; then
@@ -32,12 +36,16 @@ for i in $DISABLE_PLUGINS; do
   sudo -u www-data PHP_MEMORY_LIMIT=512M php occ app:disable $i
 done
 
-echo $CONFIG_JSON >./tmp
-sudo -u www-data PHP_MEMORY_LIMIT=512M php occ config:import ./tmp
-rm ./tmp
+if [ -n "$CONFIG_JSON" ]; then
+  echo "$CONFIG_JSON" >./tmp
+  sudo -u www-data PHP_MEMORY_LIMIT=512M php occ config:import ./tmp
+  rm ./tmp
+else
+  echo "No configuration will we be imported. See CONFIG_JSON env."
+fi
 
 sudo -u www-data PHP_MEMORY_LIMIT=512M php occ upgrade
 
-echo 'The configuration script was executed' >>/usr/nextcloud/executed
+echo "The configuration script was executed" >>/usr/nextcloud/executed
 
 echo "Done"
