@@ -66,7 +66,7 @@ The groupfoldersautomation folder, our custom plugin, gets mounted automatically
 ## NextCloud configuration
 
 The NextCloud instance will be available at [`http://localhost:8080`](http://localhost:8080).
-For the admin login, use [`http://localhost:8080?direct=1`](http://localhost:8080?direct=1).
+For the admin login, use [`http://localhost:8080/login?direct=1`](http://localhost:8080/login?direct=1).
 You may login into the instance with username `admin` and password `admin`.
 
 | Environment variable     | E.g.                                                          | comment                                                                                                                                        |
