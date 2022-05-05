@@ -19,6 +19,8 @@ services:
   db:
     image: postgres:latest
     restart: unless-stopped
+    ports:
+      - 5433:5432
     env_file:
       - .env
     volumes:
@@ -28,8 +30,7 @@ services:
 
 networks:
   default:
-    external:
-      name: schulcloudserver_schulcloud-server-network
+    name: schulcloudserver_schulcloud-server-network
 
 volumes:
   db:

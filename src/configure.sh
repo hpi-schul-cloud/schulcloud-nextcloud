@@ -21,6 +21,8 @@ done
 
 echo "Start configuration script..."
 
+sudo -u www-data PHP_MEMORY_LIMIT=512M php occ upgrade
+
 # Copy customs apps to nextcloud after installation, because of overwriting
 cp -R /usr/nextcloud/custom_apps/. /var/www/html/custom_apps/
 
@@ -43,8 +45,6 @@ if [ -n "$CONFIG_JSON" ]; then
 else
   echo "No configuration will we be imported. See CONFIG_JSON env."
 fi
-
-sudo -u www-data PHP_MEMORY_LIMIT=512M php occ upgrade
 
 echo "The configuration script was executed" >>/usr/nextcloud/executed
 
