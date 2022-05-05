@@ -14,7 +14,7 @@ services:
       - .env
     volumes:
       - nextcloud:/var/www/html
-      - ./src/custom_apps/groupfoldersautomation:/var/www/html/custom_apps/groupfoldersautomation:rw
+      - ./src/custom_apps/schulcloud:/var/www/html/custom_apps/schulcloud:rw
 
   db:
     image: postgres:latest

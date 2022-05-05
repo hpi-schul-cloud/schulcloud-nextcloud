@@ -1,5 +1,5 @@
 <?php
-namespace OCA\GroupFoldersAutomation\Migration;
+namespace OCA\Schulcloud\Migration;
 
 use Closure;
 use OCP\DB\ISchemaWrapper;

@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
-    <id>groupfoldersautomation</id>
-    <name>Group Folders Automation</name>
+    <id>schulcloud</id>
+    <name>Schulcloud</name>
     <summary>Automatically creates Group Folders from the Group Folders Plugin via REST API Calls</summary>
     <description><![CDATA[Automatically creates Group Folders from the Group Folders Plugin via REST API Calls]]></description>
     <version>0.0.3</version>
     <licence>agpl</licence>
     <author>Marvin Öhlerking</author>
-    <namespace>GroupFoldersAutomation</namespace>
+    <namespace>Schulcloud</namespace>
     <category>tools</category>
     <bugs></bugs>
     <dependencies>
@@ -17,7 +17,7 @@
         <lib>SimpleXML</lib>
     </dependencies>
     <settings>
-        <admin>OCA\GroupFoldersAutomation\Settings\AdminSettings</admin>
-        <admin-section>OCA\GroupFoldersAutomation\Settings\AdminSection</admin-section>
+        <admin>OCA\Schulcloud\Settings\AdminSettings</admin>
+        <admin-section>OCA\Schulcloud\Settings\AdminSection</admin-section>
     </settings>
 </info>

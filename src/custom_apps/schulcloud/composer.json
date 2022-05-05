@@ -1,5 +1,5 @@
 {
-    "name": "Group Folders Automation",
+    "name": "Schulcloud",
     "description": "Automatically creates Group Folders from the Group Folders Plugin via REST API Calls",
     "type": "project",
     "license": "AGPL",

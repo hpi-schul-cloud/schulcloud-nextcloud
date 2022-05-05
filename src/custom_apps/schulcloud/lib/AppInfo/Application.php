@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OCA\GroupFoldersAutomation\AppInfo;
+namespace OCA\Schulcloud\AppInfo;
 
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
@@ -14,7 +14,7 @@ use OCP\Group\Events\GroupCreatedEvent;
 use OCP\User\Events\PostLoginEvent;
 use OCP\IGroupManager;
 
-use OCA\GroupFoldersAutomation\Db\GroupFolderMapper;
+use OCA\Schulcloud\Db\GroupFolderMapper;
 
 use Psr\Log\LoggerInterface;
 
@@ -32,7 +32,7 @@ class Application extends App implements IBootstrap {
    private $logger;
 
    public function __construct() {
-      parent::__construct('groupfoldersautomation');
+      parent::__construct('schulcloud'); // id
 
       // Load environment variables
       $this->adminUser = getenv('NEXTCLOUD_ADMIN_USER');
@@ -51,7 +51,7 @@ class Application extends App implements IBootstrap {
    public function boot(IBootContext $context): void {
       $this->logger = $this->getService(LoggerInterface::class);
       $this->groupFolderMap = $this->getService(GroupFolderMapper::class);
-      
+
       // Register event handlers
       $dispatcher = $this->getService(IEventDispatcher::class);
       $dispatcher->addListener(GroupCreatedEvent::class, [$this, 'handleGroupFolderCreation']);

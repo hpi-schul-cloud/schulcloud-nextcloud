@@ -1,8 +1,8 @@
 <?php
-namespace OCA\GroupFoldersAutomation\Db;
- 
+namespace OCA\Schulcloud\Db;
+
 use OCP\AppFramework\Db\Entity;
- 
+
 class GroupFolderConnection extends Entity
 {
     protected $gid;

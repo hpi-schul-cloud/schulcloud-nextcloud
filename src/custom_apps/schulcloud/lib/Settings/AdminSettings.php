@@ -1,5 +1,5 @@
 <?php
-namespace OCA\GroupFoldersAutomation\Settings;
+namespace OCA\Schulcloud\Settings;
 
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IConfig;
@@ -30,14 +30,14 @@ class AdminSettings implements ISettings {
             //'this_config_var' => $this->config->getSystemValue('some_system_var', true),
         ];
 
-        return new TemplateResponse('groupfoldersautomation', 'settings/index', $parameters, '');
+        return new TemplateResponse('schulcloud', 'settings/index', $parameters, '');
     }
 
     /**
      * @return string ID of the section that should be used
      */
     public function getSection(): string {
-        return 'groupfoldersautomation';
+        return 'schulcloud';
     }
 
     /**

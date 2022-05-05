@@ -2,8 +2,8 @@
 /** @var $l \OCP\IL10N */
 /** @var $_ array */
 
-script('groupfoldersautomation', 'script');		// JavaScript file
-style('groupfoldersautomation', 'style');		// CSS file
+script('schulcloud', 'script');		// JavaScript file
+style('schulcloud', 'style');		// CSS file
 ?>
 
 <div id="app-settings">

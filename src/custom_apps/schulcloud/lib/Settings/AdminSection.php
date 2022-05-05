@@ -1,5 +1,5 @@
 <?php
-namespace OCA\GroupFoldersAutomation\Settings;
+namespace OCA\Schulcloud\Settings;
 
 use OCP\IL10N;
 use OCP\IURLGenerator;
@@ -29,14 +29,14 @@ class AdminSection implements IIconSection {
      * @return string Internal ID of the section
      */
     public function getID(): string {
-        return 'groupfoldersautomation';
+        return 'schulcloud';
     }
 
     /**
      * @return string Display name of the section
      */
     public function getName(): string {
-        return $this->l->t('Group Folders Automation');
+        return $this->l->t('Schulcloud');
     }
 
     /**

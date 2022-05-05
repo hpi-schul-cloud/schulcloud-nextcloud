@@ -60,7 +60,7 @@ The compose uses the `.env` to configure the environment. To start and build the
 docker-compose up --build
 ```
 
-The groupfoldersautomation folder, our custom plugin, gets mounted automatically and can be edited while the container is running.
+The schulcloud folder, our custom plugin, gets mounted automatically and can be edited while the container is running.
 
 
 ## NextCloud configuration
@@ -78,7 +78,7 @@ You may login into the instance with username `admin` and password `admin`.
 | INSTALL_PLUGINS          | sociallogin groupfolders ...                                  | Installs all referecend plugins from nextcloud app store. If the appstore is unreachable the container startup fails.                          |
 | NEXTCLOUD_ADMIN_USER     | admin                                                         |                                                                                                                                                |
 | NEXTCLOUD_ADMIN_PASSWORD | admin                                                         |                                                                                                                                                |
-| ENABLE_PLUGINS           | groupfoldersautomation                                        | Enables all referenced plugins. Precondition the plugin is installed.                                                                          |
+| ENABLE_PLUGINS           | schulcloud                                        | Enables all referenced plugins. Precondition the plugin is installed.                                                                          |
 | DISABLE_PLUGINS          | accessibility activity circles comments...                    | Disable all referenced plugins. Precondition the plugin is installed.                                                                          |
 | CONFIG_JSON              | {"system":{"app_install_overwrite":["gluusso","groupfolder... | Contains the whole nextcloud configuration. It will be only imported after installation of nextcloud and overrides values of config.php files. |
 
