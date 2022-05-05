@@ -12,7 +12,7 @@
     <category>tools</category>
     <bugs></bugs>
     <dependencies>
-        <nextcloud min-version="12" max-version="23"/>
+        <nextcloud min-version="12"/>
         <lib>curl</lib>
         <lib>SimpleXML</lib>
     </dependencies>
