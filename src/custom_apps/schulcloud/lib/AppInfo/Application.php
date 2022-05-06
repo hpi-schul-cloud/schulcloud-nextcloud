@@ -63,7 +63,7 @@ class Application extends App implements IBootstrap {
 
       $affectedGroup = $event->getGroup();
       $groupId = $affectedGroup->getGID();
-      $folderName = $affectedGroup->getDisplayName();
+      $folderName = self::makeFolderName($groupId, $affectedGroup->getDisplayName());
 
       try {
          // Create new folder
@@ -91,8 +91,9 @@ class Application extends App implements IBootstrap {
       $groups = $groupManager->getUserGroups($event->getUser());
 
       foreach($groups as $group) {
-         $connections = $mapper->findByGroupID($group->getGID());
-         $newFolderName = $group->getDisplayName();
+         $groupId = $group->getGID();
+         $connections = $mapper->findByGroupID($groupId);
+         $newFolderName = self::makeFolderName($groupId, $group->getDisplayName());
 
          if(count($connections) == 1) {
             $folderId = $connections[0]->getFid();
@@ -158,5 +159,9 @@ class Application extends App implements IBootstrap {
 
       curl_close($curl);
       return $result;
+   }
+
+   private static function makeFolderName($groupId, $groupName) {
+      return "$groupName ($groupId)";
    }
 }

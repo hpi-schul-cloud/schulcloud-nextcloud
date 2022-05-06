@@ -1,1 +1,8 @@
+# Intellij
 /.idea/*
+
+# PHP composer
+**/vendor/**
+
+# VSCode
+/.vscode/*
