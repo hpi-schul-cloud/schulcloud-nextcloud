@@ -33,6 +33,7 @@ class GroupFolderRenamingListener implements IEventListener {
 
     public function handle(Event $event): void {
         if (!($event instanceof PostLoginEvent)) {
+            $this->logger->error(self::class . ' is not registered correctly');
 			return;
 		}
 
