@@ -4,8 +4,6 @@ namespace OCA\Schulcloud\Tests\Unit\Controller;
 
 use PHPUnit\Framework\TestCase;
 
-use OCP\AppFramework\Http\TemplateResponse;
-
 use OCA\Schulcloud\Controller\PageController;
 
 
@@ -21,5 +19,4 @@ class PageControllerTest extends TestCase {
 	public function testIndex() {
 		$this->assertTrue(true);
 	}
-
 }

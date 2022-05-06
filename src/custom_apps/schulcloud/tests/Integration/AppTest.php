@@ -1,10 +1,9 @@
 <?php
 
-namespace OCA\MyApp\Tests\Integration\Controller;
+namespace OCA\Schulcloud\Tests\Integration\Controller;
 
 use OCP\AppFramework\App;
-use Test\TestCase;
-
+use PHPUnit\Framework\TestCase;
 
 /**
  * This test shows how to make a small Integration Test. Query your class
@@ -15,7 +14,7 @@ class AppTest extends TestCase {
 
     private $container;
 
-    public function setUp() {
+    public function setUp(): void{
         parent::setUp();
         $app = new App('schulcloud');
         $this->container = $app->getContainer();

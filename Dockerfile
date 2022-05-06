@@ -15,7 +15,7 @@ COPY ./src/custom_apps /usr/nextcloud/custom_apps
 
 FROM base AS development
 
-RUN apt-get install -y supervisor \
+RUN apt-get install -y supervisor composer \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir /var/log/supervisord /var/run/supervisord
 
