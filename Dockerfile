@@ -28,5 +28,7 @@ CMD ["/usr/bin/supervisord", "-c", "/usr/nextcloud/supervisord.conf"]
 FROM development AS test
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
-RUN sudo -u www-data php occ  maintenance:install
-RUN sh /usr/nextcloud/configure.sh
+WORKDIR /
+COPY --from=development . .
+WORKDIR /usr/nextcloud/custom_apps/schulcloud
+RUN composer update
