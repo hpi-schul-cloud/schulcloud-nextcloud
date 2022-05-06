@@ -18,10 +18,15 @@ FROM base AS development
 RUN apt-get install -y supervisor \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir /var/log/supervisord /var/run/supervisord
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
 COPY ./src /usr/nextcloud
 RUN mkdir /var/www/html/custom_apps/
 RUN sudo chown -R www-data /var/www/html/custom_apps/
 
 CMD ["/usr/bin/supervisord", "-c", "/usr/nextcloud/supervisord.conf"]
+
+FROM development AS test
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
+RUN sudo -u www-data php occ  maintenance:install
+RUN sh /usr/nextcloud/configure.sh
