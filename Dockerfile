@@ -15,9 +15,10 @@ COPY ./src/custom_apps /usr/nextcloud/custom_apps
 
 FROM base AS development
 
-RUN apt-get install -y supervisor composer \
+RUN apt-get install -y supervisor \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir /var/log/supervisord /var/run/supervisord
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
 COPY ./src /usr/nextcloud
 RUN mkdir /var/www/html/custom_apps/
