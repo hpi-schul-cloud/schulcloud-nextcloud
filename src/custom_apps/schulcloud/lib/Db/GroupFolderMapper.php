@@ -16,7 +16,7 @@ class GroupFolderMapper extends QBMapper {
      * @param string $field
      * @return GroupFolderConnection|null
      */
-    private function find(string $id, string $field) {
+    private function find($id, $field) {
         $qb = $this->db->getQueryBuilder();
 
         $qb->select('*')
@@ -32,11 +32,11 @@ class GroupFolderMapper extends QBMapper {
         }
     }
 
-    public function findByGroupID(string $gid) {
+    public function findByGroupID($gid) {
         return $this->find($gid, 'gid');
     }
 
-    public function findByFolderID(string $fid) {
+    public function findByFolderID($fid) {
         return $this->find($fid, 'fid');
     }
 
@@ -44,7 +44,7 @@ class GroupFolderMapper extends QBMapper {
      * @param string $gid Nextcloud group id
      * @param string $fid GroupFolders folder id
      */
-    public function createGroupFolderConnection(string $gid, string $fid)
+    public function createGroupFolderConnection($gid, $fid)
     {
         $connection = new GroupFolderConnection();
         $connection->setGid($gid);
@@ -56,7 +56,7 @@ class GroupFolderMapper extends QBMapper {
      * @param string $id
      * @param string $field
      */
-    private function deleteConnections(string $id, string $field)
+    private function deleteConnections($id, $field)
     {
         $qb = $this->db->getQueryBuilder();
         $qb->delete($this->getTableName())
@@ -71,11 +71,11 @@ class GroupFolderMapper extends QBMapper {
         }
     }
 
-    public function deleteByGroupID(string $gid) {
+    public function deleteByGroupID($gid) {
         return $this->deleteConnections($gid, 'gid');
     }
 
-    public function deleteByFolderID(string $fid) {
+    public function deleteByFolderID($fid) {
         return $this->deleteConnections($fid, 'fid');
     }
 }
