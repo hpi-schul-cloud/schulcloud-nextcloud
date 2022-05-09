@@ -4,6 +4,9 @@ namespace OCA\Schulcloud\Db;
 use OCP\IDBConnection;
 use OCP\AppFramework\Db;
 use OCP\AppFramework\Db\QBMapper;
+use OCP\AppFramework\Db\DoesNotExistException;
+
+use OCA\Schulcloud\Db\GroupFolderConnection;
 
 class GroupFolderMapper extends QBMapper {
 
@@ -27,8 +30,8 @@ class GroupFolderMapper extends QBMapper {
 
         try {
             return $this->findEntities($qb);
-        } catch(Db\DoesNotExistException $e) {
-            return null;
+        } catch(DoesNotExistException $e) {
+            return array();
         }
     }
 

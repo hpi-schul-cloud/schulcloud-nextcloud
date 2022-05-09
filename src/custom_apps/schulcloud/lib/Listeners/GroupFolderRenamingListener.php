@@ -46,11 +46,15 @@ class GroupFolderRenamingListener implements IEventListener {
             $newFolderName = GroupFolderName::make($groupId, $group->getDisplayName());
 
             if(count($connections) == 1) {
-                $folderId = $connections[0]->getFid();
+                try {
+                    $folderId = $connections[0]->getFid();
 
-                $result = $this->curl->send('POST', CurlRequest::API_URL . "index.php/apps/groupfolders/folders/$folderId/mountpoint", array('mountpoint'=>$newFolderName));
+                    $result = $this->curl->send('POST', CurlRequest::API_URL . "index.php/apps/groupfolders/folders/$folderId/mountpoint", array('mountpoint'=>$newFolderName));
 
-                $this->logger->info("Renamed group folder: [id: $folderId, name: $newFolderName]");
+                    $this->logger->info("Renamed group folder: [id: $folderId, name: $newFolderName]");
+                } catch(\Exception $e) {
+                    $this->logger->error("Failed to rename group folder:\n" . $e->getMessage());
+                }
             } else {
                 $this->logger->notice("Cannot determine Group Folder to rename for group [name: $newFolderName], since the group has multiple registered Group Folders");
             }

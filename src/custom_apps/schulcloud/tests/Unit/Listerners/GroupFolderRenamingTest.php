@@ -26,6 +26,9 @@ class GroupFolderRenamingTest extends TestCase {
     /** @var GroupFolderMapper|\PHPUnit\Framework\MockObject\MockObject */
 	private $mapper;
 
+    /** @var GroupFolderConnection|\PHPUnit\Framework\MockObject\MockObject */
+	private $testEntity;
+
     /** @var IGroupManager|\PHPUnit\Framework\MockObject\MockObject */
 	private $groupManager;
 
@@ -47,39 +50,53 @@ class GroupFolderRenamingTest extends TestCase {
 
         $this->testUser = $this->createMock(IUser::class);
 
+        $this->testEntity = $this->getMockBuilder(GroupFolderConnection::class)
+            ->addMethods(['getGid', 'getFid'])
+            ->getMock();
+        $this->testEntity->method('getGid')
+            ->will($this->returnValue(self::testGroupId));
+        $this->testEntity->method('getFid')
+            ->will($this->returnValue(self::testFolderId));
+
         $this->mapper = $this->createMock(GroupFolderMapper::class);
+        $this->mapper->method('findByGroupID')
+            ->with($this->equalTo(self::testGroupId))
+            ->will($this->returnValue(array($this->testEntity)));
+
+
         $this->groupManager = $this->createMock(IGroupManager::class);
+        $this->groupManager->method('getUserGroups')
+            ->with($this->equalTo($this->testUser))
+            ->will($this->returnValue(array($this->testGroup)));
+
         $this->logger = $this->createMock(ILogger::class);
+
         $this->curl = $this->createMock(CurlRequest::class);
 
         $this->listener = new GroupFolderRenamingListener($this->mapper, $this->groupManager, $this->logger, $this->curl);
     }
 
     public function testGroupFoldersRenamingSuccessfull() {
-        $entity = $this->getMockBuilder(GroupFolderConnection::class)
-            ->addMethods(['getGid', 'getFid'])
-            ->getMock();
-        $entity->method('getGid')
-            ->will($this->returnValue(self::testGroupId));
-        $entity->method('getFid')
-            ->will($this->returnValue(self::testFolderId));
-
-        $this->groupManager->method('getUserGroups')
-            ->with($this->equalTo($this->testUser))
-            ->will($this->returnValue(array($this->testGroup)));
-
-        $this->mapper->method('findByGroupID')
-            ->with($this->equalTo(self::testGroupId))
-            ->will($this->returnValue(array($entity)));
-
         $folderName = self::testGroupName . ' (' . self::testGroupId . ')';
         $this->curl->expects($this->once())
             ->method('send')
-            ->with($this->any(), $this->any(), array('mountpoint'=>$folderName));
+            ->with($this->anything(), $this->anything(), array('mountpoint'=>$folderName));
         
         $this->logger->expects($this->once())
             ->method('info');
             
+        $event = new PostLoginEvent($this->testUser, "test_user_name", "test_password", true);
+        $this->listener->handle($event);
+    }
+
+    public function testGroupFoldersRenamingApiNotResponding() {
+        $this->curl->expects($this->once())
+            ->method('send')
+            ->will($this->throwException(new \Exception()));
+
+        $this->logger->expects($this->once())
+            ->method('error');
+
         $event = new PostLoginEvent($this->testUser, "test_user_name", "test_password", true);
         $this->listener->handle($event);
     }

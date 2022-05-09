@@ -38,10 +38,6 @@ class Application extends App implements IBootstrap {
    }
 
    public function boot(IBootContext $context): void {
-
-   }
-
-   private static function makeFolderName($groupId, $groupName) {
-      return "$groupName ($groupId)";
+      
    }
 }
