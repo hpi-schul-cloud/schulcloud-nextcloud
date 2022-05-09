@@ -8,6 +8,7 @@ use OCP\IGroupManager;
 use OCP\ILogger;
 
 use OCA\Schulcloud\Helper\CurlRequest;
+use OCA\Schulcloud\Helper\GroupFolderName;
 use OCA\Schulcloud\Db\GroupFolderMapper;
 
 class GroupFolderRenamingListener implements IEventListener {
@@ -42,7 +43,7 @@ class GroupFolderRenamingListener implements IEventListener {
         foreach($groups as $group) {
             $groupId = $group->getGID();
             $connections = $this->mapper->findByGroupID($groupId);
-            $newFolderName = self::makeFolderName($groupId, $group->getDisplayName());
+            $newFolderName = GroupFolderName::make($groupId, $group->getDisplayName());
 
             if(count($connections) == 1) {
                 $folderId = $connections[0]->getFid();
@@ -54,9 +55,5 @@ class GroupFolderRenamingListener implements IEventListener {
                 $this->logger->notice("Cannot determine Group Folder to rename for group [name: $newFolderName], since the group has multiple registered Group Folders");
             }
         }
-    }
-
-    private static function makeFolderName($groupId, $groupName) {
-        return "$groupName ($groupId)";
     }
 }

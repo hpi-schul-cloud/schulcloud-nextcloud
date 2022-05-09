@@ -7,6 +7,7 @@ use OCP\Group\Events\GroupCreatedEvent;
 use OCP\ILogger;
 
 use OCA\Schulcloud\Helper\CurlRequest;
+use OCA\Schulcloud\Helper\GroupFolderName;
 use OCA\Schulcloud\Db\GroupFolderMapper;
 
 class GroupFolderCreationListener implements IEventListener {
@@ -34,7 +35,7 @@ class GroupFolderCreationListener implements IEventListener {
 
         $affectedGroup = $event->getGroup();
         $groupId = $affectedGroup->getGID();
-        $folderName = self::makeFolderName($groupId, $affectedGroup->getDisplayName());
+        $folderName = GroupFolderName::make($groupId, $affectedGroup->getDisplayName());
 
         try {
             // Create new folder
@@ -53,9 +54,5 @@ class GroupFolderCreationListener implements IEventListener {
         } catch(\Exception $e) {
             $this->logger->error("Failed to create group folder:\n" . $e->getMessage());
         }
-    }
-
-    private static function makeFolderName($groupId, $groupName) {
-        return "$groupName ($groupId)";
     }
 }
