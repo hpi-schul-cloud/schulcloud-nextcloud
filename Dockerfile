@@ -24,3 +24,11 @@ RUN mkdir /var/www/html/custom_apps/
 RUN sudo chown -R www-data /var/www/html/custom_apps/
 
 CMD ["/usr/bin/supervisord", "-c", "/usr/nextcloud/supervisord.conf"]
+
+FROM development AS test
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
+WORKDIR /
+COPY --from=development . .
+WORKDIR /usr/nextcloud/custom_apps/schulcloud
+RUN composer update
