@@ -5,7 +5,7 @@
     <name>Schulcloud</name>
     <summary>Automatically creates Group Folders from the Group Folders Plugin via REST API Calls</summary>
     <description><![CDATA[Automatically creates Group Folders from the Group Folders Plugin via REST API Calls]]></description>
-    <version>0.0.3</version>
+    <version>0.1.2</version>
     <licence>agpl</licence>
     <author>Marvin Öhlerking</author>
     <namespace>Schulcloud</namespace>
