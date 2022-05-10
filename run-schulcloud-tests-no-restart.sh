@@ -1,7 +1,7 @@
 #!/bin/bash
 #phpunit has to be installed with composer to the vendor directory
 
-docker-compose -p schulcloud-nextcloud-tests up -d --no-recreate
+docker-compose -p schulcloud-nextcloud-tests up -d --no-recreate --build
 
 CMD="
 while ! [ -f '/usr/nextcloud/executed' ]; do
