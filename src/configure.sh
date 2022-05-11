@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -f "/var/www/html/executed" ]; then
+if [ "$RUN_CONFIGURATION" = false ]; then
   echo "Configuration script already run. Nothing to do."
   exit 0
 fi
