@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -f "/usr/nextcloud/executed" ]; then
+if [ -f "/var/www/html/executed" ]; then
   echo "Configuration script already run. Nothing to do."
   exit 0
 fi
@@ -46,6 +46,6 @@ else
   echo "No configuration will we be imported. See CONFIG_JSON env."
 fi
 
-echo "The configuration script was executed" >>/usr/nextcloud/executed
+echo "The configuration script was executed" >> /var/www/html/executed
 
 echo "Done"

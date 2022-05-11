@@ -3,9 +3,9 @@
       xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
     <id>schulcloud</id>
     <name>Schulcloud</name>
-    <summary>Automatically creates Group Folders from the Group Folders Plugin via REST API Calls</summary>
-    <description><![CDATA[Automatically creates Group Folders from the Group Folders Plugin via REST API Calls]]></description>
-    <version>0.0.3</version>
+    <summary>Automatically creates Group Folders from the Group Folders Plugin</summary>
+    <description><![CDATA[Automatically creates Group Folders from the Group Folders Plugin]]></description>
+    <version>0.1.2</version>
     <licence>agpl</licence>
     <author>Marvin Öhlerking</author>
     <namespace>Schulcloud</namespace>
