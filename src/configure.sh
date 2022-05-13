@@ -1,6 +1,10 @@
 #!/bin/sh
 
-if [ "$RUN_CONFIGURATION" = false ]; then
+if [ ! -f "/var/www/html/executed" ]; then
+  echo "Initial Setup. Configuration will run."
+elif [ "$RUN_CONFIGURATION" = True ]; then
+  echo "RUN_CONFIGURATION variabel set to True. Configuration will run."
+else
   echo "Configuration script already run. Nothing to do."
   exit 0
 fi
