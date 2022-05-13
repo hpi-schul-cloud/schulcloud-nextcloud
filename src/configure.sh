@@ -25,8 +25,6 @@ done
 
 echo "Start configuration script..."
 
-sudo -u www-data PHP_MEMORY_LIMIT=512M php occ upgrade
-
 # Copy customs apps to nextcloud after installation, because of overwriting
 cp -R /usr/nextcloud/custom_apps/. /var/www/html/custom_apps/
 
