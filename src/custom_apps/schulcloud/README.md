@@ -1,5 +1,5 @@
 # Schulcloud
-Place this app in **nextcloud/apps/**
+Place this app in **nextcloud/custom_apps/**
 
 ## Building the app
 

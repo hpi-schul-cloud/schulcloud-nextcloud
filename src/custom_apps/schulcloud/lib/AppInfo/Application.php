@@ -12,7 +12,6 @@ use OCP\ILogger;
 
 use OCA\GroupFolders\Folder\FolderManager;
 
-use OCA\Schulcloud\AppInfo\DependencyManager;
 use OCA\Schulcloud\Listeners\GroupFolderCreationListener;
 use OCA\Schulcloud\Listeners\GroupFolderRenamingListener;
 use OCA\Schulcloud\Folder\GroupFolderManager;
@@ -43,6 +42,6 @@ class Application extends App implements IBootstrap {
    }
 
    public function boot(IBootContext $context): void {
-
+      // Boot logic goes here
    }
 }

@@ -7,7 +7,7 @@
     <description><![CDATA[Automatically creates Group Folders from the Group Folders Plugin]]></description>
     <version>0.1.2</version>
     <licence>agpl</licence>
-    <author>Marvin Öhlerking</author>
+    <author>Capcakes</author>
     <namespace>Schulcloud</namespace>
     <category>tools</category>
     <bugs></bugs>

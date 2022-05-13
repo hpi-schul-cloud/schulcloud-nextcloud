@@ -63,6 +63,23 @@ docker-compose up --build
 The schulcloud folder, our custom plugin, gets mounted automatically and can be edited while the container is running.
 
 
+## Running Tests
+
+To run the PHPUnit tests you can use the provided shell script.
+
+    run-schulcloud-tests.sh
+
+This builds the test image and creates a container with a nextcloud installation together with the tests.
+The container with its volumes gets automatically deleted after this. Since this process takes a while you can also run
+the tests with the other shell script.
+
+    run-schulcloud-tests-no-restart.sh
+
+This also builds the test image, but reuses the running container without deleting it.
+If you have a custom testsuite you can use its name as a parameter for the scripts to only run this suite
+e.g. `./run-schulcloud-tests.sh unit`.
+
+
 ## NextCloud configuration
 
 The NextCloud instance will be available at [`http://localhost:8080`](http://localhost:8080).
@@ -78,6 +95,7 @@ You may login into the instance with username `admin` and password `admin`.
 | INSTALL_PLUGINS          | sociallogin groupfolders ...                                  | Installs all referecend plugins from nextcloud app store. If the appstore is unreachable the container startup fails.                          |
 | NEXTCLOUD_ADMIN_USER     | admin                                                         |                                                                                                                                                |
 | NEXTCLOUD_ADMIN_PASSWORD | admin                                                         |                                                                                                                                                |
+| RUN_CONFIGURATION        | true                                                          | option to disable the automatic configuration of nextcloud                                                                                     |
 | ENABLE_PLUGINS           | schulcloud                                                    | Enables all referenced plugins. Precondition the plugin is installed.                                                                          |
 | DISABLE_PLUGINS          | accessibility activity circles comments...                    | Disable all referenced plugins. Precondition the plugin is installed.                                                                          |
 | CONFIG_JSON              | {"system":{"app_install_overwrite":["gluusso","groupfolder... | Contains the whole nextcloud configuration. It will be only imported after installation of nextcloud and overrides values of config.php files. |

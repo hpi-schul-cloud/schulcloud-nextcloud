@@ -32,3 +32,4 @@ WORKDIR /
 COPY --from=development . .
 WORKDIR /usr/nextcloud/custom_apps/schulcloud
 RUN composer update
+WORKDIR /var/www/html

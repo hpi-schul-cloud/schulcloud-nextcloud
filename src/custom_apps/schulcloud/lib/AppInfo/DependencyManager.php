@@ -1,33 +1,44 @@
 <?php
 namespace OCA\Schulcloud\AppInfo;
 
+use DomainException;
+
 class DependencyManager {
 
-   /**
-	 * @throws Exception
-	 */
-   public static function checkDependencies() {
+    /**
+     * helper function to check all required dependencies
+     * @return void
+     * @throws DomainException
+     */
+   public static function checkDependencies(): void {
       self::checkAppDependency('sociallogin');
       self::checkAppDependency('groupfolders');
 
       self::checkClassDependency('OCA\GroupFolders\Folder\FolderManager');
    }
 
-   /**
-	 * @throws Exception
-	 */
-   public static function checkAppDependency(string $name) {
+
+    /**
+     * Checks if an app is installed and enabled
+     * @param string $name app id
+     * @return void
+     * @throws DomainException if app is not enabled
+     */
+   public static function checkAppDependency(string $name): void {
       if(!\OCP\App::isEnabled($name)) {
-         throw new \Exception("App '$name' is not enabled, but it is a required dependency.");
+         throw new DomainException("App '$name' is not enabled, but it is a required dependency.");
       }
    }
 
-   /**
-	 * @throws Exception
-	 */
-   public static function checkClassDependency(string $class) {
+    /**
+     * Checks if a class exists
+     * @param string $class Class name with namespace e.g. OCA\Schulcloud\SomeClass
+     * @return void
+     * @throws DomainException if class does not exist
+     */
+   public static function checkClassDependency(string $class): void {
       if(!class_exists($class)) {
-         throw new \Exception("Could not find class '$class', but it is a required dependency.");
+         throw new DomainException("Could not find class '$class', but it is a required dependency.");
       }
    }
 }

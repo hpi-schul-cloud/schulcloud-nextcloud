@@ -20,6 +20,11 @@ class GroupFolderManager {
         $this->logger = $logger;
     }
 
+    /**
+     * Creates a group folder and associates a group with it
+     * @param $group
+     * @return void
+     */
     public function createFolderForGroup($group) {
         $groupId = $group->getGID();
         $folderName = GroupFolderName::make($groupId, $group->getDisplayName());
@@ -34,6 +39,11 @@ class GroupFolderManager {
         }
     }
 
+    /**
+     * Fetches all group folders of a user and renames them according to the nextcloud group that is connected to that folder
+     * @param $user
+     * @return void
+     */
     public function renameFoldersOfUser($user) {
         try {
             $folderList = $this->folderManager->getFoldersForUser($user);
@@ -42,6 +52,7 @@ class GroupFolderManager {
                 $folderId = $folder['folder_id'];
                 
                 $groups = $this->folderManager->searchGroups($folderId);
+                // Assumes that the automatically generated group folders are named after the first (and only) connected group
                 $group = $groups[0];
                 
                 $newFolderName = GroupFolderName::make($group['gid'], $group['displayname']);
