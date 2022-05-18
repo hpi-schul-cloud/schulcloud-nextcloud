@@ -1,38 +1,32 @@
 <?php
-
 namespace OCA\Schulcloud\Controller;
 
 use OCP\AppFramework\ApiController;
 use OCP\IRequest;
+use OCP\IUserSession;
 
-/**
- * See https://github.com/nextcloud/server/blob/master/lib/public/AppFramework/ApiController.php
- */
 class LogoutController extends ApiController {
 
-    public function __construct($appName, IRequest $request) {
+    /** @var IUserSession */
+    private $session;
+
+    public function __construct($appName, IRequest $request, IUserSession $session) {
         parent::__construct(
             $appName,
             $request,
             'GET',
             '',
             1728000);
+        $this->session = $session;
     }
 
     /**
-     * @NoCSRFRequired
      * @NoAdminRequired
-     */
-    public function index() : array {
-        return array('loggedIn');
-    }
-
-    /**
      * @NoCSRFRequired
-     * @NoAdminRequired
+     * @UseSession
      */
-    public function logout() : array {
-        \OC::$server->getUserSession()->logout();
-        return array('Logged out!');
+    public function logout(): array {
+        $this->session->logout();
+        return array('message'=>'Logout successfull');
     }
 }
