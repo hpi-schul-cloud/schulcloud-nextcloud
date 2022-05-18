@@ -14,6 +14,7 @@ services:
       - .env
     volumes:
       - nextcloud:/var/www/html
+      - ./src/custom_apps/schulcloud:/var/www/html/custom_apps/schulcloud:rw
     depends_on:
       - db
 

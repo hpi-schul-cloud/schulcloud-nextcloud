@@ -9,7 +9,6 @@
  */
 return [
     'routes' => [
-        ['name' => 'logout#index', 'url' => '/', 'verb' => 'GET'],
-        ['name' => 'logout#logout', 'url' => '/logout', 'verb' => 'GET'],
+        ['name' => 'logout#logout', 'url' => '/logout', 'verb' => 'GET']
     ]
 ];
