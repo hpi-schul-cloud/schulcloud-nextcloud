@@ -27,6 +27,6 @@ class LogoutController extends ApiController {
      */
     public function logout(): array {
         $this->session->logout();
-        return array('message'=>'Logout successfull');
+        return array('message'=>'Logout successful');
     }
 }
