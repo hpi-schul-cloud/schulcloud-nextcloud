@@ -5,7 +5,7 @@
     <name>Schulcloud</name>
     <summary>Automatically creates Group Folders from the Group Folders Plugin</summary>
     <description><![CDATA[Automatically creates Group Folders from the Group Folders Plugin]]></description>
-    <version>0.1.2</version>
+    <version>0.1.6</version>
     <licence>agpl</licence>
     <author>Capcakes</author>
     <namespace>Schulcloud</namespace>
