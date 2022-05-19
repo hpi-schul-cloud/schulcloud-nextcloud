@@ -1,5 +1,5 @@
 <?php
-namespace OCA\Schulcloud\Tests\Integration\Listeners;
+namespace OCA\Schulcloud\Tests\Unit\Folder;
 
 use PHPUnit\Framework\TestCase;
 

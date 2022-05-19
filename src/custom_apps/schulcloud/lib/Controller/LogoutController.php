@@ -23,7 +23,6 @@ class LogoutController extends ApiController {
     /**
      * @NoAdminRequired
      * @NoCSRFRequired
-     * @UseSession
      */
     public function logout(): array {
         $this->session->logout();
