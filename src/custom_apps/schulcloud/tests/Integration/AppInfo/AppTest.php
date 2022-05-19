@@ -1,6 +1,6 @@
 <?php
 
-namespace OCA\Schulcloud\Tests\Integration;
+namespace OCA\Schulcloud\Tests\Integration\AppInfo;
 
 use PHPUnit\Framework\TestCase;
 
