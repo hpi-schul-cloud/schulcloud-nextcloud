@@ -18,16 +18,19 @@ if [ -z "$INSTALL_PLUGINS" ] || [ -z "$ENABLE_PLUGINS" ] || [ -z "$DISABLE_PLUGI
 fi
 
 # Clone external git plugins
-if [ -n "$EXTERNAL_GIT_PLUGINS" ]; then
-  rm -rf /usr/nextcloud/external_plugins
-  mkdir -p /usr/nextcloud/external_plugins
-  cd /usr/nextcloud/external_plugins
-  for i in $EXTERNAL_GIT_PLUGINS; do
-    echo "Cloning $i"
-    git clone $i
-  done
-  cd /var/www/html/
-fi
+#if [ -n "$EXTERNAL_GIT_PLUGINS" ]; then
+#  rm -rf /usr/nextcloud/external_plugins
+#  mkdir -p /usr/nextcloud/external_plugins
+#  cd /usr/nextcloud/external_plugins
+#  for i in $EXTERNAL_GIT_PLUGINS; do
+#    echo "Cloning $i"
+#    git clone $i
+#  done
+#  cd /var/www/html/
+#fi
+
+# TODO remove
+#mv /usr/nextcloud/external_plugins/NextcloudExtract /usr/nextcloud/external_plugins/custom-extract
 
 # Check if nextcloud is available to install plugins
 while true; do
@@ -42,7 +45,7 @@ done
 
 # Copy customs apps to nextcloud after installation, because of overwriting
 cp -R /usr/nextcloud/custom_apps/. /var/www/html/custom_apps/
-cp -R /usr/nextcloud/external_plugins/. /var/www/html/custom_apps/
+#cp -R /usr/nextcloud/external_plugins/. /var/www/html/custom_apps/
 
 echo "Start configuration script..."
 
