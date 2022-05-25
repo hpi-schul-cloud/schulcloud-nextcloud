@@ -7,7 +7,7 @@ check_environment() {
   if [ ! -f "/var/www/html/executed" ]; then
     echo "Initial Setup. Configuration will run."
   elif [ "$RUN_CONFIGURATION" = true ]; then
-    echo "RUN_CONFIGURATION variable set to True. Configuration will run."
+    echo "RUN_CONFIGURATION variable set to true. Configuration will run."
   else
     echo "Configuration script already run. Nothing to do."
     exit 0
