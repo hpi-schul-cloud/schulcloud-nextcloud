@@ -3,7 +3,7 @@ FROM nextcloud:24.0.0 AS base
 
 USER root
 
-RUN apt-get update && apt-get install -y sudo
+RUN apt-get update && apt-get install -y sudo git
 
 ENV NEXTCLOUD_UPDATE=1
 

@@ -1,5 +1,8 @@
 #!/bin/sh
 
+CUSTOM_APPS_PATH="/usr/nextcloud/custom_apps/"
+
+# Check if configure needs to run
 if [ ! -f "/var/www/html/executed" ]; then
   echo "Initial Setup. Configuration will run."
 elif [ "$RUN_CONFIGURATION" = True ]; then
@@ -9,10 +12,12 @@ else
   exit 0
 fi
 
+# Check variables
 if [ -z "$INSTALL_PLUGINS" ] || [ -z "$ENABLE_PLUGINS" ] || [ -z "$DISABLE_PLUGINS" ] || [ -z "$CONFIG_JSON" ]; then
   echo "One or more environment variables are undefined"
 fi
 
+# Check if nextcloud is available to install plugins
 while true; do
   sudo -u www-data PHP_MEMORY_LIMIT=512M php occ status | grep "installed: true"
   if [ $? -eq 0 ]; then
@@ -23,10 +28,23 @@ while true; do
   sleep 5
 done
 
-echo "Start configuration script..."
+# Clone external git plugins
+if [ -n "$EXTERNAL_GIT_PLUGINS" ]; then
+  rm -rf /usr/nextcloud/external_plugins
+  mkdir -p /usr/nextcloud/external_plugins
+  cd /usr/nextcloud/external_plugins
+  for i in $EXTERNAL_GIT_PLUGINS; do
+    echo "Cloning $i"
+    git clone $i
+  done
+  cd /var/www/html/
+fi
 
 # Copy customs apps to nextcloud after installation, because of overwriting
 cp -R /usr/nextcloud/custom_apps/. /var/www/html/custom_apps/
+cp -R /usr/nextcloud/external_plugins/. /var/www/html/custom_apps/
+
+echo "Start configuration script..."
 
 for i in $INSTALL_PLUGINS; do
   sudo -u www-data PHP_MEMORY_LIMIT=512M php occ app:install $i
