@@ -17,6 +17,9 @@ check_environment() {
   if [ -z "$INSTALL_PLUGINS" ] || [ -z "$ENABLE_PLUGINS" ] || [ -z "$DISABLE_PLUGINS" ] || [ -z "$CONFIG_JSON" ]; then
     echo "Please note: one or more environment variables are undefined"
   fi
+
+  # set php memory limit to default if env is not set
+  echo ${PHP_MEMORY_LIMIT:=512M}
 }
 
 # Clone external git plugins
@@ -42,7 +45,7 @@ external_plugins() {
 # Check if nextcloud is available to install plugins
 waiting_for_nextcloud() {
   while true; do
-    sudo -u www-data PHP_MEMORY_LIMIT=512M php occ status | grep "installed: true"
+    sudo -u www-data PHP_MEMORY_LIMIT=$PHP_MEMORY_LIMIT php occ status | grep "installed: true"
     if [ $? -eq 0 ]; then
       echo "Nextcloud is reachable"
       break
@@ -55,15 +58,15 @@ waiting_for_nextcloud() {
 # installs, enables and disables given plugins
 manage_plugins() {
   for i in $INSTALL_PLUGINS; do
-    sudo -u www-data PHP_MEMORY_LIMIT=512M php occ app:install $i
+    sudo -u www-data PHP_MEMORY_LIMIT=$PHP_MEMORY_LIMIT php occ app:install $i
   done
 
   for i in $ENABLE_PLUGINS; do
-    sudo -u www-data PHP_MEMORY_LIMIT=512M php occ app:enable $i
+    sudo -u www-data PHP_MEMORY_LIMIT=$PHP_MEMORY_LIMIT php occ app:enable $i
   done
 
   for i in $DISABLE_PLUGINS; do
-    sudo -u www-data PHP_MEMORY_LIMIT=512M php occ app:disable $i
+    sudo -u www-data PHP_MEMORY_LIMIT=$PHP_MEMORY_LIMIT php occ app:disable $i
   done
 }
 
@@ -75,7 +78,7 @@ copy_custom_plugins() {
 import_config() {
   if [ -n "$CONFIG_JSON" ]; then
     echo "$CONFIG_JSON" > ./tmp
-    sudo -u www-data PHP_MEMORY_LIMIT=512M php occ config:import ./tmp
+    sudo -u www-data PHP_MEMORY_LIMIT=$PHP_MEMORY_LIMIT php occ config:import ./tmp
     rm ./tmp
   else
     echo "No configuration will we be imported. See CONFIG_JSON env."
