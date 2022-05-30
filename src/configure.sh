@@ -53,7 +53,7 @@ waiting_for_nextcloud() {
 }
 
 # installs, enables and disables given plugins
-managePlugins() {
+manage_plugins() {
   for i in $INSTALL_PLUGINS; do
     sudo -u www-data PHP_MEMORY_LIMIT=512M php occ app:install $i
   done
@@ -91,6 +91,6 @@ external_plugins
 waiting_for_nextcloud
 # Copy customs plugins to nextcloud after installation, because of overwriting
 copy_custom_plugins
-managePlugins
+manage_plugins
 import_config
 echo "The configuration script was executed" > /var/www/html/executed
