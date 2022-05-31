@@ -3,7 +3,7 @@ FROM nextcloud:24.0.0 AS base
 
 USER root
 
-RUN apt-get update && apt-get install -y sudo git p7zip p7zip-full
+RUN apt-get update && apt-get install -y sudo git p7zip p7zip-full unrar
 
 ENV NEXTCLOUD_UPDATE=1
 
