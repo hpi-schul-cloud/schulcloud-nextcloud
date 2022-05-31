@@ -3,7 +3,7 @@ FROM nextcloud:24.0.0 AS base
 
 USER root
 
-RUN apt-get update && apt-get install -y sudo git
+RUN apt-get update && apt-get install -y sudo git p7zip p7zip-full
 
 ENV NEXTCLOUD_UPDATE=1
 
@@ -12,6 +12,7 @@ FROM base AS production
 COPY ./src/configure.sh /usr/nextcloud/configure.sh
 RUN chmod +x /usr/nextcloud/configure.sh
 COPY ./src/custom_apps /usr/nextcloud/custom_apps
+RUN sudo chown -R www-data /usr/nextcloud/custom_apps
 
 FROM base AS development
 
