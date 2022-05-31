@@ -29,7 +29,7 @@ nextcloud:
     - name: RUN_CONFIGURATION
       value: true
     - name: EXTERNAL_GIT_PLUGINS
-      value: "https://github.com/hpi-schul-cloud/NextcloudExtract.git:extract:master"
+      value: "https://github.com/hpi-schul-cloud/NextcloudExtract.git:extract:1.3.6"
     - name: DISABLE_PLUGINS
       value: "accessibility activity circles comments cloud_federation_api contactsinteraction dashboard federatedfilesharing files_sharing firstrunwizard password_policy photos privacy nextcloud_announcements recommendations sharebymail support survey_client systemtags theming notifications updatenotification user_ldap user_status weather_status"
     - name: CONFIG_JSON
