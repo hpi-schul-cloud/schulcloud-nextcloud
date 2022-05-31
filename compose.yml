@@ -15,7 +15,7 @@ services:
     volumes:
       - nextcloud:/var/www/html
       - ./src/custom_apps/schulcloud:/var/www/html/custom_apps/schulcloud:rw
-      - ../NextcloudExtract/:/var/www/html/custom_apps/extract:rw
+      - ../NextcloudExtract:/var/www/html/custom_apps/extract:rw
     depends_on:
       - db
 
