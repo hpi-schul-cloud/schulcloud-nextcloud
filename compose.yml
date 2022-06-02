@@ -16,8 +16,21 @@ services:
       - nextcloud:/var/www/html
       - ../schulcloud-nextcloud-app:/var/www/html/custom_apps/schulcloud:rw
       - ../NextcloudExtract:/var/www/html/custom_apps/extract:rw
+      #- ./src/config:/var/www/html/config/
     depends_on:
       - db
+      - storage
+
+  storage:
+    image: minio/minio:latest
+    ports:
+      - 9100:9000
+      - 9101:9001
+    env_file:
+      - .env
+    command: 'server /data --console-address ":9001"'
+    volumes:
+      - ~/minio/data:/data
 
   db:
     image: postgres:latest
@@ -38,4 +51,5 @@ networks:
 volumes:
   db:
   nextcloud:
+  storage:
 
