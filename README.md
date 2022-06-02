@@ -3,7 +3,6 @@
 This repository contains:
 - a Dockerfile for development and production image
 - a values.yml for the nextcloud helm chart
-- a custom nextcloud plugin
 
 The custom image configures the nextcloud instance and uses environment variables for configuration.
 These env variables can be used for installing, enabling and disabling plugins.
@@ -60,25 +59,7 @@ The compose uses the `.env` to configure the environment. To start and build the
 docker-compose up --build
 ```
 
-The schulcloud folder, our custom plugin, gets mounted automatically and can be edited while the container is running.
-
-
-## Running Tests
-
-To run the PHPUnit tests you can use the provided shell script.
-
-    run-schulcloud-tests.sh
-
-This builds the test image and creates a container with a nextcloud installation together with the tests.
-The container with its volumes gets automatically deleted after this. Since this process takes a while you can also run
-the tests with the other shell script.
-
-    run-schulcloud-tests-no-restart.sh
-
-This also builds the test image, but reuses the running container without deleting it.
-If you have a custom testsuite you can use its name as a parameter for the scripts to only run this suite
-e.g. `./run-schulcloud-tests.sh unit`.
-
+The compose file allows the mounting of plugins, so changes get transfered to the container automatically while it is running.
 
 ## NextCloud configuration
 
