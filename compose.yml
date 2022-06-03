@@ -31,6 +31,20 @@ services:
     volumes:
       - /var/data/minio:/data
 
+  createbuckets:
+    image: minio/mc
+    env_file:
+      - .env
+    depends_on:
+      - storage
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc alias set myminio http://storage:9000 $MINIO_ROOT_USER $MINIO_ROOT_PASSWORD;
+      /usr/bin/mc mb myminio/nextcloud;
+      /usr/bin/mc policy set public myminio/nextcloud;
+      exit 0;
+      "
+
   db:
     image: postgres:latest
     restart: unless-stopped
