@@ -6,6 +6,7 @@ services:
     build:
       context: .
       target: development
+    container_name: nextcloud
     image: schulcloud/schulcloud-nextcloud/development
     restart: unless-stopped
     ports:
@@ -22,6 +23,7 @@ services:
 
   storage:
     image: minio/minio:latest
+    container_name: storage
     ports:
       - 9100:9000
       - 9101:9001
@@ -30,6 +32,18 @@ services:
     command: 'server /data --console-address ":9001"'
     volumes:
       - /var/data/minio:/data
+
+  collabora:
+    image: collabora/code:latest
+    container_name: collabora
+    ports:
+      - 9980:9980
+    cap_add:
+      - MKNOD
+    environment:
+      - 'extra_params=--o:ssl.enable=false'
+      - username=admin
+      - password=admin
 
   createbuckets:
     image: minio/mc
@@ -56,10 +70,6 @@ services:
       - db:/var/lib/postgresql/data
     cap_add:
       - SYS_NICE  # CAP_SYS_NICE
-
-networks:
-  default:
-    name: schulcloudserver_schulcloud-server-network
 
 volumes:
   db:
