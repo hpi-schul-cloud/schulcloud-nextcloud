@@ -1,0 +1,58 @@
+tls:
+  options:
+    TLSv13:
+      minVersion: VersionTLS13
+      cipherSuites:
+        - TLS_AES_128_GCM_SHA256
+        - TLS_AES_256_GCM_SHA384
+        - TLS_CHACHA20_POLY1305_SHA256
+      curvePreferences:
+        - CurveP521
+        - CurveP384
+      sniStrict: true
+
+    default:
+      minVersion: VersionTLS12
+      cipherSuites:
+        - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+        - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+        - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+        - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
+      curvePreferences:
+        - CurveP521
+        - CurveP384
+      sniStrict: true
+
+http:
+  middlewares:
+    secHeaders:
+      headers:
+        browserXssFilter: true
+        contentTypeNosniff: true
+        frameDeny: true
+        sslRedirect: true
+        #HSTS Configuration
+        stsIncludeSubdomains: true
+        stsPreload: true
+        stsSeconds: 15768000
+    secHeaders2:
+      headers:
+        browserXssFilter: true
+        contentTypeNosniff: true
+        frameDeny: true
+        customFrameOptionsValue: SAMEORIGIN
+        referrerPolicy: same-origin
+        sslRedirect: true
+        #HSTS Configuration
+        stsIncludeSubdomains: true
+        stsPreload: true
+        stsSeconds: 15768000
+        forceSTSHeader: true
+        sslForceHost: true
+        customResponseHeaders:
+          server: "" # removes "Server" header
+          X-Powered-By: "" # Removes X-Powered-By
+          X-Robots-Tag: "none,noarchive,nosnippet,notranslate,noimageindex"
+          #https://securityheaders.com/ is camera+mic enough?
+          Permissions-Policy:	camera=('self'), microphone=('self'), autoplay=('self'), payment=(), screen-wake-lock=('self'), geolocation=()
+          Feature-Policy:	"camera 'self'; microphone 'self'; payment 'none'; screen-wake-lock 'self'; geolocation 'none'; usb 'none'; vr 'none';"
