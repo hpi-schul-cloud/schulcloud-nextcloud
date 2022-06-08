@@ -3,34 +3,27 @@ version: "3"
 
 services:
   traefik:
-    image: traefik:v2.5
+    image: traefik:v2.6
     container_name: traefik
     restart: unless-stopped
+    ports:
+      - "8081:80"
+      - "8080:8080"
     command:
-      - "--api=true"
-      - "--api.insecure=true"
-      - "--api.dashboard=true"
       #- "--log.level=DEBUG"
-      - "--log.filePath=/etc/traefik/traefik.log"
-      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
-      - "--providers.docker.network=schulcloud-nextcloud-network"
-      - "--providers.file.filename=/etc/traefik/config/tls.yaml"
-      - "--providers.file.watch=true"
       - "--entrypoints.web.address=:80"
-      - "--entrypoints.web-secure.address=:443"
-      # Let's Encrypt
-      - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge.entrypoint=web"
-      - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge=true"
-      - "--certificatesresolvers.letsencryptresolver.acme.email=capcakes@capgemini.com"
-      - "--certificatesresolvers.letsencryptresolver.acme.storage=/etc/traefik/acme.json"
-      # Logging options, what to log
-      - "--accesslog=true"
-      - "--accesslog.format=json"
-      - "--accessLog.filters.statusCodes=400-499"
     volumes:
-      - ./traefik:/etc/traefik
       - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  whoami:
+    image: "traefik/whoami"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`)"
+      - "traefik.http.routers.whoami.entrypoints=web"
 
   nextcloud:
     build:
@@ -39,10 +32,6 @@ services:
     container_name: nextcloud
     image: schulcloud/schulcloud-nextcloud/development
     restart: unless-stopped
-    ports:
-      - 8080:80
-    expose:
-      - 8080
     env_file:
       - .env
     volumes:
@@ -54,15 +43,8 @@ services:
       - storage
     labels:
       - "traefik.enable=true"
-      - "traefik.docker.network=schulcloud-nextcloud-network"
-      - "traefik.http.routers.nextcloud.rule=Host(`${NEXTCLOUD_FQDN}`)"
-      - "traefik.http.routers.nextcloud.entrypoints=web"
-      - "traefik.http.middlewares.nextcloud-https-redirect.redirectscheme.scheme=https"
-      - "traefik.http.routers.nextcloud.middlewares=nextcloud-https-redirect"
-      - "traefik.http.routers.nextcloud-secure.entrypoints=web-secure"
-      - "traefik.http.routers.nextcloud-secure.rule=Host(`${NEXTCLOUD_FQDN}`)"
-      - "traefik.http.routers.nextcloud-secure.tls=true"
-      - "traefik.http.routers.nextcloud-secure.tls.certresolver=letsencryptresolver"
+      - "traefik.http.routers.nextcloud.rule=Host(`nextcloud.localhost`)"
+      - "traefik.http.routers.nextcloud.entrypoints=http"
 
   storage:
     image: minio/minio:latest
@@ -82,30 +64,12 @@ services:
     restart: unless-stopped
     ports:
       - 9980:9980
-    expose:
-      - "9980"
     environment:
-      #should work as "domain=cloud1\.nextcloud\.com|cloud2\.nextcloud\.com"
-      - domain=${COLLABORA_DOMAINS}
-      - 'dictionaries=en_US,de_DE'
-      - VIRTUAL_PROTO=http
-      - VIRTUAL_PORT=9980
-      - VIRTUAL_HOST=${COLLABORA_FQDN}
+      - domain=nextcloud.localhost.dev
       - "extra_params=--o:ssl.enable=false  --o:ssl.termination=true"
     cap_add:
       - MKNOD
     tty: true
-    labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=schulcloud-nextcloud-network"
-      - "traefik.http.routers.collabora.rule=Host(`${COLLABORA_FQDN}`)"
-      - "traefik.http.routers.collabora.entrypoints=web"
-      - "traefik.http.middlewares.collabora-https-redirect.redirectscheme.scheme=https"
-      - "traefik.http.routers.collabora.middlewares=collabora-https-redirect"
-      - "traefik.http.routers.collabora-secure.entrypoints=web-secure"
-      - "traefik.http.routers.collabora-secure.rule=Host(`${COLLABORA_FQDN}`)"
-      - "traefik.http.routers.collabora-secure.tls=true"
-      - "traefik.http.routers.collabora-secure.tls.certresolver=letsencryptresolver"
 
   createbuckets:
     image: minio/mc
@@ -141,4 +105,3 @@ volumes:
 networks:
   default:
     name: schulcloud-nextcloud-network
-
