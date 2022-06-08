@@ -18,12 +18,16 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
-  whoami:
-    image: "traefik/whoami"
+  onlyoffice:
+    image: onlyoffice/documentserver
+    container_name: onlyoffice
+    volumes:
+      - /app/onlyoffice/DocumentServer/logs:/var/log/onlyoffice
+      - /app/onlyoffice/DocumentServer/data:/var/www/onlyoffice/Data
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`)"
-      - "traefik.http.routers.whoami.entrypoints=web"
+      - "traefik.http.routers.onlyoffice.rule=Host(`onlyoffice.localhost`)"
+      - "traefik.http.routers.onlyoffice.entrypoints=web"
 
   nextcloud:
     build:
@@ -44,7 +48,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.nextcloud.rule=Host(`nextcloud.localhost`)"
-      - "traefik.http.routers.nextcloud.entrypoints=http"
+      - "traefik.http.routers.nextcloud.entrypoints=web"
 
   storage:
     image: minio/minio:latest
@@ -62,14 +66,16 @@ services:
     image: collabora/code
     container_name: collabora
     restart: unless-stopped
-    ports:
-      - 9980:9980
     environment:
-      - domain=nextcloud.localhost.dev
-      - "extra_params=--o:ssl.enable=false  --o:ssl.termination=true"
+      - domain=nextcloud.localhost
+      - "extra_params=--o:ssl.enable=false --o:ssl.termination=true"
     cap_add:
       - MKNOD
     tty: true
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.collabora.rule=Host(`collabora.localhost`)"
+      - "traefik.http.routers.collabora.entrypoints=web"
 
   createbuckets:
     image: minio/mc
