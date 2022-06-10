@@ -5,6 +5,10 @@ services:
     image: nextcloud:fpm
     restart: always
     environment:
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_USER=nextcloud
+      - POSTGRES_PASSWORD=nextcloud
+      - POSTGRES_HOST=db
       - NEXTCLOUD_ADMIN_USER=admin
       - NEXTCLOUD_ADMIN_PASSWORD=admin
     expose:
@@ -22,31 +26,31 @@ services:
     volumes:
       - document_data:/var/www/onlyoffice/Data
       - document_log:/var/log/onlyoffice
-  collabora:
-    image: collabora/code
-    container_name: collabora
-    restart: unless-stopped
-    expose:
-      - '80'
-      - '9980'
-    environment:
-      - aliasgroup1=app-server
-      - VIRTUAL_HOST=collabora.localhost
-      - VIRTUAL_PORT=9980
-      - "extra_params=--o:ssl.enable=false"
-    cap_add:
-      - MKNOD
-    tty: true
   nginx:
     container_name: nginx-server
-    image: jwilder/nginx-proxy
+    image: nginx
     restart: always
     ports:
-      - 8081:80
-      - 8443:443
+      - 9090:80
+      - 9443:443
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
       - app_data:/var/www/html
+
+  db:
+    image: postgres
+    restart: unless-stopped
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_USER=nextcloud
+      - POSTGRES_PASSWORD=nextcloud
+      - POSTGRES_HOST=db
+    volumes:
+      - db:/var/lib/postgresql/data
+    cap_add:
+      - SYS_NICE  # CAP_SYS_NICE
 
 volumes:
   db:
