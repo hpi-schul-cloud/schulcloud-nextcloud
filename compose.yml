@@ -2,16 +2,6 @@
 version: "3"
 
 services:
-  onlyoffice:
-    image: onlyoffice/documentserver
-    container_name: onlyoffice
-    expose:
-      - '80'
-      - '443'
-    volumes:
-      - document_data:/var/www/onlyoffice/Data
-      - document_log:/var/log/onlyoffice
-
   nextcloud:
     build:
       context: .
@@ -20,7 +10,10 @@ services:
     image: schulcloud/schulcloud-nextcloud/development
     restart: unless-stopped
     expose:
-      - '80'
+      - 80
+    environment:
+      - VIRTUAL_HOST=nextcloud.localhost
+      - NEXTCLOUD_TRUSTED_DOMAINS=nextcloud.localhost nginx
     env_file:
       - .env
     volumes:
@@ -37,26 +30,13 @@ services:
     ports:
       - 9100:9000
       - 9101:9001
+    environment:
+      - VIRTUAL_HOST=storage.localhost
     env_file:
       - .env
     command: 'server /data --console-address ":9001"'
     volumes:
       - /var/data/minio:/data
-
-#  collabora:
-#    image: collabora/code
-#    container_name: collabora
-#    restart: unless-stopped
-#    environment:
-#      - domain=nextcloud.localhost
-#      - "extra_params=--o:ssl.enable=false --o:ssl.termination=true"
-#    cap_add:
-#      - MKNOD
-#    tty: true
-#    labels:
-#      - "traefik.enable=true"
-#      - "traefik.http.routers.collabora.rule=Host(`collabora.localhost`)"
-#      - "traefik.http.routers.collabora.entrypoints=web"
 
   createbuckets:
     image: minio/mc
@@ -86,20 +66,15 @@ services:
 
   nginx:
     container_name: nginx
-    image: nginx
+    image: jwilder/nginx-proxy
     restart: always
+    environment:
+      - VIRTUAL_HOST=nginx.localhost
     ports:
       - 9090:80
       - 9443:443
     volumes:
-      - ./src/nginx.conf:/etc/nginx/nginx.conf
-      - nextcloud:/var/www/html
-    links:
-      - onlyoffice
-      - nextcloud
-    depends_on:
-      - onlyoffice
-      - nextcloud
+      - /var/run/docker.sock:/tmp/docker.sock:ro
 
 volumes:
   db:

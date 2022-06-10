@@ -73,12 +73,12 @@ running.
 
 ## NextCloud configuration
 
-The NextCloud instance will be available at [`http://localhost:8080`](http://localhost:8080).
-For the admin login, use [`http://localhost:8080/login?noredir=1`](http://localhost:8080/login?noredir=1).
+The NextCloud instance will be available at [`http://nextcloud.localhost:9090/`](http://nextcloud.localhost:9090/).
+For the admin login, use [`http://nextcloud.localhost:9090/login?noredir=1`](http://nextcloud.localhost:9090/login?noredir=1).
 You may login into the instance with username `admin` and password `admin`.
 
 The s3 bucket (minio console) will be available
-at [`http://localhost:9101/buckets/nextcloud/browse`](http://localhost:9101/buckets/nextcloud/browse)
+at [`http://storage.localhost:9101/buckets/nextcloud/browse`](http://storage.localhost:9101/buckets/nextcloud/browse)
 with username `admin12345` and password `admin12345`.
 
 | Environment variable     | E.g.                                                                                                              | comment                                                                                                                                        |
