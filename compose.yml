@@ -6,10 +6,14 @@ services:
     build:
       context: .
       target: development
+    container_name: nextcloud
     image: schulcloud/schulcloud-nextcloud/development
     restart: unless-stopped
-    ports:
-      - 8080:80
+    expose:
+      - 80
+    environment:
+      - VIRTUAL_HOST=nextcloud.localhost
+      - NEXTCLOUD_TRUSTED_DOMAINS=nextcloud.localhost nginx
     env_file:
       - .env
     volumes:
@@ -18,9 +22,38 @@ services:
       - ../NextcloudExtract:/var/www/html/custom_apps/extract:rw
     depends_on:
       - db
+      - storage
+
+  storage:
+    image: minio/minio:latest
+    container_name: storage
+    ports:
+      - 9100:9000
+      - 9101:9001
+    environment:
+      - VIRTUAL_HOST=storage.localhost
+    env_file:
+      - .env
+    command: 'server /data --console-address ":9001"'
+    volumes:
+      - /var/data/minio:/data
+
+  createbuckets:
+    image: minio/mc
+    env_file:
+      - .env
+    depends_on:
+      - storage
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc alias set myminio http://storage:9000 $MINIO_ROOT_USER $MINIO_ROOT_PASSWORD;
+      /usr/bin/mc mb myminio/nextcloud;
+      /usr/bin/mc policy set public myminio/nextcloud;
+      exit 0;
+      "
 
   db:
-    image: postgres:latest
+    image: postgres
     restart: unless-stopped
     ports:
       - 5433:5432
@@ -31,11 +64,26 @@ services:
     cap_add:
       - SYS_NICE  # CAP_SYS_NICE
 
-networks:
-  default:
-    name: schulcloudserver_schulcloud-server-network
+  nginx:
+    container_name: nginx
+    image: jwilder/nginx-proxy
+    restart: always
+    environment:
+      - VIRTUAL_HOST=nginx.localhost
+    ports:
+      - 9090:80
+      - 9443:443
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
 
 volumes:
   db:
   nextcloud:
+  storage:
+  # onlyoffice-document-server
+  document_data:
+  document_log:
 
+networks:
+  default:
+    name: schulcloud-nextcloud-network

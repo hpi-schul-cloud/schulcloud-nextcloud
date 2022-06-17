@@ -71,7 +71,6 @@ manage_plugins() {
 }
 
 copy_custom_plugins() {
-  cp -R /usr/nextcloud/custom_apps/. /var/www/html/custom_apps/
   cp -R /usr/nextcloud/external_plugins/. /var/www/html/custom_apps/
 }
 
