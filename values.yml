@@ -56,6 +56,8 @@ nextcloud:
       value: 'true'
     - name: OBJECTSTORE_S3_LEGACYAUTH
       value: 'true'
+    - name: OBJECTSTORE_S3_REGION
+      value: 'de-central'
 
 internalDatabase:
   enabled: false
