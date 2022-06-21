@@ -34,7 +34,7 @@ external_plugins() {
       version=$(echo "$i" | grep -oP '([^\:]+)$')
       plugin_name=$(echo "$i" | grep -oP '(?<=\.git:)([^:]+)')
       echo "Cloning $url with version $version"
-      git clone -b $version $url
+      git -c advice.detachedHead=false clone -b $version $url
       echo "Renaming $directory_name to $plugin_name"
       mv $directory_name $plugin_name
     done
