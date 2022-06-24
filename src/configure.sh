@@ -76,11 +76,18 @@ copy_custom_plugins() {
 
 import_config() {
   if [ -n "$CONFIG_JSON" ]; then
-    echo "$CONFIG_JSON" > ./tmp
+    echo "$CONFIG_JSON" >./tmp
     sudo -u www-data PHP_MEMORY_LIMIT=$PHP_MEMORY_LIMIT php occ config:import ./tmp
     rm ./tmp
   else
     echo "No configuration will we be imported. See CONFIG_JSON env."
+  fi
+}
+
+modify_htaccess() {
+  if [ "$DISABLE_USER_SETTINGS" = True ]; then
+    grep -qxF '############ CUSTOM_HTACCESS ############' .htaccess || cat /usr/nextcloud/.custom_htaccess >> /var/www/html/.htaccess
+    echo "Custom htaccess imported and user settings redirect applied."
   fi
 }
 
@@ -95,4 +102,5 @@ waiting_for_nextcloud
 copy_custom_plugins
 manage_plugins
 import_config
-echo "The configuration script was executed" > /var/www/html/executed
+modify_htaccess
+echo "The configuration script was executed" >/var/www/html/executed
