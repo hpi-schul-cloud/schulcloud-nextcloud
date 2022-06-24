@@ -84,6 +84,13 @@ import_config() {
   fi
 }
 
+modify_htaccess() {
+  if [ "$DISABLE_USER_SETTINGS" = True ]; then
+    grep -qxF '############ CUSTOM_HTACCESS ############' .htaccess || cat /usr/nextcloud/.custom_htaccess >> /var/www/html/.htaccess
+    echo "Custom htaccess imported and user settings redirect applied."
+  fi
+}
+
 ######
 # main
 ######
@@ -95,4 +102,5 @@ waiting_for_nextcloud
 copy_custom_plugins
 manage_plugins
 import_config
+modify_htaccess
 echo "The configuration script was executed" > /var/www/html/executed
