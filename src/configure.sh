@@ -91,6 +91,15 @@ modify_htaccess() {
   fi
 }
 
+modify_htaccess() {
+  if [ "$DISABLE_USER_SETTINGS" = True ]; then
+    grep -qxF '############ CUSTOM_HTACCESS ############' .htaccess || cat /usr/nextcloud/.custom_htaccess >> /var/www/html/.htaccess
+    echo "Custom htaccess imported and user settings redirect applied."
+  else
+    sudo -u www-data PHP_MEMORY_LIMIT=$PHP_MEMORY_LIMIT php occ maintenance:update:htaccess
+  fi
+}
+
 ######
 # main
 ######
