@@ -97,6 +97,7 @@ modify_htaccess() {
     echo "Custom htaccess imported and user settings redirect applied."
   else
     sudo -u www-data PHP_MEMORY_LIMIT=$PHP_MEMORY_LIMIT php occ maintenance:update:htaccess
+    echo "Nextcloud default htaccess applied."
   fi
 }
 
