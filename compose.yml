@@ -64,6 +64,7 @@ services:
     cap_add:
       - SYS_NICE  # CAP_SYS_NICE
 
+  # nginx here for simulate a ingress like in kubernetes
   nginx:
     container_name: nginx
     image: jwilder/nginx-proxy
@@ -75,6 +76,7 @@ services:
       - 9443:443
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./src/nginx.conf:/etc/nginx/conf.d/my_proxy.conf:ro
 
 volumes:
   db:
