@@ -88,4 +88,4 @@ volumes:
 
 networks:
   default:
-    name: schulcloud-nextcloud-network
+    name: schulcloudserver_schulcloud-server-network
