@@ -1,7 +1,5 @@
 #!/bin/sh
 
-CUSTOM_APPS_PATH="/usr/nextcloud/custom_apps/"
-
 check_environment() {
   # Check if configure needs to run
   if [ ! -f "/var/www/html/executed" ]; then
@@ -84,16 +82,6 @@ import_config() {
   fi
 }
 
-modify_htaccess() {
-  if [ "$DISABLE_USER_SETTINGS" = True ]; then
-    grep -qxF '############ CUSTOM_HTACCESS ############' .htaccess || cat /usr/nextcloud/.custom_htaccess >> /var/www/html/.htaccess
-    echo "Custom htaccess imported and user settings redirect applied."
-  else
-    sudo -u www-data PHP_MEMORY_LIMIT=$PHP_MEMORY_LIMIT php occ maintenance:update:htaccess
-    echo "Nextcloud default htaccess applied."
-  fi
-}
-
 ######
 # main
 ######
@@ -105,5 +93,4 @@ waiting_for_nextcloud
 copy_custom_plugins
 manage_plugins
 import_config
-modify_htaccess
 echo "The configuration script was executed" > /var/www/html/executed
