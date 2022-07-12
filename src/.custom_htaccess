@@ -1,4 +1,0 @@
-############ CUSTOM_HTACCESS ############
-<IfModule mod_rewrite.c>
-  RedirectMatch 301 /settings/user(.*) /
-</IfModule>

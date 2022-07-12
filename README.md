@@ -75,7 +75,8 @@ running.
 
 The NextCloud instance will be available at [`http://nextcloud.localhost:9090/`](http://nextcloud.localhost:9090/).
 For the admin login, use [`http://nextcloud.localhost:9090/login?noredir=1`](http://nextcloud.localhost:9090/login?noredir=1).
-You may login into the instance with username `admin` and password `admin`.
+You may login into the instance with username `admin` and password `admin`. Otherwise you will automatically redirected from
+social login to the schulcloud login page.
 
 The s3 bucket (minio console) will be available
 at [`http://storage.localhost:9101/buckets/nextcloud/browse`](http://storage.localhost:9101/buckets/nextcloud/browse)
@@ -96,7 +97,6 @@ with username `admin12345` and password `admin12345`.
 | CONFIG_JSON              | {"system":{"app_install_overwrite":["gluusso","groupfolder...                                                     | Contains the whole nextcloud configuration. It will be only imported after installation of nextcloud and overrides values of config.php files. |
 | EXTERNAL_GIT_PLUGINS     | https://github.com/PaulLereverend/NextcloudExtract.git:[NEW_FOLDER_NAME]:[VERSION_TAG OR BRANCH_NAME] https://... | Clones git repos with a specific version or branch name and renames the cloned folder. Cloned plugin also have to be in ENABLE_PLUGINS.        |
 | PHP_MEMORY_LIMIT         | 512M                                                                                                              | Default value is 512M. The configuration script needs more memory for php memory to run the nextcloud occ commands.                            |
-| DISABLE_USER_SETTINGS    | True                                                                                                              | Set an RedirectMatch to disable user settings with nextclouds integrated apache2.                                                              |
 
 | Environment variable for object storage as primary storage | E.g.       | comment                                                                                                                                                                                                                                                                                                                                                            |
 |------------------------------------------------------------|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

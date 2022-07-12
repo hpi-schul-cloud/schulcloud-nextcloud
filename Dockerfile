@@ -12,7 +12,6 @@ ENV NEXTCLOUD_UPDATE=1
 FROM base AS production
 
 COPY ./src/configure.sh /usr/nextcloud/configure.sh
-COPY ./src/.custom_htaccess /usr/nextcloud/.custom_htaccess
 RUN chmod +x /usr/nextcloud/configure.sh
 
 FROM base AS development
