@@ -16,7 +16,7 @@ jobs:
         id: docker_meta_img_dev
         uses: docker/metadata-action@v3
         with:
-          images: schulcloud/${{ github.repository }}/dev
+          images: schulcloud/schulcloud-nextcloud/dev
           tags: |
             type=ref,event=tag
             type=semver,pattern={{version}}
@@ -26,7 +26,7 @@ jobs:
         id: docker_meta_img_prod
         uses: docker/metadata-action@v3
         with:
-          images: schulcloud/${{ github.repository }}
+          images: schulcloud/schulcloud-nextcloud
           tags: |
             type=ref,event=tag
             type=semver,pattern={{version}}
