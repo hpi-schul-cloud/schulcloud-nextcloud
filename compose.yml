@@ -23,6 +23,8 @@ services:
     depends_on:
       - db
       - storage
+      - cache
+      - antivirus
 
   storage:
     image: minio/minio:latest
@@ -64,6 +66,26 @@ services:
     cap_add:
       - SYS_NICE  # CAP_SYS_NICE
 
+  cache:
+    container_name: cache
+    image: redis:alpine
+    env_file:
+      - .env
+    volumes:
+      - cache:/data
+    command: redis-server --requirepass ${REDIS_HOST_PASSWORD}
+
+  antivirus:
+    container_name: antivirus
+    image: clamav/clamav:stable_base
+    ports:
+      - 3310:3310
+    volumes:
+      # Socket
+      - antivirus:/var/lib/clamav
+      # Virus DB
+      - /var/docker/clamav/virus_db/:/var/lib/clamav/
+
   # nginx here for simulate a ingress like in kubernetes
   nginx:
     container_name: nginx
@@ -82,9 +104,8 @@ volumes:
   db:
   nextcloud:
   storage:
-  # onlyoffice-document-server
-  document_data:
-  document_log:
+  antivirus:
+  cache:
 
 networks:
   default:

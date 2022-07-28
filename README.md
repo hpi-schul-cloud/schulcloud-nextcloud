@@ -112,4 +112,11 @@ with username `admin12345` and password `admin12345`.
 | OBJECTSTORE_S3_USEPATH_STYLE*                              | true       | use_path_style is usually not required (and is, in fact, incompatible with newer Amazon datacenters), but can be used with non-Amazon servers where the DNS infrastructure cannot be controlled. Ordinarily, requests will be made with http://bucket.hostname.domain/, but with path style enabled, requests are made with http://hostname.domain/bucket instead. |
 | OBJECTSTORE_S3_LEGACYAUTH*                                 | true       | Legacy authentication is only required for S3 servers that only implement version 2 authentication, by default version 4 authentication will be used.                                                                                                                                                                                                                                                                                                                                                                   |
 
+| Environment variable for redis cache | E.g.       | comment                                                      |
+|--------------------------------------|------------|--------------------------------------------------------------|
+| REDIS_HOST                           | cache      | The host of the redis instance                               |
+| REDIS_HOST_PORT                      |            | The port. If it is empty the default port 6379 will be used. |
+| REDIS_HOST_PASSWORD                  | redis12345 | The password for redis.                                      |
+
+
 *Only needed for local development
