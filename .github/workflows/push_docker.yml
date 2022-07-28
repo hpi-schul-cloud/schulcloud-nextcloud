@@ -16,7 +16,7 @@ jobs:
         id: docker_meta_img_dev
         uses: docker/metadata-action@v3
         with:
-          images: ghcr.io/${{ github.repository }}/dev
+          images: schulcloud/${{ github.repository }}/dev
           tags: |
             type=ref,event=tag
             type=semver,pattern={{version}}
@@ -26,11 +26,32 @@ jobs:
         id: docker_meta_img_prod
         uses: docker/metadata-action@v3
         with:
+          images: schulcloud/${{ github.repository }}
+          tags: |
+            type=ref,event=tag
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+
+      - name: Docker meta service name for GitHub development image
+        id: github_meta_img_dev
+        uses: docker/metadata-action@v3
+        with:
+          images: ghcr.io/${{ github.repository }}/dev
+          tags: |
+            type=ref,event=tag
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+
+      - name: Docker meta service name for GitHub production image
+        id: github_meta_img_prod
+        uses: docker/metadata-action@v3
+        with:
           images: ghcr.io/${{ github.repository }}
           tags: |
             type=ref,event=tag
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
+
       - name: Log into DockerHub registry
         uses: docker/login-action@v1
         with:
@@ -55,8 +76,12 @@ jobs:
           platforms: linux/amd64
           push: true
           target: development
-          tags: ${{ steps.docker_meta_img_dev.outputs.tags }}
-          labels: ${{ steps.docker_meta_img_dev.outputs.labels }}
+          tags: |
+            ${{ steps.docker_meta_img_dev.outputs.tags }}
+            ${{ steps.github_meta_img_dev.outputs.tags }}
+          labels: |
+            ${{ steps.docker_meta_img_dev.outputs.labels }}
+            ${{ steps.github_meta_img_dev.outputs.labels }}
 
       - name: Build and push ${{ github.repository }} production image
         uses: docker/build-push-action@v2
@@ -66,5 +91,9 @@ jobs:
           platforms: linux/amd64
           push: true
           target: production
-          tags: ${{ steps.docker_meta_img_prod.outputs.tags }}
-          labels: ${{ steps.docker_meta_img_prod.outputs.labels }}
+          tags: |
+            ${{ steps.docker_meta_img_prod.outputs.tags }}
+            ${{ steps.github_meta_img_prod.outputs.tags }}
+          labels: |
+            ${{ steps.docker_meta_img_prod.outputs.labels }}
+            ${{ steps.github_meta_img_prod.outputs.labels }}
