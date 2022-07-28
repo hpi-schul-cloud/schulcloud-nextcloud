@@ -25,5 +25,5 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64
           push: true
-          tags: schulcloud/schulcloud-nextcloud:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/schulcloud-nextcloud:latest
 
