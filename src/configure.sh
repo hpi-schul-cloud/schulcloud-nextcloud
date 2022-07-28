@@ -70,6 +70,8 @@ manage_plugins() {
 
 copy_custom_plugins() {
   cp -R /usr/nextcloud/external_plugins/. /var/www/html/custom_apps/
+  chown -R www-data /var/www/html/custom_apps/
+  echo "Copied custom plugins and changed owner to www-data."
 }
 
 import_config() {
