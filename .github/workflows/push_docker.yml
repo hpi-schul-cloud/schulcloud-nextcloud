@@ -17,7 +17,7 @@ jobs:
         uses: docker/metadata-action@v3
         with:
           images: |
-            schulcloud/schulcloud-nextcloud/dev
+            schulcloud/schulcloud-nextcloud-dev
             ghcr.io/${{ github.repository }}/dev
           tags: |
             type=ref,event=tag
