@@ -53,13 +53,13 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
 
       - name: Log into DockerHub registry
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Log into GitHub Container Registry
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -76,12 +76,8 @@ jobs:
           platforms: linux/amd64
           push: true
           target: development
-          tags: |
-            ${{ steps.docker_meta_img_dev.outputs.tags }}
-            ${{ steps.github_meta_img_dev.outputs.tags }}
-          labels: |
-            ${{ steps.docker_meta_img_dev.outputs.labels }}
-            ${{ steps.github_meta_img_dev.outputs.labels }}
+          tags: ${{ steps.docker_meta_img_dev.outputs.tags }}
+          labels: ${{ steps.docker_meta_img_dev.outputs.labels }}
 
       - name: Build and push ${{ github.repository }} production image
         uses: docker/build-push-action@v3
@@ -91,9 +87,5 @@ jobs:
           platforms: linux/amd64
           push: true
           target: production
-          tags: |
-            ${{ steps.docker_meta_img_prod.outputs.tags }}
-            ${{ steps.github_meta_img_prod.outputs.tags }}
-          labels: |
-            ${{ steps.docker_meta_img_prod.outputs.labels }}
-            ${{ steps.github_meta_img_prod.outputs.labels }}
+          tags: ${{ steps.docker_meta_img_prod.outputs.tags }}
+          labels: ${{ steps.docker_meta_img_prod.outputs.labels }}
