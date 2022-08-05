@@ -3,7 +3,7 @@ FROM nextcloud:24.0.3 AS base
 
 USER root
 
-RUN apt-get update && apt-get install -y sudo git p7zip p7zip-full \
+RUN apt-get update && apt-get install -y sudo git p7zip p7zip-full libmagickcore-6.q16-6-extra wget \
     && pecl install rar \
     && echo extension=rar.so >> /usr/local/etc/php/conf.d/docker-php-ext-rar.ini
 
