@@ -118,5 +118,13 @@ with username `admin12345` and password `admin12345`.
 | REDIS_HOST_PORT                      |            | The port. If it is empty the default port 6379 will be used. |
 | REDIS_HOST_PASSWORD                  | redis12345 | The password for redis.                                      |
 
+| Environment variable for theming | E.g.                                                              | comment                                                                       |
+|----------------------------------|-------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| THEMING_NAME                     | Schulcloud Nextcloud Dev                                          | This name will displayed as title in the browser tab.                         |
+| THEMING_URL                      | http://nextcloud.localhost:9090                                   | The link behind the logo.                                                     |
+| THEMING_SLOGAN                   | Niedersächsische Bildungscloud                                    | Slogan name will be displayed on the login screen.                            |
+| THEMING_COLOR                    | #2876d0                                                           | Primary color of the theme. The other colors will be generated automatically. |   
+| THEMING_LOGO_URL                 | https://niedersachsen.cloud/_nuxt/img/logo-image-mono.abeaf87.svg | Url to the logo.                                                              |
+
 
 *Only needed for local development
