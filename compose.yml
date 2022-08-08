@@ -9,6 +9,8 @@ services:
     container_name: nextcloud
     image: schulcloud/schulcloud-nextcloud/development
     restart: unless-stopped
+    ports:
+      - 8081:80
     expose:
       - 80
     environment:
