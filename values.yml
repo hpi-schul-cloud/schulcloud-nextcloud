@@ -113,7 +113,7 @@ nextcloud:
                   "update_profile_on_login": "1"
                 },
                 "theming_customcss": {
-                  "customcss": "#app-navigation:not(.vue) > ul > li#quota {\\n    display: none;\\n}\\n\\n#app-navigation:not(.vue) > ul > li.nav-recent {\\n    display: none;\\n}\\n\\n#app-settings:not(.vue) > div {\\n    display: none;\\n}\\n\\n.remember-login-container { display: none; } \\n\\n#contactsmenu { display: none; }\\n\\n[data-id=\"settings\"] {\\n    display: none;\\n}",
+                  "customcss": "#app-navigation:not(.vue) > ul > li#quota {\\n    display: none;\\n}\\n\\n#app-navigation:not(.vue) > ul > li.nav-recent {\\n    display: none;\\n}\\n\\n#app-settings:not(.vue) > div {\\n    display: none;\\n}\\n\\n.remember-login-container { display: none; } \\n\\n#contactsmenu { display: none; }\\n\\n[data-id=\"settings\"] {\\n    display: none;\\n}\\n\\n[data-id=\"help\"] {\\n    display: none;\\n}",
                   "cachebuster": "1659944778758",
                   "installed_version": "1.11.0",
                   "types": "",
