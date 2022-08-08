@@ -23,9 +23,9 @@ nextcloud:
   ## Extra environment variables
   extraEnv:
     - name: INSTALL_PLUGINS
-      value: "sociallogin groupfolders"
+      value: "sociallogin groupfolders theming_customcss"
     - name: ENABLE_PLUGINS
-      value: "schulcloud extract"
+      value: "schulcloud extract theming"
     - name: RUN_CONFIGURATION
       value: "True"
     - name: EXTERNAL_GIT_PLUGINS
@@ -150,6 +150,16 @@ nextcloud:
       value: cache
     - name: REDIS_HOST_PASSWORD
       value: redis12345
+    - name: THEMING_NAME
+      value: Schulcloud Nextcloud
+    - name: THEMING_URL
+      value: https://nextcloud-nbc.dbildungscloud.dev/
+    - name: THEMING_SLOGAN
+      value: Niedersächsische Bildungscloud
+    - name: THEMING_COLOR
+      value: '#2876d0'
+    - name: THEMING_LOGO_URL
+      value: https://niedersachsen.cloud/images/logo/cloud-transparent-mono-48-48.svg
 
 internalDatabase:
   enabled: false
