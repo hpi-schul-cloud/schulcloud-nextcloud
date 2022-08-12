@@ -136,4 +136,9 @@ import_config
 if [ "$isThemingEnabled" = True ]; then
   apply_theme
 fi
+
+# TODO Move to env to be in sync with social login
+$OCC_COMMAND user_oidc:provider SchulcloudNextcloud --clientid="Nextcloud" \
+--clientsecret="Nextcloud" --check-bearer="1" --unique-uid="0" --scope="openid offline profile email groups" --discoveryuri="http://hydra.localhost:9000/.well-known/openid-configuration"
+
 echo "The configuration script was executed" > /var/www/html/executed

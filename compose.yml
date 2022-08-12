@@ -15,7 +15,6 @@ services:
       - 80
     environment:
       - VIRTUAL_HOST=nextcloud.localhost
-      - NEXTCLOUD_TRUSTED_DOMAINS=nextcloud.localhost nginx
     env_file:
       - .env
     volumes:
