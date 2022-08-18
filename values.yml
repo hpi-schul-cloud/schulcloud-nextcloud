@@ -157,7 +157,7 @@ nextcloud:
     - name: THEMING_SLOGAN
       value: Niedersächsische Bildungscloud
     - name: THEMING_COLOR
-      value: '#2876d0'
+      value: '"#5083C7"'
     - name: THEMING_LOGO_URL
       value: https://niedersachsen.cloud/images/logo/logo-wt.png
 
