@@ -57,6 +57,7 @@ archive_external_plugins() {
       wget -O "$file_name" "$url"
       tar -xzf "$file_name"
     done
+    rm -f ./*.tar.gz
   fi
 }
 
@@ -140,6 +141,13 @@ apply_theme() {
   fi
 }
 
+run_post_config_command() {
+  if [ -n "$POST_CONFIG_COMMAND" ]; then
+    echo "Running post config command"
+    $POST_CONFIG_COMMAND
+  fi
+}
+
 ######
 # main
 ######
@@ -154,9 +162,6 @@ import_config
 if [ "$isThemingEnabled" = True ]; then
   apply_theme
 fi
-
-# TODO Move to env to be in sync with social login
-$OCC_COMMAND user_oidc:provider SchulcloudNextcloud --clientid="Nextcloud" \
---clientsecret="Nextcloud" --check-bearer="1" --unique-uid="0" --scope="openid offline profile email groups" --discoveryuri="http://hydra.localhost:9000/.well-known/openid-configuration"
+run_post_config_command
 
 echo "The configuration script was executed" > /var/www/html/executed
