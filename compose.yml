@@ -19,8 +19,9 @@ services:
       - .env
     volumes:
       - nextcloud:/var/www/html
-      - ../schulcloud-nextcloud-app:/var/www/html/custom_apps/schulcloud:ro
-      - ../NextcloudExtract:/var/www/html/custom_apps/extract:ro
+      #- ../schulcloud-nextcloud-app:/var/www/html/custom_apps/schulcloud:ro
+      #- ../NextcloudExtract:/var/www/html/custom_apps/extract:ro
+      #- ../user_oidc:/var/www/html/custom_apps/user_oidc:ro
     depends_on:
       - db
       - storage
@@ -30,11 +31,14 @@ services:
   storage:
     image: minio/minio:latest
     container_name: storage
+    restart: unless-stopped
     ports:
       - 9100:9000
       - 9101:9001
     environment:
       - VIRTUAL_HOST=storage.localhost
+      - MINIO_ROOT_USER=admin12345
+      - MINIO_ROOT_PASSWORD=admin12345
     env_file:
       - .env
     command: 'server /data --console-address ":9001"'
@@ -49,7 +53,7 @@ services:
       - storage
     entrypoint: >
       /bin/sh -c "
-      /usr/bin/mc alias set myminio http://storage:9000 $MINIO_ROOT_USER $MINIO_ROOT_PASSWORD;
+      /usr/bin/mc alias set myminio http://storage:9000 admin12345 admin12345;
       /usr/bin/mc mb myminio/nextcloud;
       /usr/bin/mc policy set public myminio/nextcloud;
       exit 0;
@@ -70,6 +74,7 @@ services:
   cache:
     container_name: cache
     image: redis:alpine
+    restart: unless-stopped
     env_file:
       - .env
     volumes:
@@ -79,6 +84,7 @@ services:
   antivirus:
     container_name: antivirus
     image: clamav/clamav:stable_base
+    restart: unless-stopped
     ports:
       - 3310:3310
     volumes:
