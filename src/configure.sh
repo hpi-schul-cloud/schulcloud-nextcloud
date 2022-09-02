@@ -163,5 +163,6 @@ if [ "$isThemingEnabled" = True ]; then
   apply_theme
 fi
 run_post_config_command
+echo "Configuration script finished successfully!"
 
 echo "The configuration script was executed" > /var/www/html/executed
