@@ -144,7 +144,7 @@ apply_theme() {
 run_post_config_command() {
   if [ -n "$POST_CONFIG_COMMAND" ]; then
     echo "Running post config command"
-    $POST_CONFIG_COMMAND
+    echo $POST_CONFIG_COMMAND | bash # eval "$POST_CONFIG_COMMAND"
   fi
 }
 
