@@ -54,7 +54,10 @@ nextcloud:
                   "gluusso",
                   "schulcloud",
                   "extract"
-                ]
+                ],
+                "user_oidc": {
+                     "single_logout": false
+                }
               },
               "apps": {
                 "core": {
@@ -120,7 +123,26 @@ nextcloud:
                   "installed_version": "1.11.0",
                   "types": "",
                   "enabled": "yes"
-                }
+                },
+                "user_oidc": {
+                   "userinfo_bearer_validation": "false",
+                   "selfencoded_bearer_validation": "true",
+                   "types": "authentication",
+                   "enabled": "yes",
+                   "provider-1-mappingQuota": "",
+                   "provider-1-extraClaims": "",
+                   "provider-1-jwksCache": "",
+                   "provider-1-jwksCacheTimestamp": "",
+                   "provider-1-uniqueUid": "0",
+                   "provider-1-checkBearer": "1",
+                   "provider-1-mappingUid": "sub",
+                   "provider-1-mappingDisplayName": "name",
+                   "provider-1-mappingEmail": "email",
+                   "provider-1-mappingGroups": "groups",
+                   "provider-1-groupProvisioning": "1",
+                   "provider-1-providerBasedId": "1",
+                   "id4me_enabled": "0"
+                 }
               }
             }'
     - name: POST_CONFIG_COMMAND
