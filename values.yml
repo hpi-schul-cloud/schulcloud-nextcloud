@@ -125,6 +125,7 @@ nextcloud:
                   "enabled": "yes"
                 },
                 "user_oidc": {
+                   "allow_multiple_user_backends": "0",
                    "userinfo_bearer_validation": "false",
                    "selfencoded_bearer_validation": "true",
                    "types": "authentication",
