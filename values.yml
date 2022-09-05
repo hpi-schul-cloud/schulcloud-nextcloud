@@ -43,7 +43,6 @@ nextcloud:
                 "upgrade.disable-web": true,
                 "trashbin_retention_obligation": "7,7",
                 "filelocking.enabled": false,
-                "social_login_auto_redirect": true,
                 "templatesdirectory": "",
                 "skeletondirectory": "",
                 "profile.enabled": false,
