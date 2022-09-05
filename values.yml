@@ -31,7 +31,7 @@ nextcloud:
     - name: EXTERNAL_GIT_PLUGINS
       value: "https://github.com/hpi-schul-cloud/NextcloudExtract.git:extract:1.3.6 https://github.com/hpi-schul-cloud/schulcloud-nextcloud-app.git:schulcloud:0.1.7"
     - name: EXTERNAL_ARCHIVE_PLUGINS
-      value: "https://github.com/MarvinOehlerkingCap/user_oidc/releases/download/1.3.0/user_oidc-1.3.0.tar.gz:user_oidc"
+      value: "https://github.com/hpi-schul-cloud/user_oidc/releases/download/v1.3.0-alpha/user_oidc-v1.3.0-alpha.tar.gz:user_oidc"
     - name: DISABLE_PLUGINS
       value: "accessibility activity circles comments contactsinteraction dashboard files_sharing firstrunwizard password_policy photos privacy nextcloud_announcements recommendations sharebymail support survey_client systemtags theming notifications updatenotification user_ldap user_status weather_status"
     - name: CONFIG_JSON
