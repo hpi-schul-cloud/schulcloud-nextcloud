@@ -23,7 +23,7 @@ nextcloud:
   ## Extra environment variables
   extraEnv:
     - name: INSTALL_PLUGINS
-      value: "sociallogin groupfolders theming_customcss"
+      value: "groupfolders theming_customcss"
     - name: ENABLE_PLUGINS
       value: "schulcloud extract theming user_oidc"
     - name: RUN_CONFIGURATION
@@ -33,7 +33,7 @@ nextcloud:
     - name: EXTERNAL_ARCHIVE_PLUGINS
       value: "https://github.com/hpi-schul-cloud/user_oidc/releases/download/v1.3.0-alpha/user_oidc-v1.3.0-alpha.tar.gz:user_oidc"
     - name: DISABLE_PLUGINS
-      value: "accessibility activity circles comments contactsinteraction dashboard files_sharing firstrunwizard password_policy photos privacy nextcloud_announcements recommendations sharebymail support survey_client systemtags theming notifications updatenotification user_ldap user_status weather_status"
+      value: "accessibility activity circles comments contactsinteraction dashboard files_sharing firstrunwizard password_policy photos privacy nextcloud_announcements recommendations sharebymail sociallogin support survey_client systemtags theming notifications updatenotification user_ldap user_status weather_status"
     - name: CONFIG_JSON
       value: '{"system": {
                 "auto_logout": false,
@@ -43,7 +43,7 @@ nextcloud:
                 "upgrade.disable-web": true,
                 "trashbin_retention_obligation": "7,7",
                 "filelocking.enabled": false,
-                "social_login_auto_redirect": true,
+                "social_login_auto_redirect": false,
                 "templatesdirectory": "",
                 "skeletondirectory": "",
                 "profile.enabled": false,
@@ -57,7 +57,8 @@ nextcloud:
                 ],
                 "user_oidc": {
                      "single_logout": false
-                }
+                },
+                "debug": true
               },
               "apps": {
                 "core": {
@@ -100,22 +101,6 @@ nextcloud:
                 "extract": {
                   "enabled": "yes",
                   "types": ""
-                },
-                "sociallogin": {
-                  "allow_login_connect": "",
-                  "auto_create_groups": "1",
-                  "create_disabled_users": "",
-                  "custom_providers": "{\"custom_oidc\":[{\"name\":\"SchulcloudNextcloud\",\"title\":\"SchulcloudNextcloud\",\"authorizeUrl\":\"http:\\/\\/localhost:9000\\/oauth2\\/auth\",\"tokenUrl\":\"http:\\/\\/hydra-host:4444\\/oauth2\\/token\",\"displayNameClaim\":\"name\",\"userInfoUrl\":\"http:\\/\\/hydra-host:4444\\/userinfo\",\"logoutUrl\":\"http:\\/\\/localhost:3100\\/dashboard\",\"clientId\":\"Nextcloud\",\"clientSecret\":\"Nextcloud\",\"scope\":\"openid offline profile email groups\",\"groupsClaim\":\"groups\",\"style\":\"none\",\"defaultGroup\":\"schulcloud\"}]}",
-                  "disable_notify_admins": "1",
-                  "disable_registration": "",
-                  "enabled": "yes",
-                  "hide_default_login": "true",
-                  "no_prune_user_groups": "",
-                  "prevent_create_email_exists": "",
-                  "restrict_users_wo_assigned_groups": "",
-                  "restrict_users_wo_mapped_groups": "",
-                  "types": "",
-                  "update_profile_on_login": "1"
                 },
                 "theming_customcss": {
                   "customcss": "#app-navigation:not(.vue) > ul > li#quota {\\n    display: none;\\n}\\n\\n#app-navigation:not(.vue) > ul > li.nav-recent { \\n    display: none;\\n}\\n\\n#contactsmenu { display: none; }\\n\\n#app-settings-content:not(.vue) > label, #webdavurl, em  { \\n     display: none;\\n}\\n\\n[data-id=\"settings\"] { display: none; }\\n\\n[data-id=\"help\"] { display: none; }",

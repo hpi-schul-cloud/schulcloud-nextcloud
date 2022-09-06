@@ -74,7 +74,7 @@ running.
 ## NextCloud configuration
 
 The NextCloud instance will be available at [`http://nextcloud.localhost:9090/`](http://nextcloud.localhost:9090/).
-For the admin login, use [`http://nextcloud.localhost:9090/login?noredir=1`](http://nextcloud.localhost:9090/login?noredir=1).
+For the admin login, use [`http://nextcloud.localhost:9090/login?direct=1`](http://nextcloud.localhost:9090/login?direct=1).
 You may login into the instance with username `admin` and password `admin`. Otherwise you will automatically redirected from
 social login to the schulcloud login page.
 
