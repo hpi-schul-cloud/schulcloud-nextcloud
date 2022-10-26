@@ -2,6 +2,7 @@
 
 isThemingEnabled=False
 OCC_COMMAND="sudo -u www-data PHP_MEMORY_LIMIT=$PHP_MEMORY_LIMIT php occ "
+EXTERNAL_PLUGINS_PATH=/usr/nextcloud/external_plugins
 
 check_environment() {
   # Check if configure needs to run
@@ -32,11 +33,8 @@ check_environment() {
 }
 
 # Clone external git plugins
-external_plugins() {
+git_external_plugins() {
   if [ -n "$EXTERNAL_GIT_PLUGINS" ]; then
-    rm -rf /usr/nextcloud/external_plugins
-    mkdir -p /usr/nextcloud/external_plugins
-    cd /usr/nextcloud/external_plugins
     for i in $EXTERNAL_GIT_PLUGINS; do
       url=$(echo "$i" | grep -oP '.+.git(?=\:)')
       directory_name=$(echo "$i" | grep -oP '([^\/]+)(?=\.git)')
@@ -47,8 +45,29 @@ external_plugins() {
       echo "Renaming $directory_name to $plugin_name"
       mv $directory_name $plugin_name
     done
-    cd /var/www/html/
   fi
+}
+
+archive_external_plugins() {
+  if [ -n "$EXTERNAL_ARCHIVE_PLUGINS" ]; then
+    for i in $EXTERNAL_ARCHIVE_PLUGINS; do
+      url=$(echo "$i" | grep -oP '.+.tar.gz(?=\:)')
+      file_name=$(echo "$i" | grep -oP '(?<=\/)([^\/]+)(?=\:)')
+      echo "Downloading $url"
+      wget -O "$file_name" "$url"
+      tar -xzf "$file_name"
+    done
+    rm -f ./*.tar.gz
+  fi
+}
+
+handle_external_plugins() {
+  rm -rf "$EXTERNAL_PLUGINS_PATH"
+  mkdir -p "$EXTERNAL_PLUGINS_PATH"
+  cd "$EXTERNAL_PLUGINS_PATH"
+  git_external_plugins
+  archive_external_plugins
+  cd /var/www/html/
 }
 
 # Check if nextcloud is available to install plugins
@@ -122,12 +141,19 @@ apply_theme() {
   fi
 }
 
+run_post_config_command() {
+  if [ -n "$POST_CONFIG_COMMAND" ]; then
+    echo "Running post config command"
+    echo $POST_CONFIG_COMMAND | bash # eval "$POST_CONFIG_COMMAND"
+  fi
+}
+
 ######
 # main
 ######
 check_environment
 echo "Start configuration script..."
-external_plugins
+handle_external_plugins
 waiting_for_nextcloud
 # Copy customs plugins to nextcloud after installation, because of overwriting
 copy_custom_plugins
@@ -136,4 +162,7 @@ import_config
 if [ "$isThemingEnabled" = True ]; then
   apply_theme
 fi
+run_post_config_command
+echo "Configuration script finished successfully!"
+
 echo "The configuration script was executed" > /var/www/html/executed

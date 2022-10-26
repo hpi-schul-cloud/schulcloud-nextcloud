@@ -74,7 +74,7 @@ running.
 ## NextCloud configuration
 
 The NextCloud instance will be available at [`http://nextcloud.localhost:9090/`](http://nextcloud.localhost:9090/).
-For the admin login, use [`http://nextcloud.localhost:9090/login?noredir=1`](http://nextcloud.localhost:9090/login?noredir=1).
+For the admin login, use [`http://nextcloud.localhost:9090/login?direct=1`](http://nextcloud.localhost:9090/login?direct=1).
 You may login into the instance with username `admin` and password `admin`. Otherwise you will automatically redirected from
 social login to the schulcloud login page.
 
@@ -96,6 +96,8 @@ with username `admin12345` and password `admin12345`.
 | DISABLE_PLUGINS          | accessibility activity circles comments...                                                                        | Disable all referenced plugins. Precondition the plugin is installed.                                                                          |
 | CONFIG_JSON              | {"system":{"app_install_overwrite":["gluusso","groupfolder...                                                     | Contains the whole nextcloud configuration. It will be only imported after installation of nextcloud and overrides values of config.php files. |
 | EXTERNAL_GIT_PLUGINS     | https://github.com/PaulLereverend/NextcloudExtract.git:[NEW_FOLDER_NAME]:[VERSION_TAG OR BRANCH_NAME] https://... | Clones git repos with a specific version or branch name and renames the cloned folder. Cloned plugin also have to be in ENABLE_PLUGINS.        |
+| EXTERNAL_ARCHIVE_PLUGINS | https://github.com/nextcloud/user_oidc/releases/download/v0.3.2/user_oidc.tar.gz:user_oidc                        | Gets and unzips an build release. The plugin also have to be in ENABLE_PLUGINS.                                                                |
+| POST_CONFIG_COMMAND      | php occ user_oidc:provider ...                                                                                    | Contains a user specific command which will be executed after the CONFIG_JSON was imported.                                                    |
 | PHP_MEMORY_LIMIT         | 512M                                                                                                              | Default value is 512M. The configuration script needs more memory for php memory to run the nextcloud occ commands.                            |
 
 | Environment variable for object storage as primary storage | E.g.       | comment                                                                                                                                                                                                                                                                                                                                                            |
