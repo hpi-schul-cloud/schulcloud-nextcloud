@@ -23,7 +23,7 @@ nextcloud:
   ## Extra environment variables
   extraEnv:
     - name: INSTALL_PLUGINS
-      value: "groupfolders theming_customcss"
+      value: "groupfolders theming_customcss richdocuments"
     - name: ENABLE_PLUGINS
       value: "schulcloud extract theming user_oidc"
     - name: RUN_CONFIGURATION
@@ -129,6 +129,16 @@ nextcloud:
                    "provider-1-groupProvisioning": "1",
                    "provider-1-providerBasedId": "1",
                    "id4me_enabled": "0"
+                 },
+                "richdocuments": {
+                     "wopi_url": "http:\/\/collabora.localhost:9090\/",
+                     "public_wopi_url": "http:\/\/collabora.localhost:9090",
+                     "types": "prevent_group_restriction",
+                     "enabled": "yes",
+                     "disable_certificate_verification": "",
+                     "doc_format": "",
+                     "use_groups": "",
+                     "wopi_allowlist": ""
                  }
               }
             }'
