@@ -25,7 +25,7 @@ jobs:
       - name: Extract branch name
         shell: bash
         run: |
-          branch_name=$(echo "branch=${GITHUB_REF#refs/heads/}"
+          branch_name=$(echo "branch=${GITHUB_REF#refs/heads/}")
           echo "branch_name=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
 
           temp=$(echo $branch_name | sed 's@.*/@@' | tr [A-Z] [a-z] | tr _ - | tr \. -)
