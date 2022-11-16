@@ -56,7 +56,7 @@
          "allow_login_connect":"",
          "auto_create_groups":"1",
          "create_disabled_users":"",
-         "custom_providers":"{\"custom_oidc\":[{\"name\":\"SchulcloudNextcloud\",\"title\":\"SchulcloudNextcloud\",\"authorizeUrl\":\"https:\\/\\/{{ nbc_authorizeUrl }}\\/oauth2\\/auth\",\"tokenUrl\":\"https:\\/\\/{{ hydraUrl }}\\/oauth2\\/token\",\"displayNameClaim\":\"name\",\"userInfoUrl\":\"https:\\/\\/{{ nbc_hydraUrl }}\\/userinfo\",\"logoutUrl\":\"https:\\/\\/{{ nbc_logoutUrl }}\\/dashboard\",\"clientId\":\"{{ socialloginClientId}}\",\"clientSecret\":\"{{ socialloginSecret }}\",\"scope\":\"openid offline profile email groups\",\"groupsClaim\":\"groups\",\"style\":\"none\",\"defaultGroup\":\"schulcloud\"}]}",
+         "custom_providers":"{\"custom_oidc\":[{\"name\":\"SchulcloudNextcloud\",\"title\":\"SchulcloudNextcloud\",\"authorizeUrl\":\"https:\\/\\/{{ nbc_authorizeUrl }}\\/oauth2\\/auth\",\"tokenUrl\":\"https:\\/\\/{{ nbc_hydraUrl }}\\/oauth2\\/token\",\"displayNameClaim\":\"name\",\"userInfoUrl\":\"https:\\/\\/{{ nbc_hydraUrl }}\\/userinfo\",\"logoutUrl\":\"https:\\/\\/{{ nbc_logoutUrl }}\\/dashboard\",\"clientId\":\"{{ socialloginClientId }}\",\"clientSecret\":\"{{ socialloginSecret }}\",\"scope\":\"openid offline profile email groups\",\"groupsClaim\":\"groups\",\"style\":\"none\",\"defaultGroup\":\"schulcloud\"}]}",
          "disable_notify_admins":"1",
          "disable_registration":"",
          "enabled":"yes",
