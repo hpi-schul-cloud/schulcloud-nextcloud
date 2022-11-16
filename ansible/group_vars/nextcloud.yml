@@ -18,6 +18,14 @@ run_nextcloud_configuration: false
 nextcloud_theming_slogan: Niedersächsische Bildungscloud
 nextcloud_theming_color: '#5083C7'
 nextcloud_theming_logo_url: https://niedersachsen.cloud/images/logo/logo-wt.png
+# ask Dimitrij
+nextcloud_resources:
+  limits:
+    cpu: 500m
+    memory: 2G
+  requests:
+    cpu: 1000m
+    memory: 4G
 nextcloud_values:
   image:
     repository: "{{ nextcloud_image_repository }}"
@@ -61,10 +69,11 @@ nextcloud_values:
     - name: PHP_MEMORY_LIMIT
       value: 8192M
     - name: OBJECTSTORE_S3_BUCKET
-      valueFrom:
-        secretKeyRef:
-          name: "{{ nextcloud_secret_name }}"
-          key: s3_bucket_name
+      value: nextcloud-aimee-test
+      # valueFrom:
+      #   secretKeyRef:
+      #     name: "{{ nextcloud_secret_name }}"
+      #     key: s3_bucket_name
     - name: OBJECTSTORE_S3_KEY
       valueFrom:
         secretKeyRef:
@@ -78,7 +87,7 @@ nextcloud_values:
     - name: OBJECTSTORE_S3_HOST
       value: "{{ nextcloud_objectstore_s3_host }}"
     - name: OBJECTSTORE_S3_REGION
-      value: "{{ nextcloud_objectstore_s3_region }}"
+      value: "de"
     - name: OBJECTSTORE_S3_SSL
       value: "true"
     - name: OBJECTSTORE_S3_AUTOCREATE
