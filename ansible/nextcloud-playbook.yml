@@ -23,7 +23,7 @@
   - name: Create nextcloud secret
     kubernetes.core.k8s:
       state: present
-      kubeconfig: "{{ kubeconfig }}"
+      kubeconfig: ~/.kube/config
       definition:
         apiVersion: onepassword.com/v1
         kind: OnePasswordItem
@@ -36,7 +36,7 @@
   - name: Create nextcloud postgresql pvc
     kubernetes.core.k8s:
       state: present
-      kubeconfig: "{{ kubeconfig }}"
+      kubeconfig: ~/.kube/config
       definition:
         apiVersion: v1
         kind: PersistentVolumeClaim
@@ -63,7 +63,7 @@
       update_repo_cache: yes
       wait: yes
       chart_version: "{{ nextcloud_chart_version }}" 
-      kubeconfig: "{{ kubeconfig }}"
+      kubeconfig: ~/.kube/config
       release_namespace: "{{ namespace }}"
       values:
         "{{ nextcloud_values }}"
