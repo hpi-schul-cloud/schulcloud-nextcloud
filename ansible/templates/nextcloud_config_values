@@ -1,0 +1,78 @@
+{
+   "system":{
+      "auto_logout": false,
+      "remember_login_cookie_lifetime": "0",
+      "session_lifetime": "7200",
+      "session_keepalive": false,
+      "upgrade.disable-web":false,
+      "trashbin_retention_obligation": "7,7",
+      "filelocking.enabled": false,
+      "social_login_auto_redirect": true,
+      "hide_login_form": false,
+      "templatesdirectory":"",
+      "skeletondirectory":"",
+      "overwriteprotocol": "https",
+      "profile.enabled":false,
+      "auth.webauthn.enabled":false,
+      "allow_user_to_change_display_name":false,
+      "config_is_read_only":false,
+      "loglevel": 1,
+      "log_type": "errorlog",
+      "app_install_overwrite":[
+         "gluusso",
+         "schulcloud",
+         "extract"
+      ]
+   },
+   "apps":{
+      "core":{
+         "shareapi_default_permission_cancreate":"no",
+         "shareapi_default_permission_canupdate":"no",
+         "shareapi_default_permission_candelete":"no",
+         "shareapi_default_permission_canshare":"no",
+         "shareapi_default_permissions":"1",
+         "shareapi_restrict_user_enumeration_full_match":"no",
+         "shareapi_allow_share_dialog_user_enumeration":"no",
+         "shareapi_allow_group_sharing":"no",
+         "shareapi_allow_resharing":"no",
+         "shareapi_allow_public_upload":"no",
+         "shareapi_allow_links":"no",
+         "shareapi_enabled":"no"
+      },
+      "files":{
+         "types":"filesystem",
+         "enabled":"yes",
+         "default_quota":"0 B"
+      },
+      "schulcloud": {
+         "enabled": "yes",
+         "types": ""
+      },
+      "extract": {
+         "enabled": "yes",
+         "types": ""
+      },
+      "sociallogin":{
+         "allow_login_connect":"",
+         "auto_create_groups":"1",
+         "create_disabled_users":"",
+         "custom_providers":"{\"custom_oidc\":[{\"name\":\"SchulcloudNextcloud\",\"title\":\"SchulcloudNextcloud\",\"authorizeUrl\":\"https:\\/\\/{{ item.authorizeUrl }}\\/oauth2\\/auth\",\"tokenUrl\":\"https:\\/\\/{{ item.hydraUrl }}\\/oauth2\\/token\",\"displayNameClaim\":\"name\",\"userInfoUrl\":\"https:\\/\\/{{ item.hydraUrl }}\\/userinfo\",\"logoutUrl\":\"https:\\/\\/{{ item.logoutUrl }}\\/dashboard\",\"clientId\":\"{{ socialloginClientId}}\",\"clientSecret\":\"{{ socialloginSecret }}\",\"scope\":\"openid offline profile email groups\",\"groupsClaim\":\"groups\",\"style\":\"none\",\"defaultGroup\":\"schulcloud\"}]}",
+         "disable_notify_admins":"1",
+         "disable_registration":"",
+         "enabled":"yes",
+         "hide_default_login":"true",
+         "no_prune_user_groups":"",
+         "prevent_create_email_exists":"",
+         "restrict_users_wo_assigned_groups":"",
+         "restrict_users_wo_mapped_groups":"",
+         "types":"",
+         "update_profile_on_login":"1"
+      },
+      "theming_customcss": {
+         "customcss": "#app-navigation:not(.vue) > ul > li#quota {\\n display: none;\\n}\\n\\n#app-navigation:not(.vue) > ul > li.nav-recent { \\n display: none;\\n}\\n\\n#contactsmenu { display: none; }\\n\\n#app-settings-content:not(.vue) > label, #webdavurl, em { \\n display: none;\\n}\\n\\n[data-id=\"settings\"] { display: none; }\\n\\n[data-id=\"help\"] { display: none; }",
+         "cachebuster": "1659944778758",
+         "types": "",
+         "enabled": "yes"
+      }
+   }
+}

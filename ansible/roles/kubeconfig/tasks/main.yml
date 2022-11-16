@@ -1,0 +1,11 @@
+- name: create dir ".kube"
+  file:
+    path: "{{ ansible_env.HOME }}/.kube/"
+    state: directory
+    mode: 0700
+
+- name: push kubeconfig
+  copy:
+    src: config
+    dest: "{{ ansible_env.HOME }}/.kube/config"
+    mode: 0600

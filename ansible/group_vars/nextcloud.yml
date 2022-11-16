@@ -1,0 +1,125 @@
+nextcloud_chart_version: 2.13.2
+nextcloud_secret_name: nextcloud
+nextcloud_postgresql_pvc_name: nextcloud-postgresql-pvc
+nextcloud_postgresql_pvc_size: 15Gi
+nextcloud_pvc_size: 10Gi
+nextcloud_data_pvc_size: 10Gi
+nextcloud_install_plugins: "sociallogin groupfolders theming_customcss"
+nextcloud_enable_plugins: "schulcloud extract theming"
+nextcloud_disable_plugins: "accessibility activity circles comments cloud_federation_api contactsinteraction dashboard federatedfilesharing files_sharing firstrunwizard password_policy photos privacy nextcloud_announcements recommendations sharebymail support survey_client systemtags notifications updatenotification user_status weather_status"
+nextcloud_image_repository: ghcr.io/hpi-schul-cloud/schulcloud-nextcloud
+nextcloud_image_tag: latest
+nbc_authorizeUrl: oauth-nbc-main.cd.dbildungscloud.dev
+nbc_hydraUrl: oauth-nbc-main.cd.dbildungscloud.dev
+nbc_logoutUrl: nbc-main.cd.dbildungscloud.dev
+nbc_nextcloud_hostname: nbc-main.cd.dbildungscloud.dev
+nextcloud_external_git_plugins: "https://github.com/hpi-schul-cloud/NextcloudExtract.git:extract:1.3.7 https://github.com/hpi-schul-cloud/schulcloud-nextcloud-app.git:schulcloud:0.1.8"
+run_nextcloud_configuration: false
+nextcloud_theming_slogan: Niedersächsische Bildungscloud
+nextcloud_theming_color: '#5083C7'
+nextcloud_theming_logo_url: https://niedersachsen.cloud/images/logo/logo-wt.png
+nextcloud_values:
+  image:
+    repository: "{{ nextcloud_image_repository }}"
+    tag: "{{ nextcloud_image_tag }}"
+    pullPolicy: Always
+  resources:
+    "{{ nextcloud_resources }}"
+  lifecycle:
+    postStartCommand: ["/bin/sh", "-c", "/usr/nextcloud/configure.sh > /usr/nextcloud/configure_output"]
+  ingress:
+    enabled: false
+    # annotations:
+    #   cert-manager.io/cluster-issuer: sc-cert-manager-clusterissuer-letsencrypt
+    #   nginx.ingress.kubernetes.io/client-max-body-size: "1G"
+    #   nginx.ingress.kubernetes.io/proxy-body-size: "1G"
+    #   nginx.ingress.kubernetes.io/rewrite-target: /
+    # tls:
+    # - secretName: nextcloud-tls
+    #   hosts:
+    #   - "{{ nbc_nextcloud_hostname}}"
+  nextcloud:
+    host: "{{ nbc_nextcloud_hostname }}"
+    existingSecret:
+      enabled: true
+      secretName: "{{ nextcloud_secret_name }}"
+      usernameKey: username
+      passwordKey: password
+    extraEnv:
+    - name: INSTALL_PLUGINS
+      value: "{{ nextcloud_install_plugins }}"
+    - name: ENABLE_PLUGINS
+      value: "{{ nextcloud_enable_plugins }}"
+    - name: DISABLE_PLUGINS
+      value: "{{ nextcloud_disable_plugins }}"
+    - name: RUN_CONFIGURATION
+      value: "{%if run_nextcloud_configuration is defined%}{{ run_nextcloud_configuration | string}}{%else%}false{%endif%}"
+    - name: EXTERNAL_GIT_PLUGINS
+      value: "{{ nextcloud_external_git_plugins }}"
+    - name: CONFIG_JSON
+      value: "{{ lookup('template', './templates/nextcloud_config_values') | to_json }}"
+    - name: PHP_MEMORY_LIMIT
+      value: 8192M
+    - name: OBJECTSTORE_S3_BUCKET
+      valueFrom:
+        secretKeyRef:
+          name: "{{ nextcloud_secret_name }}"
+          key: s3_bucket_name
+    - name: OBJECTSTORE_S3_KEY
+      valueFrom:
+        secretKeyRef:
+          name: "{{ nextcloud_secret_name }}"
+          key: s3_access_key
+    - name: OBJECTSTORE_S3_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: "{{ nextcloud_secret_name }}"
+          key: s3_access_secret
+    - name: OBJECTSTORE_S3_HOST
+      value: "{{ nextcloud_objectstore_s3_host }}"
+    - name: OBJECTSTORE_S3_REGION
+      value: "{{ nextcloud_objectstore_s3_region }}"
+    - name: OBJECTSTORE_S3_SSL
+      value: "true"
+    - name: OBJECTSTORE_S3_AUTOCREATE
+      value: "false"
+    - name: OBJECTSTORE_S3_USEPATH_STYLE
+      value: "true"
+    - name: OBJECTSTORE_S3_LEGACYAUTH
+      value: "true"
+    - name: THEMING_NAME
+      value: Schulcloud Nextcloud
+    - name: THEMING_URL
+      value: https://{{ nbc_nextcloud_hostname }}/
+    - name: THEMING_SLOGAN
+      value: "{{ nextcloud_theming_slogan }}"
+    - name: THEMING_COLOR
+      value:  "{{ nextcloud_theming_color }}"
+    - name: THEMING_LOGO_URL
+      value:  "{{ nextcloud_theming_logo_url }}"
+  metrics:
+    enabled: false
+    # necessary to avoid admin user of nextcloud to be added to the db again
+  persistence:
+    enabled: true
+    size: "{{ nextcloud_pvc_size }}"
+    nextcloudData:
+      enabled: true
+      size: "{{ nextcloud_data_pvc_size }}"
+  internalDatabase:
+    enabled: false
+  # used by nextcloud to connect to db
+  externalDatabase:
+    enabled: true
+    type: postgresql
+    host: nextcloud-postgresql.{{ namespace }}.svc.cluster.local
+    existingSecret:
+      secretName:  "{{ nextcloud_secret_name }}"
+      usernameKey: nextclouddb-user
+      passwordKey: nextclouddb-password
+  postgresql:
+    enabled: true
+    existingSecret: "{{ nextcloud_secret_name }}"
+    persistence:
+      enabled: true
+      existingClaim: "{{ nextcloud_postgresql_pvc_name }}"

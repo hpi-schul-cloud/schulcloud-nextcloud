@@ -1,0 +1,69 @@
+---
+- name: Nextcloud Deployment
+  hosts:
+    - sc-dev-nextcloud
+  connection: local
+  roles:
+  - kubeconfig
+  tasks:
+  - name: Add nextcloud chart repo
+    kubernetes.core.helm_repository:
+      name: nextcloud
+      repo_url: "https://nextcloud.github.io/helm/"
+
+  - name: Create a namespace based on branch
+    kubernetes.core.k8s:
+      name: "{{ namespace }}"
+      kind: Namespace
+      state: present
+      kubeconfig: ~/.kube/config
+      api_version: v1
+
+  # weiß nicht ob er einfach so auf 1password zugreifen kann, sonst in dof_app_deploy nachgucken
+    - name: Create nextcloud secret
+      kubernetes.core.k8s:
+        state: present
+        kubeconfig: "{{ kubeconfig }}"
+        definition:
+          apiVersion: onepassword.com/v1
+          kind: OnePasswordItem
+          metadata:
+            name: "{{ nextcloud_secret_name }}"
+            namespace: "{{ namespace }}"
+          spec:
+            itemPath: "vaults/{{ vault }}/items/nextcloud"
+
+    - name: Create nextcloud postgresql pvc
+      kubernetes.core.k8s:
+        state: present
+        kubeconfig: "{{ kubeconfig }}"
+        definition:
+          apiVersion: v1
+          kind: PersistentVolumeClaim
+          metadata:
+            name: "{{ nextcloud_postgresql_pvc_name }}"
+            namespace: "{{ namespace }}"
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: "{{ nextcloud_postgresql_pvc_size }}"
+
+# s3 bucket  nextcloud-aimee-test in frankfurt
+
+# wenn ingress da ist, dann aber im Helm Chart disabled, wird der Ingress gelöscht? 
+# -  Login wird redirected auf die dev-nbc-Seite, die brauch ein Eintrag im SHD, dass man zugreifen darf
+# auch metriken testen
+
+    - name: Install nextcloud helm chart
+      kubernetes.core.helm:
+        name: nextcloud
+        chart_ref: nextcloud/nextcloud
+        update_repo_cache: yes
+        wait: yes
+        chart_version: "{{ nextcloud_chart_version }}" 
+        kubeconfig: "{{ kubeconfig }}"
+        release_namespace: "{{ namespace }}"
+        values:
+          "{{ nextcloud_values }}"
