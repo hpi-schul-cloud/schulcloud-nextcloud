@@ -25,8 +25,7 @@ jobs:
       - name: Extract branch name
         shell: bash
         run: echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
-        # not sure if this is necessary
-        # id: extract_branch
+        id: extract_branch
 
   deploy_nextcloud:
     needs:
