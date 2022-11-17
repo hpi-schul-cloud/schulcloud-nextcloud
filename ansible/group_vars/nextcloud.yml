@@ -74,7 +74,7 @@ nextcloud_values:
           # im folder speicher, gleich zum branch namen, der müsste automatisch angelegt werden
           # das scheint nicht konfigurierbar sonst müsste man den URL Namen geändert bekommen?
     - name: OBJECTSTORE_S3_HOST
-      value: "{{ nextcloud_objectstore_s3_host }}"
+      value: "s3-eu-central-2.ionoscloud.com" #{{ nextcloud_objectstore_s3_host }}"
     - name: OBJECTSTORE_S3_REGION
       value: "de" #nextcloud_objectstore_s3_region
     - name: OBJECTSTORE_S3_SSL
