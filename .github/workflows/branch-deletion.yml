@@ -19,8 +19,8 @@ jobs:
         id: extract_branch
 
   delete_namespace:
-  # protect nbc-main branch from accidental deletion
-  if: ${{ needs.get_branch_name.outputs.branch }} != 'nbc-main'
+    # protect nbc-main branch from accidental deletion
+    if: ${{ needs.get_branch_name.outputs.branch }} != 'nbc-main'
     needs:
       - get_branch_name
     uses: ./.github/workflows/delete-namespace.yml

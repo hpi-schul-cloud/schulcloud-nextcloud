@@ -23,7 +23,7 @@ jobs:
         id: extract_branch
 
   deploy_nextcloud_from_branch:
-  if: ${{ needs.get_branch_name.outputs.branch }} != 'main'
+    if: ${{ needs.get_branch_name.outputs.branch }} != 'main'
     needs:
       - get_branch_name
     uses: ./.github/workflows/deploy-nextcloud.yml
