@@ -1,5 +1,5 @@
 ---
-name: Nextcloud Ansible Playbook Action
+name: Deploy Nextcloud
 
 on:
   workflow_call:
@@ -7,10 +7,13 @@ on:
       HOST:
         required: true
         type: string
+      BUCKET_NAME:
+        required: true
+        type: string
       NAMESPACE:
         required: true
         type: string
-      BRANCH_NAME_SCHULCLOUD_INSTANCE:
+      NAMESPACE_SCHULCLOUD_INSTANCE:
         required: true
         type: string
     secrets:
@@ -49,7 +52,8 @@ jobs:
         working-directory: ${{ github.workspace }}/ansible/group_vars
         run: |
           echo -e "\nnamespace: ${{ inputs.NAMESPACE }}" >> config.yml
-          echo "schulcloud_branch: ${{ inputs.BRANCH_NAME_SCHULCLOUD_INSTANCE }}" >> config.yml
+          echo "nextcloud_objectstore_s3_bucket_name: ${{ inputs.BUCKET_NAME }}" >> config.yml
+          echo "schulcloud_branch: ${{ inputs.NAMESPACE_SCHULCLOUD_INSTANCE }}" >> config.yml
           echo "socialloginClientId: ${{ secrets.SOCIALLOGINCLIENTID }}" >> config.yml
           echo "socialloginSecret: ${{ secrets.SOCIALLOGINSECRET }}" >> config.yml
           cat config.yml

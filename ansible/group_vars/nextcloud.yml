@@ -9,8 +9,8 @@ nextcloud_enable_plugins: "schulcloud extract theming"
 nextcloud_disable_plugins: "accessibility activity circles comments cloud_federation_api contactsinteraction dashboard federatedfilesharing files_sharing firstrunwizard password_policy photos privacy nextcloud_announcements recommendations sharebymail support survey_client systemtags notifications updatenotification user_status weather_status"
 nextcloud_image_repository: ghcr.io/hpi-schul-cloud/schulcloud-nextcloud
 nextcloud_image_tag: latest
-nextcloud_objectstore_s3_host: s3-de-central.profitbricks.com
-nextcloud_objectstore_s3_region: "de" # muss später Berlin werden
+nextcloud_objectstore_s3_host: s3-eu-central-2.ionoscloud.com
+nextcloud_objectstore_s3_region: eu-central-2
 nextcloud_external_git_plugins: "https://github.com/hpi-schul-cloud/NextcloudExtract.git:extract:1.3.7 https://github.com/hpi-schul-cloud/schulcloud-nextcloud-app.git:schulcloud:0.1.8"
 run_nextcloud_configuration: false
 nextcloud_values:
@@ -56,11 +56,7 @@ nextcloud_values:
     - name: PHP_MEMORY_LIMIT
       value: 8192M
     - name: OBJECTSTORE_S3_BUCKET
-      value: nextcloud-aimee-test
-      # valueFrom:
-      #   secretKeyRef:
-      #     name: "{{ nextcloud_secret_name }}"
-      #     key: s3_bucket_name
+      value: "{{ nextcloud_objectstore_s3_bucket_name }}"
     - name: OBJECTSTORE_S3_KEY
       valueFrom:
         secretKeyRef:

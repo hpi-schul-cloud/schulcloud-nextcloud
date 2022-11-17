@@ -1,0 +1,26 @@
+# Test this at the end
+name: Deploy Nextcloud on Branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  nextcloud_approval:
+    environment: approve_sc_dev_nextcloud
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Approval from authorized approve_sc_dev_nextcloud Group has been given!"
+
+  deploy_nextcloud_from_main:
+    needs:
+      - get_branch_name
+    uses: ./.github/workflows/deploy-nextcloud.yml
+    with:
+      HOST: "sc-dev-nextcloud"
+      BUCKET_NAME: "nextcloud-branches-txl"
+      NAMESPACE: "nbc-main"
+      NAMESPACE_SCHULCLOUD_INSTANCE: "nbc-main"
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
+      KUBECONFIG: ${{ secrets.KUBECONFIG }}

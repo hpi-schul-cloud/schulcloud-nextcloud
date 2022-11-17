@@ -1,15 +1,11 @@
-name: Deploy Nextlcoud on Branch namespace
-# testen später ob main wirklich nicht ausgerollt wird
-# on: push
-  # push:
-  #   branches:
-  #   - "!main"
-# gh workflow run <workflow> --ref <branch-name> -f <myparameter>=<myvalue>
+name: Deploy Nextcloud on Branch
+# cd schulcloud-nextcloud
+# gh workflow run branch-deployment.yml --ref <branch-name> -f BRANCH_NAME_SCHULCLOUD_INSTANCE=<myvalue>
 on:
   workflow_dispatch:
     inputs:
-      BRANCH_NAME_SCHULCLOUD_INSTANCE:
-        description: 'Branch name of schulcloud instance of sc-dev-devcenter-1'
+      NAMESPACE_SCHULCLOUD_INSTANCE:
+        description: 'Namespace name of schulcloud instance of sc-dev-devcenter-1'
         required: true
 
 jobs:
@@ -23,21 +19,21 @@ jobs:
         run: |
           branch_name=$(echo "branch=${GITHUB_REF#refs/heads/}")
           echo "branch_name=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
-
           namespace_name=$(echo $branch_name | sed 's@.*/@@' | tr [A-Z] [a-z] | tr _ - | tr \. -)
           echo "before regex:" $branch_name "after regex:" $namespace_name
           echo "$namespace_name" >> $GITHUB_OUTPUT
         id: extract_branch
 
   deploy_nextcloud_from_branch:
-    if: ${{ needs.get_branch_name.outputs.branch }} != 'main'
+    if: ${{ needs.get_branch_name.outputs.branch }} != 'main' && ${{ needs.get_branch_name.outputs.branch }} != 'nbc-main'
     needs:
       - get_branch_name
     uses: ./.github/workflows/deploy-nextcloud.yml
     with:
       HOST: sc-dev-nextcloud
+      BUCKET_NAME: "nextcloud-branches-txl"
       NAMESPACE:  ${{ needs.get_branch_name.outputs.branch }}
-      BRANCH_NAME_SCHULCLOUD_INSTANCE: ${{ inputs.BRANCH_NAME_SCHULCLOUD_INSTANCE }}
+      NAMESPACE_SCHULCLOUD_INSTANCE: ${{ inputs.NAMESPACE_SCHULCLOUD_INSTANCE }}
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
       KUBECONFIG: ${{ secrets.KUBECONFIG }}

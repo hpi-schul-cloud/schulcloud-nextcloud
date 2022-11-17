@@ -1,6 +1,4 @@
 stage: dev
-# das muss später configurierbar gemacht werden
-schulcloud_branch: "nbc-n21-380-lti-crud"
 nbc_authorizeUrl: "oauth-{{ schulcloud_branch}}.cd.dbildungscloud.dev"
 nbc_hydraUrl: "oauth-{{ schulcloud_branch }}.cd.dbildungscloud.dev"
 nbc_logoutUrl: "{{ schulcloud_branch }}.cd.dbildungscloud.dev"

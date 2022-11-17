@@ -1,4 +1,4 @@
-name: Delete Namespace on branch deletion
+name: Delete Namespace on Branch Deletion
 on: delete
 
 jobs:
