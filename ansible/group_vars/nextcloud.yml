@@ -10,7 +10,7 @@ nextcloud_disable_plugins: "accessibility activity circles comments cloud_federa
 nextcloud_image_repository: ghcr.io/hpi-schul-cloud/schulcloud-nextcloud
 nextcloud_image_tag: latest
 nextcloud_objectstore_s3_host: s3-de-central.profitbricks.com
-# nextcloud_objectstore_s3_region: "{{ s3_region_frankfurt }}" # muss später Berlin werden
+nextcloud_objectstore_s3_region: "de" # muss später Berlin werden
 nextcloud_external_git_plugins: "https://github.com/hpi-schul-cloud/NextcloudExtract.git:extract:1.3.7 https://github.com/hpi-schul-cloud/schulcloud-nextcloud-app.git:schulcloud:0.1.8"
 run_nextcloud_configuration: false
 nextcloud_values:
@@ -74,10 +74,9 @@ nextcloud_values:
           # im folder speicher, gleich zum branch namen, der müsste automatisch angelegt werden
           # das scheint nicht konfigurierbar sonst müsste man den URL Namen geändert bekommen?
     - name: OBJECTSTORE_S3_HOST
-      value: "s3-eu-central-2.ionoscloud.com" #{{ nextcloud_objectstore_s3_host }}"
+      value: "{{ nextcloud_objectstore_s3_host }}"
     - name: OBJECTSTORE_S3_REGION
-      value: "de" #nextcloud_objectstore_s3_region
-    - name: OBJECTSTORE_S3_SSL
+      value: "{{ nextcloud_objectstore_s3_region }}"
       value: "true"
     - name: OBJECTSTORE_S3_AUTOCREATE
       value: "false"
