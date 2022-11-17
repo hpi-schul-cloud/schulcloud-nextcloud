@@ -15,6 +15,10 @@ on:
         required: true
       KUBECONFIG:
         required: true
+      SOCIALLOGINCLIENTID:
+        required: true
+      SOCIALLOGINSECRET:
+        required: true
 
 jobs:
   run_ansible_playbook_nextcloud:
