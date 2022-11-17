@@ -19,7 +19,6 @@ nextcloud_instances:
   nextcloud_theming_slogan: Niedersächsische Bildungscloud
   nextcloud_theming_color: '#5083C7'
   nextcloud_theming_logo_url: https://niedersachsen.cloud/images/logo/logo-wt.png
-# ask Dimitrij
 nextcloud_resources:
   limits:
     cpu: 1000m

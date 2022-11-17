@@ -1,9 +1,16 @@
 name: Deploy Nextlcoud on Branch namespace
 # testen später ob main wirklich nicht ausgerollt wird
-on: push
+# on: push
   # push:
   #   branches:
   #   - "!main"
+# gh workflow run <workflow> --ref <branch-name> -f <myparameter>=<myvalue>
+on:
+  workflow_dispatch:
+    inputs:
+      BRANCH_NAME_SCHULCLOUD_INSTANCE:
+        description: 'Branch name of schulcloud instance of sc-dev-devcenter-1'
+        required: true
 
 jobs:
   get_branch_name:
@@ -30,6 +37,7 @@ jobs:
     with:
       HOST: sc-dev-nextcloud
       NAMESPACE:  ${{ needs.get_branch_name.outputs.branch }}
+      BRANCH_NAME_SCHULCLOUD_INSTANCE: ${{ inputs.BRANCH_NAME_SCHULCLOUD_INSTANCE }}
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
       KUBECONFIG: ${{ secrets.KUBECONFIG }}

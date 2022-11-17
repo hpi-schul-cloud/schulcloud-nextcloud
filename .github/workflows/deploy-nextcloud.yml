@@ -4,10 +4,13 @@ name: Nextcloud Ansible Playbook Action
 on:
   workflow_call:
     inputs:
+      HOST:
+        required: true
+        type: string
       NAMESPACE:
         required: true
         type: string
-      HOST:
+      BRANCH_NAME_SCHULCLOUD_INSTANCE:
         required: true
         type: string
     secrets:
@@ -44,9 +47,9 @@ jobs:
 
       - name: Set ENVs in config.yml file
         working-directory: ${{ github.workspace }}/ansible/group_vars
-        # dummy Werte
         run: |
           echo -e "\nnamespace: ${{ inputs.NAMESPACE }}" >> config.yml
+          echo "schulcloud_branch: ${{ inputs.BRANCH_NAME_SCHULCLOUD_INSTANCE }}" >> config.yml
           echo "socialloginClientId: ${{ secrets.SOCIALLOGINCLIENTID }}" >> config.yml
           echo "socialloginSecret: ${{ secrets.SOCIALLOGINSECRET }}" >> config.yml
           cat config.yml
