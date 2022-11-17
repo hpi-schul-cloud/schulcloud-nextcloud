@@ -1,6 +1,6 @@
 name: Deploy Nextcloud on Branch
 # cd schulcloud-nextcloud
-# gh workflow run branch-deployment.yml --ref <branch-name> -f BRANCH_NAME_SCHULCLOUD_INSTANCE=<myvalue>
+# gh workflow run branch-deployment.yml --ref <branch-name> -f NAMESPACE_SCHULCLOUD_INSTANCE=<myvalue>
 on:
   workflow_dispatch:
     inputs:

@@ -53,7 +53,7 @@ jobs:
         run: |
           echo -e "\nnamespace: ${{ inputs.NAMESPACE }}" >> config.yml
           echo "nextcloud_objectstore_s3_bucket_name: ${{ inputs.BUCKET_NAME }}" >> config.yml
-          echo "schulcloud_branch: ${{ inputs.NAMESPACE_SCHULCLOUD_INSTANCE }}" >> config.yml
+          echo "schulcloud_namespace: ${{ inputs.NAMESPACE_SCHULCLOUD_INSTANCE }}" >> config.yml
           echo "socialloginClientId: ${{ secrets.SOCIALLOGINCLIENTID }}" >> config.yml
           echo "socialloginSecret: ${{ secrets.SOCIALLOGINSECRET }}" >> config.yml
           cat config.yml
