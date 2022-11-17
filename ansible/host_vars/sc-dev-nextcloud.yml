@@ -1,1 +1,2 @@
 vault: sc-dev-cd
+nextcloud_ingress_path_user_settings: /settings/user(?!s)[0-9]*

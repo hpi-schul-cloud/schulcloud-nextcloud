@@ -1,0 +1,35 @@
+name: Deploy Nextlcoud on Branch namespace
+# testen später ob main wirklich nicht ausgerollt wird
+on:
+  push:
+    branches:
+    - "!main"
+
+jobs:
+  get_branch_name:
+    runs-on: ubuntu-latest
+    outputs:
+      branch: ${{ steps.extract_branch.outputs.branch }}
+    steps:
+      - name: Extract branch name
+        shell: bash
+        run: |
+          branch_name=$(echo "branch=${GITHUB_REF#refs/heads/}")
+          echo "branch_name=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+
+          namespace_name=$(echo $branch_name | sed 's@.*/@@' | tr [A-Z] [a-z] | tr _ - | tr \. -)
+          echo "before regex:" $branch_name "after regex:" $namespace_name
+          echo "$namespace_name" >> $GITHUB_OUTPUT
+        id: extract_branch
+
+  deploy_nextcloud_from_branch:
+  if: ${{ needs.get_branch_name.outputs.branch }} != 'main'
+    needs:
+      - get_branch_name
+    uses: ./.github/workflows/deploy-nextcloud.yml
+    with:
+      HOST: sc-dev-nextcloud
+      NAMESPACE:  ${{ needs.get_branch_name.outputs.branch }}
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
+      KUBECONFIG: ${{ secrets.KUBECONFIG }}

@@ -16,39 +16,18 @@
       name: "{{ namespace }}"
       kind: Namespace
       state: present
-      kubeconfig: ~/.kube/config
+      kubeconfig: "{{ kubeconfig }}"
       api_version: v1
 
-# weiß nicht ob er einfach so auf 1password zugreifen kann, sonst in dof_app_deploy nachgucken
-  - name: Create nextcloud secret
-    kubernetes.core.k8s:
-      state: present
-      kubeconfig: ~/.kube/config
-      definition:
-        apiVersion: onepassword.com/v1
-        kind: OnePasswordItem
-        metadata:
-          name: "{{ nextcloud_secret_name }}"
-          namespace: "{{ namespace }}"
-        spec:
-          itemPath: "vaults/{{ vault }}/items/nextcloud"
-
-  - name: Create nextcloud postgresql pvc
-    kubernetes.core.k8s:
-      state: present
-      kubeconfig: ~/.kube/config
-      definition:
-        apiVersion: v1
-        kind: PersistentVolumeClaim
-        metadata:
-          name: "{{ nextcloud_postgresql_pvc_name }}"
-          namespace: "{{ namespace }}"
-        spec:
-          accessModes:
-            - ReadWriteOnce
-          resources:
-            requests:
-              storage: "{{ nextcloud_postgresql_pvc_size }}"
+    - name: Create Nextcloud instances
+      include_tasks: multi-instance-nextcloud.yml
+      vars:
+        instance_vault: "{%if item.vault is defined%}{{item.vault}}{%else%}{{project}}-{{stage}}-{{item.name}}{%endif%}"
+        # socialloginClientId: "{{ lookup('dbildungscloud.onepwd.onepwd', secret_name='nextcloud', vault=instance_vault, field='socialloginClientId', session_shorthand='ansible-run') }}"
+        # socialloginSecret: "{{ lookup('dbildungscloud.onepwd.onepwd', secret_name='nextcloud', vault=instance_vault, field='socialloginSecret', session_shorthand='ansible-run') }}"
+      loop: "{{ nextcloud_instances | selectattr('nextcloud_enabled', 'defined' ) | selectattr('nextcloud_enabled', 'equalto', true)}}"
+      tags:
+        - nextcloud
 
 # s3 bucket  nextcloud-aimee-test in frankfurt
 
@@ -56,14 +35,3 @@
 # -  Login wird redirected auf die dev-nbc-Seite, die brauch ein Eintrag im SHD, dass man zugreifen darf
 # auch metriken testen
 
-  - name: Install nextcloud helm chart
-    kubernetes.core.helm:
-      name: nextcloud
-      chart_ref: nextcloud/nextcloud
-      update_repo_cache: yes
-      wait: yes
-      chart_version: "{{ nextcloud_chart_version }}" 
-      kubeconfig: ~/.kube/config
-      release_namespace: "{{ namespace }}"
-      values:
-        "{{ nextcloud_values }}"

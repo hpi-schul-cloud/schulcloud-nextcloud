@@ -1,0 +1,44 @@
+--- 
+    - name: Create nextcloud secret
+      kubernetes.core.k8s:
+        state: present
+        kubeconfig:  "{{ kubeconfig }}"
+        definition:
+          apiVersion: onepassword.com/v1
+          kind: OnePasswordItem
+          metadata:
+            name: "{{ nextcloud_secret_name }}"
+            namespace: "{{ item.namespace }}"
+          spec:
+            itemPath: "vaults/{{ instance_vault }}/items/nextcloud"   
+
+    - name: Create nextcloud postgresql pvc
+      kubernetes.core.k8s:
+        state: present
+        kubeconfig: "{{ kubeconfig }}"
+        definition:
+          apiVersion: v1
+          kind: PersistentVolumeClaim
+          metadata:
+            name: "{{ nextcloud_postgresql_pvc_name }}"
+            namespace: "{{ item.namespace }}"
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: "{{ nextcloud_postgresql_pvc_size }}"
+      tags:
+        - nextcloud
+
+    - name: Install nextcloud helm chart
+      kubernetes.core.helm:
+        name: nextcloud
+        chart_ref: nextcloud/nextcloud
+        update_repo_cache: yes
+        wait: yes
+        chart_version: "{{ nextcloud_chart_version }}" 
+        kubeconfig: "{{ kubeconfig }}"
+        release_namespace: "{{ item.namespace }}"
+        values:
+          "{{ nextcloud_values }}"

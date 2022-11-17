@@ -29,7 +29,7 @@ jobs:
         run: |
           python3 -m pip install kubernetes
 
-      - name: install requirements ansible-galaxy
+      - name: Install requirements ansible-galaxy
         run: ansible-galaxy install -r ansible/collections/requirements.yml
 
       - name: Create Kubeconfig file in config folder
@@ -40,8 +40,11 @@ jobs:
 
       - name: Set ENVs in config.yml file
         working-directory: ${{ github.workspace }}/ansible/group_vars
+        # dummy Werte
         run: |
           echo -e "\nnamespace: ${{ inputs.NAMESPACE }}" >> config.yml
+          echo "socialloginClientId: ${{ secrets.SOCIALLOGINCLIENTID }}" >> config.yml
+          echo "socialloginSecret: ${{ secrets.SOCIALLOGINSECRET }}" >> config.yml
           cat config.yml
 
       - name: Execute Ansible Nextcloud Playbook

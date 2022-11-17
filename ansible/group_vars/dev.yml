@@ -1,0 +1,29 @@
+stage: dev
+# das muss später configurierbar gemacht werden
+schulcloud_branch: "nbc-n21-380-lti-crud"
+nbc_authorizeUrl: "oauth-{{ schulcloud_branch}}.cd.dbildungscloud.dev"
+nbc_hydraUrl: "oauth-{{ schulcloud_branch }}.cd.dbildungscloud.dev"
+nbc_logoutUrl: "{{ schulcloud_branch }}.cd.dbildungscloud.dev"
+nbc_nextcloud_hostname: "{{ schulcloud_branch }}.cd.dbildungscloud.dev"
+nextcloud_instances:
+- name: cd
+  namespace: "{{ namespace }}"
+  vault: "{{project}}-{{stage}}-cd"
+  nextcloud_enabled: true
+  # set this var to true in order for the configure.sh script to be run
+  # run_nextcloud_configuration: false
+  authorizeUrl: "{{ nbc_authorizeUrl }}"
+  hydraUrl: "{{ nbc_hydraUrl }}"
+  logoutUrl: "{{ nbc_logoutUrl }}"
+  nextcloud_hostname: "{{ namespace }}.sc-dev-nextcloud.dbildungscloud.dev"
+  nextcloud_theming_slogan: Niedersächsische Bildungscloud
+  nextcloud_theming_color: '#5083C7'
+  nextcloud_theming_logo_url: https://niedersachsen.cloud/images/logo/logo-wt.png
+# ask Dimitrij
+nextcloud_resources:
+  limits:
+    cpu: 500m
+    memory: 2G
+  requests:
+    cpu: 1000m
+    memory: 4G

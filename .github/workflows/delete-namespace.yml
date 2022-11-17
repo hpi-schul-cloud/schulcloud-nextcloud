@@ -1,0 +1,53 @@
+---
+name: Delete Namespace Action
+
+on:
+  workflow_call:
+    inputs:
+      NAMESPACE:
+        required: true
+        type: string
+      HOST:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
+      KUBECONFIG:
+        required: true
+
+jobs:
+  run_delete_ansible_playbook:
+    environment:  ${{ inputs.HOST }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+
+      - name: Install requirements python3
+        shell: bash
+        run: |
+          python3 -m pip install kubernetes
+
+      - name: Install requirements ansible-galaxy
+        run: ansible-galaxy install -r ansible/collections/requirements.yml
+
+      - name: Create Kubeconfig file in config folder
+        working-directory: ${{ github.workspace }}/ansible/roles/kubeconfig
+        run: |
+          mkdir files
+          echo "${{ secrets.KUBECONFIG }}" > files/config
+
+      - name: Execute Ansible Delete Playbook
+        working-directory: ${{ github.workspace }}/ansible
+        run: ansible-playbook ./delete-namespace-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.HOST }}
+
+      - name: Delete config files
+        if: always()
+        working-directory: ${{ github.workspace }}/ansible/roles/kubeconfig
+        run: rm -rf /config
+
+
+
+
+
