@@ -33,3 +33,7 @@ jobs:
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
       KUBECONFIG: ${{ secrets.KUBECONFIG }}
+      SOCIALLOGINCLIENTID: ${{ secrets.SOCIALLOGINCLIENTID }}
+      SOCIALLOGINSECRET: ${{ secrets.SOCIALLOGINSECRET }}
+
+
