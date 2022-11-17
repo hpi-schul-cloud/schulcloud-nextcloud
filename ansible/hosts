@@ -1,5 +1,8 @@
+[config]
+sc-dev-nextcloud
+
 [nextcloud]
 sc-dev-nextcloud
 
-[config]
+[dev]
 sc-dev-nextcloud
