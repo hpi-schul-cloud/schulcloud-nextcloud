@@ -66,8 +66,3 @@ jobs:
         if: always()
         working-directory: ${{ github.workspace }}/ansible/roles/kubeconfig
         run: rm -rf /config
-
-
-
-
-

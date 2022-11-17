@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       NAMESPACE_SCHULCLOUD_INSTANCE:
-        description: 'Namespace name of schulcloud instance of sc-dev-devcenter-1'
+        description: 'Namespace name of schulcloud instance in sc-dev-devcenter-1'
         required: true
 
 jobs:

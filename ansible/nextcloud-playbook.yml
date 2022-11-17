@@ -26,10 +26,3 @@
     loop: "{{ nextcloud_instances | selectattr('nextcloud_enabled', 'defined' ) | selectattr('nextcloud_enabled', 'equalto', true)}}"
     tags:
       - nextcloud
-
-# s3 bucket  nextcloud-aimee-test in frankfurt
-
-# wenn ingress da ist, dann aber im Helm Chart disabled, wird der Ingress gelöscht? 
-# -  Login wird redirected auf die dev-nbc-Seite, die brauch ein Eintrag im SHD, dass man zugreifen darf
-# auch metriken testen
-

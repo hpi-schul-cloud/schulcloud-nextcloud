@@ -1,4 +1,4 @@
---- 
+---
     - name: Create nextcloud secret
       kubernetes.core.k8s:
         state: present
@@ -10,7 +10,7 @@
             name: "{{ nextcloud_secret_name }}"
             namespace: "{{ item.namespace }}"
           spec:
-            itemPath: "vaults/{{ instance_vault }}/items/nextcloud"   
+            itemPath: "vaults/{{ instance_vault }}/items/nextcloud"
 
     - name: Create nextcloud postgresql pvc
       kubernetes.core.k8s:
@@ -42,3 +42,5 @@
         release_namespace: "{{ item.namespace }}"
         values:
           "{{ nextcloud_values }}"
+
+    # May want to add nextcloud service monitor
