@@ -77,7 +77,6 @@ nextcloud_values:
       value: "{{ nextcloud_objectstore_s3_host }}"
     - name: OBJECTSTORE_S3_REGION
       value: "{{ nextcloud_objectstore_s3_region }}"
-      value: "true"
     - name: OBJECTSTORE_S3_AUTOCREATE
       value: "false"
     - name: OBJECTSTORE_S3_USEPATH_STYLE
