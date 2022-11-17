@@ -1,8 +1,8 @@
 stage: dev
-nbc_authorizeUrl: "oauth-{{ schulcloud_branch}}.cd.dbildungscloud.dev"
-nbc_hydraUrl: "oauth-{{ schulcloud_branch }}.cd.dbildungscloud.dev"
-nbc_logoutUrl: "{{ schulcloud_branch }}.cd.dbildungscloud.dev"
-nbc_nextcloud_hostname: "{{ schulcloud_branch }}.cd.dbildungscloud.dev"
+nbc_authorizeUrl: "oauth-{{ schulcloud_namespace}}.cd.dbildungscloud.dev"
+nbc_hydraUrl: "oauth-{{ schulcloud_namespace }}.cd.dbildungscloud.dev"
+nbc_logoutUrl: "{{ schulcloud_namespace }}.cd.dbildungscloud.dev"
+nbc_nextcloud_hostname: "{{ schulcloud_namespace }}.cd.dbildungscloud.dev"
 nextcloud_instances:
 - name: cd
   namespace: "{{ namespace }}"
