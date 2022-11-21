@@ -31,3 +31,7 @@ nextcloud_background_job_chart_values:
       - apiGroups: [""]
         resources: [ "pods", "pods/exec"]
         verbs: ["get", "list", "create"]
+  # wenn man das auf nbc-main ausrollen würde wäre wäre der cluster role Name nicht mehr passend
+  # added this value - so name of service account and cluster role (not namespace specific) are differnet
+  serviceAccount:
+    name: "{{ namespace }}-nextcloud-cron-job"
