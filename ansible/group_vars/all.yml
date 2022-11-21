@@ -1,6 +1,13 @@
 kubeconfig: ~/.kube/config
 project: sc
 
+kubectl_version: "{{ kubernetes_version }}"
+get_kubectl_command: |
+  curl -LO https://dl.k8s.io/release/v{{ kubectl_version }}/bin/linux/amd64/kubectl
+  chmod +x kubectl
+  mv ./kubectl /usr/local/bin/kubectl
+kubernetes_version: 1.22.16
+
 s3_region_berlin: eu-central-2
 s3_url_berlin: https://s3-eu-central-2.ionoscloud.com
 
@@ -17,8 +24,6 @@ nextcloud_disable_plugins: "accessibility activity circles comments contactsinte
 nextcloud_external_git_plugins: "https://github.com/hpi-schul-cloud/NextcloudExtract.git:extract:1.3.7 https://github.com/hpi-schul-cloud/schulcloud-nextcloud-app.git:schulcloud:0.1.9"
 nextcloud_post_config_command: 'sudo -u www-data PHP_MEMORY_LIMIT=512M php occ user_oidc:provider SchulcloudNextcloud --clientid="{{ socialloginClientId }}" --clientsecret="{{ socialloginSecret }}" --check-bearer="1" --unique-uid="0" --scope="openid offline profile email groups" --discoveryuri="https://{{ item.hydraUrl }}/.well-known/openid-configuration"'
 nextcloud_image_repository: schulcloud/schulcloud-nextcloud
-nextcloud_postgresql_image_tag: 11.17.0-debian-11-r37
-nextcloud_image_repository: ghcr.io/hpi-schul-cloud/schulcloud-nextcloud
 nextcloud_postgresql_image_tag: 11.17.0-debian-11-r37
 nextcloud_values:
   image:
