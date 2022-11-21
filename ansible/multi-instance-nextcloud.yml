@@ -43,4 +43,27 @@
         values:
           "{{ nextcloud_values }}"
 
-    # May want to add nextcloud service monitor
+    - name: Create nextcloud service monitor
+      kubernetes.core.k8s:
+        state: present
+        kubeconfig: "{{ kubeconfig }}"
+        definition:
+          apiVersion: monitoring.coreos.com/v1
+          kind: ServiceMonitor
+          metadata:
+            name: nextcloud-service-monitor
+            namespace: "{{ item.namespace }}"
+          spec:
+            selector:
+              matchLabels:
+                app.kubernetes.io/name: nextcloud
+            namespaceSelector:
+              any: false
+              matchNames:
+                - "{{ item.namespace }}"
+            endpoints:
+            - path: /metrics
+              interval: 30s
+              honorLabels: true
+              port: metrics
+
