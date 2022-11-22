@@ -7,6 +7,9 @@ on:
       CLUSTER:
         required: true
         type: string
+      BUCKET_NAME:
+        required: true
+        type: string
       NAMESPACE:
         required: true
         type: string
@@ -48,6 +51,7 @@ jobs:
           echo -e "\nnamespace: ${{ inputs.NAMESPACE }}" >> config.yml
           echo "s3_access_key: ${{ secrets.S3ACCESSKEY }}" >> config.yml
           echo "s3_access_secret: ${{ secrets.S3ACCESSSECRET }}" >> config.yml
+          echo "s3_bucket_name: ${{ inputs.BUCKET_NAME }}" >> config.yml
           cat config.yml
 
       - name: Execute Ansible Delete Playbook
