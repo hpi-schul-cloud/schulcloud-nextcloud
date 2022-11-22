@@ -3,7 +3,7 @@ name: Delete Namespace on Branch Deletion
 
 # cd schulcloud-nextcloud
 # gh workflow run branch-deletion.yml --ref <branch-name>
-on: push
+on: [delete, workflow_dispatch]
 
 jobs:
   get_branch_name:
