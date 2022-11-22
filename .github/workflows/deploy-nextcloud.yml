@@ -26,9 +26,9 @@ on:
       SOCIALLOGINSECRET:
         required: true
       S3ACCESSKEY:
-        required: true
+        required: false
       S3ACCESSSECRET:
-        required: true
+        required: false
 
 jobs:
   run_ansible_playbook_nextcloud:
