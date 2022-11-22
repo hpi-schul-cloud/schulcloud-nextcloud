@@ -1,5 +1,9 @@
 name: Delete Namespace on Branch Deletion
-on: delete
+# on: delete
+
+# cd schulcloud-nextcloud
+# gh workflow run branch-deletion.yml --ref <branch-name>
+on: workflow_dispatch
 
 jobs:
   get_branch_name:
@@ -12,7 +16,6 @@ jobs:
         run: |
           branch_name=$(echo "branch=${GITHUB_REF#refs/heads/}")
           echo "branch_name=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
-
           namespace_name=$(echo $branch_name | sed 's@.*/@@' | tr [A-Z] [a-z] | tr _ - | tr \. -)
           echo "before regex:" $branch_name "after regex:" $namespace_name
           echo "$namespace_name" >> $GITHUB_OUTPUT
@@ -25,7 +28,7 @@ jobs:
       - get_branch_name
     uses: ./.github/workflows/delete-namespace.yml
     with:
-      HOST: sc-dev-nextcloud
+      CLUSTER: sc-dev-nextcloud
       NAMESPACE: ${{ needs.get_branch_name.outputs.branch }}
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}

@@ -4,7 +4,7 @@ name: Deploy Nextcloud
 on:
   workflow_call:
     inputs:
-      HOST:
+      CLUSTER:
         required: true
         type: string
       BUCKET_NAME:
@@ -32,7 +32,7 @@ on:
 
 jobs:
   run_ansible_playbook_nextcloud:
-    environment: ${{ inputs.HOST }}
+    environment: ${{ inputs.CLUSTER }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -67,7 +67,7 @@ jobs:
 
       - name: Execute Ansible Nextcloud Playbook
         working-directory: ${{ github.workspace }}/ansible
-        run: ansible-playbook ./nextcloud-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.HOST }}
+        run: ansible-playbook ./nextcloud-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.CLUSTER }}
 
       - name: Delete config files
         if: always()

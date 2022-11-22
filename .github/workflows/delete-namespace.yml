@@ -4,10 +4,10 @@ name: Delete Namespace
 on:
   workflow_call:
     inputs:
-      NAMESPACE:
+      CLUSTER:
         required: true
         type: string
-      HOST:
+      NAMESPACE:
         required: true
         type: string
     secrets:
@@ -18,7 +18,7 @@ on:
 
 jobs:
   run_delete_ansible_playbook:
-    environment:  ${{ inputs.HOST }}
+    environment:  ${{ inputs.CLUSTER }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -41,13 +41,14 @@ jobs:
       - name: Set ENVs in config.yml file
         working-directory: ${{ github.workspace }}/ansible/group_vars
         run: |
-          echo -e "\ns3_access_key: ${{ secrets.S3ACCESSKEY }}" >> config.yml
+          echo -e "\nnamespace: ${{ inputs.NAMESPACE }}" >> config.yml
+          echo "s3_access_key: ${{ secrets.S3ACCESSKEY }}" >> config.yml
           echo "s3_access_secret: ${{ secrets.S3ACCESSSECRET }}" >> config.yml
           cat config.yml
 
       - name: Execute Ansible Delete Playbook
         working-directory: ${{ github.workspace }}/ansible
-        run: ansible-playbook ./delete-namespace-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.HOST }}
+        run: ansible-playbook ./delete-namespace-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.CLUSTER}}
 
       - name: Delete config files
         if: always()
