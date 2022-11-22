@@ -15,6 +15,10 @@ on:
         required: true
       KUBECONFIG:
         required: true
+      S3ACCESSKEY:
+        required: true
+      S3ACCESSSECRET:
+        required: true
 
 jobs:
   run_delete_ansible_playbook:
