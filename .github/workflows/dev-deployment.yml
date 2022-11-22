@@ -17,7 +17,7 @@ jobs:
     uses: ./.github/workflows/deploy-nextcloud.yml
     with:
       HOST: "sc-dev-nextcloud"
-      BUCKET_NAME: "nextcloud-branches-txl"
+      BUCKET_NAME: "sc-dev-cd-nextcloud-txl-bucket-0000"
       NAMESPACE: "nbc-main"
       NAMESPACE_SCHULCLOUD_INSTANCE: "nbc-main"
     secrets:

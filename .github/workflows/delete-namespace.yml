@@ -38,6 +38,13 @@ jobs:
           mkdir files
           echo "${{ secrets.KUBECONFIG }}" > files/config
 
+      - name: Set ENVs in config.yml file
+        working-directory: ${{ github.workspace }}/ansible/group_vars
+        run: |
+          echo -e "\ns3_access_key: ${{ secrets.S3ACCESSKEY }}" >> config.yml
+          echo "s3_access_secret: ${{ secrets.S3ACCESSSECRET }}" >> config.yml
+          cat config.yml
+
       - name: Execute Ansible Delete Playbook
         working-directory: ${{ github.workspace }}/ansible
         run: ansible-playbook ./delete-namespace-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.HOST }}

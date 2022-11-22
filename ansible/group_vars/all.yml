@@ -68,7 +68,7 @@ nextcloud_values:
     - name: PHP_MEMORY_LIMIT
       value: 8192M
     - name: OBJECTSTORE_S3_BUCKET
-      value: "{{ nextcloud_objectstore_s3_bucket_name }}"
+      value: "{{ s3_bucket_name }}"
     - name: OBJECTSTORE_S3_KEY
       valueFrom:
         secretKeyRef:
