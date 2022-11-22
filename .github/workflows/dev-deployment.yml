@@ -15,7 +15,7 @@ jobs:
 
   deploy_nextcloud_from_main:
     needs:
-      - get_branch_name
+      - nextcloud_approval
     uses: ./.github/workflows/deploy-nextcloud.yml
     with:
       CLUSTER: "sc-dev-nextcloud"
