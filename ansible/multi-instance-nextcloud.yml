@@ -28,8 +28,6 @@
             resources:
               requests:
                 storage: "{{ nextcloud_postgresql_pvc_size }}"
-      tags:
-        - nextcloud
 
     - name: Install nextcloud helm chart
       kubernetes.core.helm:

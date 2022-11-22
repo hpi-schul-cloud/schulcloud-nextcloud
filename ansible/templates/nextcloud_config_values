@@ -2,12 +2,15 @@
    "system":{
       "auto_logout": false,
       "remember_login_cookie_lifetime": "0",
+      "user_oidc": {
+         "single_logout": false
+      },
       "session_lifetime": "7200",
       "session_keepalive": false,
       "upgrade.disable-web":false,
       "trashbin_retention_obligation": "7,7",
       "filelocking.enabled": false,
-      "social_login_auto_redirect": true,
+      "social_login_auto_redirect": false,
       "hide_login_form": false,
       "templatesdirectory":"",
       "skeletondirectory":"",
@@ -52,27 +55,33 @@
          "enabled": "yes",
          "types": ""
       },
-      "sociallogin":{
-         "allow_login_connect":"",
-         "auto_create_groups":"1",
-         "create_disabled_users":"",
-         "custom_providers":"{\"custom_oidc\":[{\"name\":\"SchulcloudNextcloud\",\"title\":\"SchulcloudNextcloud\",\"authorizeUrl\":\"https:\\/\\/{{ item.authorizeUrl }}\\/oauth2\\/auth\",\"tokenUrl\":\"https:\\/\\/{{ item.hydraUrl }}\\/oauth2\\/token\",\"displayNameClaim\":\"name\",\"userInfoUrl\":\"https:\\/\\/{{ item.hydraUrl }}\\/userinfo\",\"logoutUrl\":\"https:\\/\\/{{ item.logoutUrl }}\\/dashboard\",\"clientId\":\"{{ socialloginClientId }}\",\"clientSecret\":\"{{ socialloginSecret }}\",\"scope\":\"openid offline profile email groups\",\"groupsClaim\":\"groups\",\"style\":\"none\",\"defaultGroup\":\"schulcloud\"}]}",
-         "disable_notify_admins":"1",
-         "disable_registration":"",
-         "enabled":"yes",
-         "hide_default_login":"true",
-         "no_prune_user_groups":"",
-         "prevent_create_email_exists":"",
-         "restrict_users_wo_assigned_groups":"",
-         "restrict_users_wo_mapped_groups":"",
-         "types":"",
-         "update_profile_on_login":"1"
-      },
       "theming_customcss": {
          "customcss": "#app-navigation:not(.vue) > ul > li#quota {\\n display: none;\\n}\\n\\n#app-navigation:not(.vue) > ul > li.nav-recent { \\n display: none;\\n}\\n\\n#contactsmenu { display: none; }\\n\\n#app-settings-content:not(.vue) > label, #webdavurl, em { \\n display: none;\\n}\\n\\n[data-id=\"settings\"] { display: none; }\\n\\n[data-id=\"help\"] { display: none; }",
          "cachebuster": "1659944778758",
          "types": "",
          "enabled": "yes"
+      },
+      "user_oidc": {
+         "allow_multiple_user_backends": "0",
+         "userinfo_bearer_validation": "false",
+         "selfencoded_bearer_validation": "true",
+         "types": "authentication",
+         "enabled": "yes",
+         "provider-1-mappingQuota": "",
+         "provider-1-extraClaims": "",
+         "provider-1-jwksCache": "",
+         "provider-1-jwksCacheTimestamp": "",
+         "provider-1-uniqueUid": "0",
+         "provider-1-checkBearer": "1",
+         "provider-1-bearerProvisioning": "1",
+         "provider-1-mappingUid": "sub",
+         "provider-1-mappingDisplayName": "name",
+         "provider-1-mappingEmail": "email",
+         "provider-1-mappingGroups": "groups",
+         "provider-1-groupProvisioning": "1",
+         "provider-1-providerBasedId": "1",
+         "id4me_enabled": "0"
       }
+      {%if item.collabora_enabled is true%}{{nextcloud_collabora_config}}{%endif%}
    }
 }

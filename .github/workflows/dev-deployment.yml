@@ -1,5 +1,6 @@
-name: Deploy Nextcloud on Branch
+name: Deploy Nextcloud on nbc-main
 on:
+  workflow_dispatch:
   push:
     branches:
       - main

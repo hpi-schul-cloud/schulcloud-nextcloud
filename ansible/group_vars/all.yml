@@ -1,12 +1,12 @@
 kubeconfig: ~/.kube/config
 project: sc
 
+kubernetes_version: 1.22.16
 kubectl_version: "{{ kubernetes_version }}"
 get_kubectl_command: |
   curl -LO https://dl.k8s.io/release/v{{ kubectl_version }}/bin/linux/amd64/kubectl
   chmod +x kubectl
   mv ./kubectl /usr/local/bin/kubectl
-kubernetes_version: 1.22.16
 
 s3_region_berlin: eu-central-2
 s3_url_berlin: https://s3-eu-central-2.ionoscloud.com
@@ -131,7 +131,6 @@ nextcloud_values:
       enabled: true
       existingClaim: "{{ nextcloud_postgresql_pvc_name }}"
 
-# testen wie das ist
 nextcloud_collabora_config:
   ',
         "richdocuments": {

@@ -1,5 +1,4 @@
 name: Delete Namespace on Branch Deletion
-# on: delete
 
 # cd schulcloud-nextcloud
 # gh workflow run branch-deletion.yml --ref <branch-name>
@@ -22,7 +21,7 @@ jobs:
         id: extract_branch
 
   delete_namespace:
-    # protect nbc-main branch from accidental deletion
+    # protect nbc-main namespace from accidental deletion
     if: ${{ needs.get_branch_name.outputs.branch }} != 'nbc-main'
     needs:
       - get_branch_name
