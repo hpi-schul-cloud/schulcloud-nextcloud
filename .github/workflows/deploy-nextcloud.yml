@@ -41,7 +41,8 @@ jobs:
       - name: Install requirements python3
         shell: bash
         run: |
-          python3 -m pip install kubernetes
+          # python3 -m pip install kubernetes
+          python3 -m pip install -r requirements.txt
 
       - name: Install requirements ansible-galaxy
         run: ansible-galaxy install -r ansible/collections/requirements.yml
