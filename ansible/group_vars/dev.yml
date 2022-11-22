@@ -14,7 +14,7 @@ nextcloud_instances:
   authorizeUrl: "{{ nbc_authorizeUrl }}"
   hydraUrl: "{{ nbc_hydraUrl }}"
   logoutUrl: "{{ nbc_logoutUrl }}"
-  nextcloud_hostname: "{%if namespace is 'nbc-main'%}'nextcloud-nbc.dbildungscloud.dev'{%else%}{{ namespace }}.sc-dev-nextcloud.dbildungscloud.dev{%endif%}"
+  nextcloud_hostname: "{%if namespace is 'nbc-main'%}'nextcloud-nbc.dbildungscloud.dev'{%else%}'{{ namespace }}.sc-dev-nextcloud.dbildungscloud.dev'{%endif%}"
   nextcloud_theming_slogan: Niedersächsische Bildungscloud
   nextcloud_theming_color: '#5083C7'
   nextcloud_theming_logo_url: https://niedersachsen.cloud/images/logo/logo-wt.png
