@@ -18,13 +18,7 @@
       state: present
       kubeconfig: "{{ kubeconfig }}"
       api_version: v1
-
-  - name: Add nextcloud chart repo
-    kubernetes.core.helm_repository:
-      name: nextcloud
-      repo_url: "https://nextcloud.github.io/helm/"
-    tags:
-      - nextcloud
+    when:  namespace !=  "nbc-main"
 
   - name: Create s3 bucket
     amazon.aws.aws_s3:
