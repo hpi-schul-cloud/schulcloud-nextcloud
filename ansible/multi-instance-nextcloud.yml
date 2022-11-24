@@ -65,3 +65,40 @@
               honorLabels: true
               port: metrics
 
+    - name: Create nextcloud-background-job configmap
+      kubernetes.core.k8s:
+        state: present
+        kubeconfig: "{{ kubeconfig }}"
+        definition:
+          apiVersion: v1
+          kind: ConfigMap
+          metadata:
+            name: background-job-script
+            namespace: "{{ item.namespace }}"
+          data:
+            cron-script: |-
+              #!/bin/bash
+              # install kubectl
+              set -e
+              {{ get_kubectl_command }}
+              kubectl version
+              # run background job
+              kubectl exec $(kubectl get pods -n {{ item.namespace }}| egrep "^nextcloud-[a-z0-9]{5,10}-[a-z0-9]{3,5}[^a-z0-9]") -- sudo -u www-data PHP_MEMORY_LIMIT=512M php -f /var/www/html/cron.php && echo "end of php -f /var/www/html/cron.php"
+              echo "Background Job - Cron has been run!"
+      tags:
+        - nextcloud
+        - nextcloud-cron
+
+    - name: Install nextcloud background job cron cronjob
+      kubernetes.core.helm:
+        name: nextcloud-cron
+        chart_ref: "{{ playbook_dir }}/../charts/cronjob"
+        wait: yes
+        chart_version: "{{ nextcloud_background_job_chart_version }}"
+        kubeconfig: "{{ kubeconfig }}"
+        release_namespace: "{{ item.namespace }}"
+        values:
+          "{{ nextcloud_background_job_chart_values }}"
+      tags:
+        - nextcloud
+        - nextcloud-cron

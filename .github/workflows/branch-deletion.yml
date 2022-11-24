@@ -15,6 +15,8 @@ jobs:
         run: |
           branch_name=$(echo "branch=${GITHUB_REF#refs/heads/}")
           echo "branch_name=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+          # renames branch to valid namespace name
+          # namespaces name constraints: at most 63 characters(only lowercase alphanumeric) or '-'
           namespace_name=$(echo $branch_name | sed 's@.*/@@' | tr [A-Z] [a-z] | tr _ - | tr \. -)
           echo "before regex:" $branch_name "after regex:" $namespace_name
           echo "$namespace_name" >> $GITHUB_OUTPUT

@@ -92,7 +92,7 @@ nextcloud_values:
     - name: THEMING_NAME
       value: Schulcloud Nextcloud
     - name: THEMING_URL
-      value: https://{{ nbc_nextcloud_hostname }}/
+      value: https://{{ item.nextcloud_hostname  }}/
     - name: THEMING_SLOGAN
       value: "{{ item.nextcloud_theming_slogan }}"
     - name: THEMING_COLOR
