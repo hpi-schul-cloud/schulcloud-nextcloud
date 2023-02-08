@@ -63,7 +63,7 @@ services:
       "
 
   db:
-    image: postgres
+    image: postgres:14
     restart: unless-stopped
     ports:
       - 5433:5432
