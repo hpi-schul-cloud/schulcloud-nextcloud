@@ -8,6 +8,9 @@ This repository contains:
 The custom image configures the nextcloud instance and uses environment variables for configuration.
 These env variables can be used e.g. for installing, enabling and disabling plugins.
 
+## Build Container
+Pushed tag ``` git tag x.y.z``` triggers the workflow which pushes the image to ghcr for dev image and dockerhub for production image.
+
 ## Build Container locally
 
 You have the choice between helm and docker-compose to setup your schulcloud-nextcloud instance locally.
