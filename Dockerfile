@@ -3,10 +3,11 @@ FROM nextcloud:25.0.8 AS base
 
 USER root
 
-RUN apt-get update && apt-get install -y sudo git p7zip p7zip-full libmagickcore-6.q16-6-extra wget \
-    && git clone https://github.com/cataphract/php-rar.git \
-    && cd php-rar && phpize && ./configure && make && make install \
-    && echo extension=rar.so >> /usr/local/etc/php/conf.d/docker-php-ext-rar.ini
+RUN apt-get update && apt-get install -y sudo git p7zip p7zip-full libmagickcore-6.q16-6-extra wget
+RUN git clone https://github.com/cataphract/php-rar
+RUN cd php-rar && git checkout ab26d28 && phpize && ./configure && make && make install 
+RUN echo extension=rar.so >> /usr/local/etc/php/conf.d/docker-php-ext-rar.ini
+
 ENV NEXTCLOUD_UPDATE=1
 
 FROM base AS production
