@@ -23,7 +23,7 @@ RUN apt-get install -y supervisor \
 
 COPY ./src /usr/nextcloud
 # for mounting
-RUN mkdir /var/www/html/custom_apps/
-RUN sudo chown -R www-data /var/www/html/custom_apps/
+RUN mkdir /var/www/html/custom_apps/ \
+    && sudo chown -R www-data /var/www/html/custom_apps/
 
 CMD ["/usr/bin/supervisord", "-c", "/usr/nextcloud/supervisord.conf"]
