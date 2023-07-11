@@ -3,9 +3,10 @@ FROM nextcloud:26.0.3 AS base
 
 USER root
 
+RUN apt-get update && apt-get install -y sudo git p7zip p7zip-full libmagickcore-6.q16-6-extra wget 
+
 COPY ./php-rar-fix/rararch.c /rararch.c 
 COPY ./php-rar-fix/rarentry.c /rarentry.c
-RUN apt-get update && apt-get install -y sudo git p7zip p7zip-full libmagickcore-6.q16-6-extra wget 
 RUN git clone https://github.com/cataphract/php-rar.git \
     && cd php-rar && git checkout ab26d28 \
     && rm rararch.c && rm rarentry.c && mv /rararch.c rararch.c && mv /rarentry.c rarentry.c \
