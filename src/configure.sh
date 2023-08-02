@@ -106,13 +106,14 @@ copy_custom_plugins() {
 
 import_config() {
   if [ -n "$CONFIG_JSON" ]; then
-    echo "$CONFIG_JSON" > ./tmp
-    ${OCC_COMMAND} config:import ./tmp
-    rm ./tmp
+    echo "$CONFIG_JSON" | tr -d '\n' > ./tmp_config.json
+    ${OCC_COMMAND} config:import ./tmp_config.json
+    rm ./tmp_config.json
   else
-    echo "No configuration will we be imported. See CONFIG_JSON env."
+    echo "No configuration will be imported. See CONFIG_JSON env."
   fi
 }
+
 
 apply_theme() {
   THEMING_COMMAND="${OCC_COMMAND} theming:config"
