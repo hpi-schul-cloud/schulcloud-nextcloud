@@ -93,8 +93,6 @@ services:
     volumes:
       # Socket
       - antivirus:/var/lib/clamav
-      # Virus DB
-      - /var/docker/clamav/virus_db/:/var/lib/clamav/
 
   # nginx here for simulate a ingress like in kubernetes
   nginx:
