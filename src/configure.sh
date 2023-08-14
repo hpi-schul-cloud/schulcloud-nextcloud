@@ -1,7 +1,7 @@
 #!/bin/sh
 
 isThemingEnabled=False
-OCC_COMMAND="sudo -E -u www-data PHP_MEMORY_LIMIT=$PHP_MEMORY_LIMIT php occ "
+OCC_COMMAND="sudo -u www-data PHP_MEMORY_LIMIT=$PHP_MEMORY_LIMIT php occ "
 EXTERNAL_PLUGINS_PATH=/usr/nextcloud/external_plugins
 
 check_environment() {
