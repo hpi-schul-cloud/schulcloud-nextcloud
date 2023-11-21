@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM nextcloud:26.0.5 AS base
+FROM nextcloud:26.0.8 AS base
 
 USER root
 
