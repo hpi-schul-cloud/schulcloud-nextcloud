@@ -23,6 +23,9 @@ RUN apt-get install -y supervisor \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir /var/log/supervisord /var/run/supervisord
 
+# update curl to address CVE-2023-38545
+RUN apt-get update && apt-get upgrade curl -y
+
 COPY ./src /usr/nextcloud
 # for mounting
 RUN mkdir /var/www/html/custom_apps/ \
