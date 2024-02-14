@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM nextcloud:27.0.0 AS base
+FROM nextcloud:26.0.10 AS base
 
 USER root
 
@@ -28,5 +28,4 @@ COPY ./src /usr/nextcloud
 RUN mkdir /var/www/html/custom_apps/ \
     && sudo chown -R www-data /var/www/html/custom_apps/
 
-# CMD ["/usr/bin/supervisord", "-c", "/usr/nextcloud/supervisord.conf"]
-CMD [""]
+CMD ["/usr/bin/supervisord", "-c", "/usr/nextcloud/supervisord.conf"]
