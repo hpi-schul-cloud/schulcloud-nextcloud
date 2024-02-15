@@ -13,7 +13,7 @@ jobs:
       packages: write
       security-events: write
       contents: read
-    uses: dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@5.0.0
+    uses: dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@OPS-5649-update-nextcloud
     with:
       image_name: "schulcloud-nextcloud"
       run_trivy_scan: true
@@ -21,3 +21,4 @@ jobs:
       container_registry: "ghcr.io"
       fail_on_vulnerabilites: true
       report_location: "Dockerfile"
+      target: ""
