@@ -28,4 +28,4 @@ COPY ./src /usr/nextcloud
 RUN mkdir /var/www/html/custom_apps/ \
     && sudo chown -R www-data /var/www/html/custom_apps/
 
-# CMD ["/usr/bin/supervisord", "-c", "/usr/nextcloud/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-c", "/usr/nextcloud/supervisord.conf"]
