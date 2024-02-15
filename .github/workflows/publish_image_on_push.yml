@@ -1,0 +1,24 @@
+name: Publish Image to GHCR on push
+
+on:
+  push:
+    branches-ignore:
+      - main
+      
+jobs:
+  build_image_on_push:
+    name: "Publish image and scan with trivy"
+    if: ${{ github.event_name == 'push' }}
+    permissions:
+      packages: write
+      security-events: write
+      contents: read
+    uses: dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@5.0.1
+    with:
+      image_name: "schulcloud-nextcloud"
+      run_trivy_scan: true
+      image_tag_generation: 'ticket_from_branch'
+      container_registry: "ghcr.io"
+      fail_on_vulnerabilites: true
+      report_location: "Dockerfile"
+      target: "production"
