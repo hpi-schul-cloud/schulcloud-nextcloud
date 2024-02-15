@@ -21,4 +21,4 @@ jobs:
       container_registry: "ghcr.io"
       fail_on_vulnerabilites: true
       report_location: "Dockerfile"
-      # target: ""
+      target: "production"
