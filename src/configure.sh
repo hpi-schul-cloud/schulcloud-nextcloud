@@ -156,6 +156,25 @@ add_sso_config_command() {
   fi
 }
 
+disable_appache_modules() {
+  if [ -n "$DISABLE_APPACHE_MODULES" ]; then
+
+      for module in $DISABLE_APPACHE_MODULES; do
+          a2dismod module -f 
+      done
+
+      apache2ctl restart
+
+  fi
+}
+
+
+disable_admin() {
+  if [ -n "$DISABLE_ADMIN" ]; then
+      sudo -u www-data php occ user:disable $DISABLE_ADMIN
+  fi
+}
+
 ######
 # main
 ######
@@ -172,6 +191,8 @@ if [ "$isThemingEnabled" = True ]; then
 fi
 run_post_config_command
 add_sso_config_command
+disable_appache_modules
+disable_admin
 echo "Configuration script finished successfully!"
 
 echo "The configuration script was executed" > /var/www/html/executed
