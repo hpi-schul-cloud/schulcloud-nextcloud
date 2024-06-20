@@ -10,6 +10,16 @@ RUN git clone https://github.com/remicollet/php-rar.git \
     && phpize && ./configure && make && make install \
     && echo extension=rar.so >> /usr/local/etc/php/conf.d/docker-php-ext-rar.ini
 
+# Delete uneeded php extentions    
+RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-ftp.ini
+RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-pdo_mysql.ini
+RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-redis.ini
+RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-ldap.ini
+RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-gmp.ini
+RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-sysvsem.ini
+RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-bcmath.ini
+
+
 ENV NEXTCLOUD_UPDATE=1
 
 FROM base AS production

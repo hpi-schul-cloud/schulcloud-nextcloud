@@ -160,7 +160,7 @@ disable_appache_modules() {
   if [ -n "$DISABLE_APPACHE_MODULES" ]; then
 
       for module in $DISABLE_APPACHE_MODULES; do
-          a2dismod module -f 
+          a2dismod module -f || true
       done
 
       apache2ctl restart
