@@ -11,6 +11,7 @@ RUN git clone https://github.com/remicollet/php-rar.git \
     && echo extension=rar.so >> /usr/local/etc/php/conf.d/docker-php-ext-rar.ini
 
 # Delete uneeded php extentions    
+# php
 RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-ftp.ini
 RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-pdo_mysql.ini
 RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-redis.ini
@@ -18,7 +19,13 @@ RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-ldap.ini
 RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-gmp.ini
 RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-sysvsem.ini
 RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-bcmath.ini
-
+# apache2
+RUN rm -rf /etc/apache2/mods-enabled/status.load
+RUN rm -rf /etc/apache2/mods-enabled/status.conf
+RUN rm -rf /etc/apache2/mods-enabled/autoindex.conf
+RUN rm -rf /etc/apache2/mods-enabled/autoindex.load
+RUN rm -rf /usr/lib/apache2/modules/mod_autindex.so
+RUN rm -rf /usr/lib/apache2/modules/mod_status.so
 
 ENV NEXTCLOUD_UPDATE=1
 
