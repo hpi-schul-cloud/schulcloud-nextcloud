@@ -149,6 +149,13 @@ run_post_config_command() {
   fi
 }
 
+add_sso_config_command() {
+  if [ -n "$SSO_CONFIG_COMMAND" ]; then
+    echo "Running sso config command"
+    echo $SSO_CONFIG_COMMAND | bash # eval "$SSO_CONFIG_COMMAND"
+  fi
+}
+
 ######
 # main
 ######
@@ -164,6 +171,7 @@ if [ "$isThemingEnabled" = True ]; then
   apply_theme
 fi
 run_post_config_command
+add_sso_config_command
 echo "Configuration script finished successfully!"
 
 echo "The configuration script was executed" > /var/www/html/executed
