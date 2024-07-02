@@ -172,8 +172,6 @@ if [ "$isThemingEnabled" = True ]; then
 fi
 run_post_config_command
 add_sso_config_command
-disable_appache_modules
-disable_admin
 echo "Configuration script finished successfully!"
 
 echo "The configuration script was executed" > /var/www/html/executed
