@@ -19,7 +19,9 @@ RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-ldap.ini
 RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-gmp.ini
 RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-sysvsem.ini
 RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-bcmath.ini
-# apache2
+
+# apache2 
+# another way is a2dismod mod_name -f
 RUN rm -rf /etc/apache2/mods-enabled/status.load
 RUN rm -rf /etc/apache2/mods-enabled/status.conf
 RUN rm -rf /etc/apache2/mods-enabled/autoindex.conf
