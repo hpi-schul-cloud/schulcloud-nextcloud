@@ -26,7 +26,7 @@ services:
       - db
       - storage
       - cache
-      - antivirus
+#      - antivirus
 
   storage:
     image: minio/minio:latest
@@ -84,15 +84,15 @@ services:
       - cache:/data
     command: redis-server --requirepass ${REDIS_HOST_PASSWORD}
 
-  antivirus:
-    container_name: antivirus
-    image: clamav/clamav:stable_base
-    restart: unless-stopped
-    ports:
-      - 3310:3310
-    volumes:
-      # Socket
-      - antivirus:/var/lib/clamav
+#  antivirus:
+#    container_name: antivirus
+#    image: clamav/clamav:stable_base
+#    restart: unless-stopped
+#    ports:
+#      - 3310:3310
+#    volumes:
+#      # Socket
+#      - antivirus:/var/lib/clamav
 
   # nginx here for simulate a ingress like in kubernetes
   nginx:
@@ -112,7 +112,7 @@ volumes:
   db:
   nextcloud:
   storage:
-  antivirus:
+#  antivirus:
   cache:
 
 networks:
