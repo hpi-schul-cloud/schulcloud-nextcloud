@@ -14,7 +14,7 @@ RUN git clone https://github.com/remicollet/php-rar.git \
 # php
 RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-ftp.ini
 RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-pdo_mysql.ini
-RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-redis.ini
+# RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-redis.ini
 RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-ldap.ini
 RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-gmp.ini
 RUN rm -rf /usr/local/etc/php/conf.d/docker-php-ext-sysvsem.ini

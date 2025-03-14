@@ -13,7 +13,7 @@ Pushed tag ``` git tag x.y.z``` triggers the workflow which pushes the image to 
 
 ## Build Container locally
 
-You have the choice between helm and docker-compose to setup your schulcloud-nextcloud instance locally.
+You have the choice between helm and docker compose to setup your schulcloud-nextcloud instance locally.
 
 ### With Helm
 
@@ -68,7 +68,7 @@ minio server and a temporary service for the nextcloud bucket creation.
 The compose uses the `.env` to configure the environment. To start and build the images use:
 
 ```
-docker-compose up --build
+docker compose up --build
 ```
 
 The compose file allows the mounting of plugins, so changes get transferred to the container automatically while it is
