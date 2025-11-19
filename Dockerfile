@@ -1,9 +1,9 @@
 # syntax=docker/dockerfile:1
-FROM nextcloud:29.0.1 AS base
+FROM nextcloud:31.0.10 AS base
 
 USER root
 
-RUN apt-get update && apt-get install -y sudo git p7zip p7zip-full libmagickcore-6.q16-6-extra wget 
+RUN apt-get update && apt-get install -y sudo git p7zip p7zip-full libmagickcore-7.q16-10-extra wget
 
 RUN git clone https://github.com/remicollet/php-rar.git \
     && cd php-rar && git checkout 02331ca \
