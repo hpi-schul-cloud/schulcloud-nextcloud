@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker build --target production -t ghcr.io/dBildungsplattform/schulcloud-nextcloud .
+docker build --target production -t ghcr.io/hpi-schul-cloud/schulcloud-nextcloud .
 
 helm uninstall schulcloud-nextcloud || true
 
