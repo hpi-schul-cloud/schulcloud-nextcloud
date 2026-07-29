@@ -1,7 +1,7 @@
 ## values.yml (default https://github.com/nextcloud/helm/blob/master/charts/nextcloud/values.yaml) for helm nextcloud helm chart
 ## https://github.com/nextcloud/helm
 image:
-  repository: schulcloud/schulcloud-nextcloud/production
+  repository: ghcr.io/dBildungsplattform/schulcloud-nextcloud
   tag: latest
   pullPolicy: IfNotPresent
 

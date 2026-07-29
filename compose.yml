@@ -7,7 +7,7 @@ services:
       context: .
       target: development
     container_name: nextcloud
-    image: schulcloud/schulcloud-nextcloud/development
+    image: ghcr.io/dBildungsplattform/schulcloud-nextcloud/dev
     restart: unless-stopped
     ports:
       - 8081:80
