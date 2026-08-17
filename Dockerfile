@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM nextcloud:31.0.10 AS base
+FROM nextcloud:31.0.14 AS base
 
 USER root
 
@@ -42,8 +42,7 @@ RUN apt-get install -y supervisor \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir /var/log/supervisord /var/run/supervisord
 
-# update curl to address CVE-2023-38545
-RUN apt-get update && apt-get upgrade curl -y
+RUN apt-get update && apt-get upgrade -y
 
 COPY ./src /usr/nextcloud
 # for mounting
