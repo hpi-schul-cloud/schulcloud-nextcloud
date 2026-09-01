@@ -1,12 +1,12 @@
 # syntax=docker/dockerfile:1
-FROM nextcloud:31.0.10 AS base
+FROM nextcloud:31.0.14 AS base
 
 USER root
 
 RUN apt-get update && apt-get install -y sudo git p7zip p7zip-full libmagickcore-7.q16-10-extra wget
 
 RUN git clone https://github.com/remicollet/php-rar.git \
-    && cd php-rar && git checkout 02331ca \
+    && cd php-rar && git checkout 1a623543c4c330beb0518fcbdf6f6b8c816dc30f \
     && phpize && ./configure && make && make install \
     && echo extension=rar.so >> /usr/local/etc/php/conf.d/docker-php-ext-rar.ini
 
@@ -42,8 +42,7 @@ RUN apt-get install -y supervisor \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir /var/log/supervisord /var/run/supervisord
 
-# update curl to address CVE-2023-38545
-RUN apt-get update && apt-get upgrade curl -y
+RUN apt-get update && apt-get upgrade -y
 
 COPY ./src /usr/nextcloud
 # for mounting
