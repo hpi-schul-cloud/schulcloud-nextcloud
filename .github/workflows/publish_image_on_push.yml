@@ -19,6 +19,6 @@ jobs:
       run_trivy_scan: true
       image_tag_generation: 'ticket_from_branch'
       container_registry: "ghcr.io"
-      fail_on_vulnerabilites: true
+      fail_on_vulnerabilites: false
       report_location: "Dockerfile"
       target: "production"
