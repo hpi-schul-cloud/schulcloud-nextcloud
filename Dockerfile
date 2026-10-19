@@ -6,7 +6,7 @@ USER root
 RUN apt-get update && apt-get install -y sudo git p7zip p7zip-full libmagickcore-7.q16-10-extra wget
 
 RUN git clone https://github.com/remicollet/php-rar.git \
-    && cd php-rar && git checkout 1a623543c4c330beb0518fcbdf6f6b8c816dc30f \
+    && cd php-rar && git checkout 9c8fcd9ebc9feaf36f945d6d7407fdcd57b7136f \
     && phpize && ./configure && make && make install \
     && echo extension=rar.so >> /usr/local/etc/php/conf.d/docker-php-ext-rar.ini
 
